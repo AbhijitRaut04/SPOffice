@@ -3,7 +3,7 @@
     <div *ngIf="showDialog" class="nav-elements">
         <div *ngFor="let item of navElements; let i = index"
             [ngClass]="{'nav-element': true, 'active':item.active, 'logOut': item.title === 'Log out'}"
-            (click)="setActive(i)">
+            (click)="handleClick(i)">
             <img src="{{ item.img }}" alt="image" />
             <span>{{ item.title }}</span>
         </div>
