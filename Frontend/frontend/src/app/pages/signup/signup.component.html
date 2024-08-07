@@ -1,0 +1,142 @@
+<div class="signup-screen">
+  <div class="form-container">
+    <div class="title">
+    <h3>Registeration Form</h3>
+    <p>Fill your details and wait for your validation</p>
+  </div>
+    <form class="form" [formGroup]="reactiveForm" (ngSubmit)="formSubmitted()">
+      <p>
+        <mat-form-field class="input-block half" appearance="outline">
+          <mat-label class="label" >First Name</mat-label>
+          <input class="input" matInput formControlName="firstname"/>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="input-block half" appearance="outline">
+          <mat-label class="label">Last Name</mat-label>
+          <input class="input" matInput formControlName="lastname"/>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="input-block half" appearance="outline">
+          <mat-label class="label">Station Location</mat-label>
+          <input class="input" matInput formControlName="stationName"/>
+        </mat-form-field>
+      </p>
+      <!-- <p>
+        <mat-form-field class="input-block half" appearance="outline">
+          <mat-label class="label">Designation</mat-label>
+          <input class="input" matInput />
+        </mat-form-field>
+      </p> -->
+
+      <mat-form-field class="input-block half" appearance="outline">
+        <mat-label>Select me</mat-label>
+        <mat-select formControlName="designation">
+          <div class="option" *ngFor="let option of designationOptions">
+          <mat-option  value="option">{{option}}</mat-option>
+        </div>
+        </mat-select>
+        
+      </mat-form-field>
+      
+      <p>
+        <mat-form-field class="input-block half" appearance="outline">
+          <mat-label class="label">Email</mat-label>
+          <input class="input" matInput formControlName="email"/>
+        </mat-form-field>
+        <small *ngIf="reactiveForm.get('email').invalid && reactiveForm.get('email').touched">Invalid Email ID</small>
+
+      </p>
+      <p>
+        <mat-form-field class="input-block half" appearance="outline">
+          <mat-label class="label">Phone</mat-label>
+          <span class="prefix" matTextPrefix>+91 &nbsp;</span>
+
+          <input type="tel" class="input" matInput formControlName="phone"/>
+        </mat-form-field>
+        <small *ngIf="reactiveForm.get('phone').invalid && reactiveForm.get('phone').touched">Invalid Phone number</small>
+      </p>
+
+      <div class="address">Address</div>
+      <p>
+        <mat-form-field class="input-block third" appearance="outline">
+          <mat-label class="label">State</mat-label>
+          <input class="input" matInput formControlName="state"/>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="input-block third" appearance="outline">
+          <mat-label class="label">City</mat-label>
+          <input class="input" matInput formControlName="city"/>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="input-block third" appearance="outline">
+          <mat-label class="label">Pin Code</mat-label>
+          <input class="input" matInput formControlName="pinCode"/>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="input-block half" appearance="outline">
+          <mat-label class="label">Landmark</mat-label>
+          <input class="input" matInput formControlName="landmark"/>
+        </mat-form-field>
+      </p>
+      
+      <p>
+        <mat-form-field class="input-block half" appearance="outline">
+          <mat-label class="label">Area</mat-label>
+          <input class="input" matInput formControlName="area"/>
+        </mat-form-field>
+      </p>
+<p>
+      <mat-form-field class="password" appearance="outline">
+        <mat-label>Create password</mat-label>
+        <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password"/>
+        <button
+          class="btn"
+          mat-icon-button
+          matSuffix
+          (click)="clickEvent($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+        >
+          <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <small class="passError" *ngIf="reactiveForm.get('password').invalid && reactiveForm.get('password').touched">*password must contain Uppercase, Lowercase and number</small>
+
+    </p>
+    <p>
+      <mat-form-field class="password" appearance="outline">
+        <mat-label>Confirm password</mat-label>
+        <input matInput [type]="hide() ? 'password' : 'text'" formControlName="confirmPassword"/>
+        <button
+          class="btn"
+          mat-icon-button
+          matSuffix
+          (click)="clickEvent($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+        >
+          <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <!-- <mat-error *ngIf="reactiveForm.controls['confirmPassword'].invalid && reactiveForm.controls['confirmPassword'].touched">
+          <span *ngIf="reactiveForm.controls['confirmPassword'].hasError('required')">Confirm Password is required.</span>
+        </mat-error> -->
+      </mat-form-field>
+      <small class="passError" *ngIf=" reactiveForm.value.password != reactiveForm.value.confirmPassword  && reactiveForm.get('confirmPassword').touched">*password and confirm password dont match</small>
+    </p>
+      <button type="submit" class="submit-btn" >
+        Submit
+      </button>
+    </form>
+
+    <div [ngClass]="{'InvalidForm':true, 'display': displayError} ">
+      <p>Fill all the details correctly</p>
+      <button class="errorBoxBtn" (click)="closeErrorBox()">Fill Again</button>
+    </div>
+  </div>
+</div>
