@@ -24,10 +24,13 @@ public class Patrolling {
     @JsonIgnore
     private Admin admin;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "police_id")
     private Police head;
 
     // add the timeline and details
 
+    @Column
     private Date date;
 
     @OneToMany(mappedBy = "patrolling", cascade = CascadeType.ALL, orphanRemoval = true)
