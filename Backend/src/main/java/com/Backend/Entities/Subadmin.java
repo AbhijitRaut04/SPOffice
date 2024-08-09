@@ -31,7 +31,7 @@ public class Subadmin {
     private String station;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_id")
+    @JoinColumn(name = "admin_id", nullable = false)
     @JsonIgnore
     private Admin admin;
 
