@@ -2,6 +2,7 @@ package com.Backend.Entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -60,5 +61,8 @@ public class Police {
     
     @OneToMany(cascade = CascadeType.ALL)
     private List<SubPatrolling> subPatrollings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "police", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AvailablePolice> available_polices;
 
 }
