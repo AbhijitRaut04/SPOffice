@@ -1,4 +1,5 @@
 package com.Backend.Service;
+import com.Backend.Dto.AvailablePoliceUpdateDto;
 import com.Backend.Entities.AvailablePolice;
 import com.Backend.Entities.Patrolling;
 import com.Backend.Entities.Police;
@@ -92,5 +93,28 @@ public class AvailablePoliceService {
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to delete available Police", e);
         }
+    }
+
+    public AvailablePolice updateAvailablePolice(Long id, AvailablePoliceUpdateDto updateDTO) {
+        // Find the existing entry
+        AvailablePolice existingEntry = availablePoliceRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("AvailablePolice not found with id " + id));
+
+        if (updateDTO.getEventId() != null) {
+            Patrolling event = patrollingRepository.findById(updateDTO.getEventId())
+                    .orElseThrow(() -> new IllegalArgumentException("Patrolling not found with id " + updateDTO.getEventId()));
+            existingEntry.setEvent(event);
+        }
+        if (updateDTO.getPoliceId() != null) {
+            Police police = policeRepository.findById(updateDTO.getPoliceId())
+                    .orElseThrow(() -> new IllegalArgumentException("Police not found with id " + updateDTO.getPoliceId()));
+            existingEntry.setPolice(police);
+        }
+        if (updateDTO.getSubadminId() != null) {
+            Subadmin subadmin = subadminRepository.findById(updateDTO.getSubadminId())
+                    .orElseThrow(() -> new IllegalArgumentException("Subadmin not found with id " + updateDTO.getSubadminId()));
+            existingEntry.setSubadmin(subadmin);
+        }
+        return availablePoliceRepository.save(existingEntry);
     }
 }
