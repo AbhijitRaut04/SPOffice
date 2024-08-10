@@ -7,6 +7,8 @@ import { CreateBtnComponent } from '../../components/reusable/create-btn/create-
 import { CreateSubeventFormComponent } from '../../components/reusable/create-subevent-form/create-subevent-form.component';
 
 
+import { EventService } from '../../services/event-service/event.service';
+
 @Component({
   selector: 'app-event-page',
   standalone: true,
@@ -17,11 +19,15 @@ import { CreateSubeventFormComponent } from '../../components/reusable/create-su
 })
 export class EventPageComponent {
 
-  constructor( private router: Router) {}
+  constructor( private router: Router, private eventService:EventService) {}
 
   navigateToCreateEvent() {
     console.log("+ button clicked!");
     this.router.navigate(['events/create']);
   }
   readonly panelOpenState = signal(false);
+//   constructor(private eventService:EventService){}
+  getEvents(){
+    console.log(this.eventService.getEvents());
+  }
 }

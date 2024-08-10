@@ -1,15 +1,19 @@
 package com.Backend.Entities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "polices")
 @Getter
 @Setter
+@Entity
+@Table(name = "polices")
 public class Police {
 
     @Id
@@ -19,12 +23,17 @@ public class Police {
     @Column(nullable = false)
     private String fullname;
 
+    @Column(nullable = false)
     private Long policeId;
 
     @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String gender;
 
     @Column(nullable = false)
     private String designation;
@@ -33,5 +42,27 @@ public class Police {
     @JoinColumn(name = "subadmin_id")
     @JsonIgnore
     private Subadmin subadmin;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "request_id")
+    private Request request;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Area area;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Sector sector;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Location> locations = new ArrayList<>();
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Patrolling> patrollings = new ArrayList<>();
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<SubPatrolling> subPatrollings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "police", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AvailablePolice> available_polices;
 
 }

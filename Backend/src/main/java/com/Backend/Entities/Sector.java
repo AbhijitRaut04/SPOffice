@@ -17,9 +17,12 @@ public class Sector {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String name;
 
-    private String head;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "police_id")
+    private Police head;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")

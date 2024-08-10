@@ -7,29 +7,29 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "admins")
 @Getter
 @Setter
+@Entity
+@Table(name = "admins")
 public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String username;
 
-    @Column(nullable = false)
+    @Column
     private String password;
 
-    @Column(nullable = false)
+    @Column
     private String contact;
 
-    @Column(nullable = false)
+    @Column
     private String district;
 
-    @ElementCollection
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Request> subAdminRequests;
 
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -37,5 +37,6 @@ public class Admin {
 
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Patrolling> patrollings;
+
 
 }

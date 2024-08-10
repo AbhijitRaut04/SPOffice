@@ -20,14 +20,20 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "police_id")
     private Police head;
 
-    private List<Police> malePolices;
+//    @OneToMany
+    private List<String> malePolices;
 
-    private List<Police> femalePolices;
+//    @OneToMany
+    private List<String> femalePolices;
 
+    @Column
     private List<String> equipments;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,9 +41,9 @@ public class Location {
     @JsonIgnore
     private Sector sector;
 
-    @ElementCollection
-    @CollectionTable(name = "policeAtLocation", joinColumns = @JoinColumn(name = "location_id"))
-    @Column(name = "police")
-    private Set<Police> polices = new HashSet<>();
+//    @ElementCollection
+//    @CollectionTable(name = "policeAtLocation", joinColumns = @JoinColumn(name = "location_id"))
+//    @Column(name = "police")
+//    private Set<Police> polices = new HashSet<>();
 
 }

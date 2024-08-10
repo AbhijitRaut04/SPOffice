@@ -14,9 +14,9 @@ import com.Backend.Repository.AdminRepository;
 @Service
 public class AdminService {
 
+	@Autowired
     private final AdminRepository adminRepository;
-
-    @Autowired
+	
     public AdminService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
     }
@@ -41,6 +41,8 @@ public class AdminService {
 
     public Admin createAdmin(Admin admin) {
         try {
+        	System.out.println(admin);
+        	System.out.println("______________________________________________");
             return adminRepository.save(admin);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to create admin", e);

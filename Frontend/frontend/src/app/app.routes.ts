@@ -4,6 +4,8 @@ import { EventPageComponent } from './Admin/pages/event-page/event-page.componen
 import { RequestsComponent } from './Admin/pages/requests/requests.component';
 import { SubadminsComponent } from './Admin/pages/subadmins/subadmins.component';
 import { CreateEventComponent } from './Admin/pages/create-event/create-event.component';
+import { adminGuard } from './Admin/gaurds/admin.guard';
+
 
 export const routes: Routes = [
     {
@@ -12,23 +14,29 @@ export const routes: Routes = [
     },
     {
         path:"events",
+
         children: [
             {
                 path:"",
                 component:EventPageComponent,
+                canActivate: [adminGuard]
             },
             {
                 path:"create",
-                component:CreateEventComponent
+                component:CreateEventComponent,
+                canActivate: [adminGuard]
+
             }
         ]
     },
     {
         path:"requests",
-        component:RequestsComponent
+        component:RequestsComponent,
+        canActivate: [adminGuard]
     },
     {
         path:"subadmins",
-        component:SubadminsComponent
+        component:SubadminsComponent,
+        canActivate: [adminGuard]
     }
 ];

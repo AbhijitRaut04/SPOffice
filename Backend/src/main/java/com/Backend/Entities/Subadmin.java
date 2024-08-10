@@ -31,11 +31,13 @@ public class Subadmin {
     private String station;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_id")
+    @JoinColumn(name = "admin_id", nullable = false)
     @JsonIgnore
     private Admin admin;
 
     @OneToMany(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Police> polices;
+    @OneToMany(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AvailablePolice> available_polices;
 
 }

@@ -41,9 +41,13 @@ public class SubadminController {
 
     // Create a new Subadmin
     @PostMapping
-    public ResponseEntity<Subadmin> createSubadmin(@RequestBody Subadmin subadmin) {
+    public ResponseEntity<Subadmin> createSubadmin(
+            @RequestParam Long admin_id,
+            @RequestBody Subadmin subadmin) {
+
         try {
-            Subadmin createdSubadmin = subadminService.createSubadmin(subadmin);
+            // Create Subadmin with the given adminId
+            Subadmin createdSubadmin = subadminService.createSubadmin(subadmin, admin_id);
             return ResponseEntity.ok(createdSubadmin);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
