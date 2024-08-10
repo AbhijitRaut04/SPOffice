@@ -4,21 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.Backend.Entities.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.Backend.Entities.Subadmin;
 import com.Backend.Repository.SubadminRepository;
+import com.Backend.Repository.AdminRepository;
 
 @Service
 public class SubadminService {
 
     private final SubadminRepository subadminRepository;
+    private final AdminRepository adminRepository;
 
     @Autowired
-    public SubadminService(SubadminRepository subadminRepository){
+    public SubadminService(SubadminRepository subadminRepository, AdminRepository adminRepository){
         this.subadminRepository = subadminRepository;
+        this.adminRepository = adminRepository;
     }
 
     public List<Subadmin> getAllSubadmins(){
@@ -38,15 +42,18 @@ public class SubadminService {
         }
         return null;
     }
-
-    public Subadmin createSubadmin(Subadmin subadmin) {
+    public Subadmin createSubadmin(Subadmin subadmin, Long adminId) {
         try {
+            Admin admin = adminRepository.findById(adminId)
+                    .orElseThrow(() -> new IllegalArgumentException("Admin not found with id: " + adminId));
+            subadmin.setAdmin(admin);
             return subadminRepository.save(subadmin);
         } catch (DataAccessException e) {
-            e.printStackTrace();
-        }
+            e.printStackTrace();}
         return null;
     }
+
+
 
     public Subadmin updateSubadmin(Long id, Subadmin updatedSubadmin) {
         try {
