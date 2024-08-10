@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/sectors")
-public class SectorController {
+public class SectorController extends BaseController  {
 
     @Autowired
     private SectorService sectorService;

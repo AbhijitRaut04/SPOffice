@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/subadmins")
-public class SubadminController {
+public class SubadminController extends BaseController  {
 
     @Autowired
     private SubadminService subadminService;

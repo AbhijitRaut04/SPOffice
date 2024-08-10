@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './Admin/components/header/header.component';
-import { CommonModule, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { FooterComponent } from './Admin/components/footer/footer.component';
 import { SignupComponent } from './pages/signup/signup.component';
 
@@ -13,5 +13,5 @@ import { SignupComponent } from './pages/signup/signup.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'SP Office';
 }

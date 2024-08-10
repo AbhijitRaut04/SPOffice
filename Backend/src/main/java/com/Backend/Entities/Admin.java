@@ -17,16 +17,12 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private String username;
 
-    @Column
     private String password;
 
-    @Column
     private String contact;
 
-    @Column
     private String district;
 
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/areas")
-public class AreaController {
+public class AreaController extends BaseController  {
 
     @Autowired
     private AreaService areaService;

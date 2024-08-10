@@ -20,7 +20,7 @@ import com.Backend.Service.SubPatrollingService;
 
 @RestController
 @RequestMapping("/api/sub-patrollings")
-public class SubPatrollingController {
+public class SubPatrollingController extends BaseController  {
 
     @Autowired
     private SubPatrollingService subPatrollingService;

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/locations")
-public class LocationController {
+public class LocationController extends BaseController  {
 
     @Autowired
     private LocationService locationService;

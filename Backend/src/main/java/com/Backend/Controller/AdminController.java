@@ -11,8 +11,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admins")
-public class AdminController {
+public class AdminController extends BaseController {
 
+    @Autowired
     private final AdminService adminService;
 
     public AdminController(AdminService adminService) {

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/polices")
-public class PoliceController {
+public class PoliceController extends BaseController  {
 
     @Autowired
     private PoliceService policeService;

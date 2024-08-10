@@ -20,7 +20,7 @@ import com.Backend.Service.PatrollingService;
 
 @RestController
 @RequestMapping("/api/patrollings")
-public class PatrollingController {
+public class PatrollingController extends BaseController  {
 
     @Autowired
     private PatrollingService patrollingService;

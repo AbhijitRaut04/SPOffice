@@ -37,6 +37,7 @@ public class Subadmin {
 
     @OneToMany(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Police> polices;
+    
     @OneToMany(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AvailablePolice> available_polices;
 

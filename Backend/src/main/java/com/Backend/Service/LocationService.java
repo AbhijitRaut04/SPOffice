@@ -37,7 +37,7 @@ public class LocationService {
                     location.setFemalePolices(updatedLocation.getFemalePolices());
                     location.setEquipments(updatedLocation.getEquipments());
                     location.setSector(updatedLocation.getSector());
-                    location.setPolices(updatedLocation.getPolices());
+                    // location.setPolices(updatedLocation.getPolices());
                     return locationRepository.save(location);
                 })
                 .orElseGet(() -> {

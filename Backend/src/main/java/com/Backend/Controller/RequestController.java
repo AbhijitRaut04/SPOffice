@@ -19,7 +19,7 @@ import com.Backend.Service.RequestService;
 
 @RestController
 @RequestMapping("/api/requests")
-public class RequestController {
+public class RequestController extends BaseController  {
 
     private final RequestService requestService;
 
