@@ -1,9 +1,17 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #f9efef;
+
 }
-.wrapper{
+
+.wrapper {
     position: relative;
     min-height: 100vh;
+}
+
+.outlet {
+    padding: 10px 25px;
+    padding-bottom: 5rem;
 }
