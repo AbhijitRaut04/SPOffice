@@ -1,6 +1,8 @@
 package com.Backend.Controller;
 
+import com.Backend.Dto.AvailablePoliceUpdateDto;
 import com.Backend.Entities.AvailablePolice;
+import com.Backend.Entities.Subadmin;
 import com.Backend.Service.AvailablePoliceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,6 +60,19 @@ public class AvailablePoliceController extends BaseController {
             // Add police to available list for particular event
             AvailablePolice createdAvailalbePolice = availablePoliceService.createAvailablePolice(availablePolice,event_id,police_id, subadmin_id);
             return ResponseEntity.ok(createdAvailalbePolice);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+
+    // Update Available Police
+    @PutMapping("/{id}")
+
+    public ResponseEntity<AvailablePolice> updateAvailablePolice(@PathVariable Long id,@RequestBody AvailablePoliceUpdateDto updateDTO){
+        try {
+            AvailablePolice updatedAvailablePolice = availablePoliceService.updateAvailablePolice(id,updateDTO);
+            return new ResponseEntity<>(updatedAvailablePolice, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
