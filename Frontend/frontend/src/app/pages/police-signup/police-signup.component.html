@@ -1,0 +1,174 @@
+<div class="signup-screen">
+  <div class="form-container">
+    <!-- title -->
+
+    <div class="title">
+      <h3>Police Registeration Form</h3>
+      <p>Fill your details and wait for your validation</p>
+    </div>
+
+    <!-- main Form body  -->
+
+    <form class="form" [formGroup]="reactiveForm" (ngSubmit)="formSubmitted()">
+      
+      <!-- Name Field  -->
+      <p>
+        <mat-form-field class="input-block" appearance="outline">
+          <mat-label class="label">Name</mat-label>
+          <input class="input" matInput formControlName="fullname" />
+        </mat-form-field>
+      </p>
+
+      <!-- Police Id Field  -->
+      <p>
+        <mat-form-field class="input-block" appearance="outline">
+          <mat-label class="label">Police ID</mat-label>
+          <input class="input" matInput formControlName="policeID" />
+        </mat-form-field>
+      </p>
+
+      <!-- Email Field  -->
+      <p>
+        <mat-form-field class="input-block" appearance="outline">
+          <mat-label class="label">Email</mat-label>
+          <input class="input" matInput formControlName="email" />
+        </mat-form-field>
+      </p>
+      <!-- Invalid Email Error  -->
+      <div
+        [ngClass]="{
+          errormsg: true,
+          errormgsDisplay:
+            reactiveForm.get('email').invalid &&
+            reactiveForm.get('email').touched
+        }"
+      >
+        Invalid Email ID
+      </div>
+
+      <!-- Phone filed  -->
+      <p>
+        <mat-form-field class="input-block" appearance="outline">
+          <mat-label class="label">Phone</mat-label>
+          <span class="prefix" matTextPrefix>+91 &nbsp;</span>
+
+          <input type="tel" class="input" matInput formControlName="phone" />
+        </mat-form-field>
+      </p>
+      <!-- Invalid Phone Error  -->
+      <div
+        [ngClass]="{
+          errormsg: true,
+          errormgsDisplay:
+            reactiveForm.get('phone').invalid &&
+            reactiveForm.get('phone').touched
+        }"
+      >
+        Invalid Phone number
+      </div>
+
+      <!-- Designation field  -->
+      <p>
+        <mat-form-field class="input-block" appearance="outline">
+          <mat-label>Designation</mat-label>
+          <mat-select formControlName="designation">
+            <div class="option" *ngFor="let option of designationOptions">
+              <mat-option value="option">{{ option }}</mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </p>
+
+      <!-- Admin Field  -->
+      <p>
+        <mat-form-field class="input-block" appearance="outline">
+          <mat-label class="label">Sub Admin</mat-label>
+          <input class="input" matInput formControlName="admin" />
+        </mat-form-field>
+      </p>
+
+
+      <!-- Create Password  -->
+      <p>
+        <mat-form-field class="input-block" appearance="outline">
+          <mat-label>Create password</mat-label>
+          <input
+            matInput
+            [type]="hide1() ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            class="btn"
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="clickEvent1($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide1()"
+          >
+            <mat-icon>{{ hide1() ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </p>
+      <!-- Invalid Password Error -->
+      <div
+        [ngClass]="{
+          errormsg: true,
+          errormgsDisplay:
+            reactiveForm.get('password').invalid &&
+            reactiveForm.get('password').touched
+        }"
+      >
+        *password must contain Uppercase, Lowercase and number
+      </div>
+
+      <!-- Confirm Password  -->
+      <p>
+        <mat-form-field class="input-block" appearance="outline">
+          <mat-label>Confirm password</mat-label>
+          <input
+            matInput
+            [type]="hide2() ? 'password' : 'text'"
+            formControlName="confirmPassword"
+          />
+          <button
+            class="btn"
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="clickEvent2($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide2()"
+          >
+            <mat-icon>{{ hide2() ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </p>
+      <!-- Confirm Password Error  -->
+      <div
+        [ngClass]="{
+          errormsg: true,
+          errormgsDisplay:
+            reactiveForm.get('confirmPassword').invalid &&
+            reactiveForm.get('confirmPassword').touched
+        }"
+      >
+        *password and confirm password dont match
+      </div>
+
+      <!--Form buttons submit || reset  -->
+
+      <div class="formButtons">
+        <button type="submit" class="submit-btn">Submit</button>
+        <button type="reset" class="submit-btn">Reset</button>
+      </div>
+    </form>
+
+    <!-- pop up error msg  -->
+
+    <div [ngClass]="{ InvalidForm: true, display: displayError }">
+      <p>Fill all the details correctly</p>
+      <button class="errorBoxBtn" (click)="closeErrorBox()">Fill Again</button>
+    </div>
+  </div>
+</div>

@@ -2,13 +2,10 @@
 
 
 .signup-screen {
-    /* height: 100vmin; */
-    width: 100vw;
     display: flex;
     justify-content: center;
     font-family: "Nunito", sans-serif;
     align-items: center;
-    /* align-items: center; */
 }
 
 .form-container {
@@ -17,7 +14,6 @@
     max-width: 640px;
     height: auto;
     padding: 20px 0px;
-    /* height: 60vw; */
     border-radius: 10px;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.812);
     display: flex;
@@ -25,7 +21,6 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    /* align-items: center; */
 
 }
 
@@ -43,46 +38,20 @@
     flex-direction: column;
     justify-content:space-around ;
     align-items: baseline;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-}
+    gap: 10px;
 
+}
 
 .input-block{
     width: 580px;
     height: 30px;
 }
 
-
-.label, .prefix {
-    font-size: 14px;
-
-}
-
-.address {
-    width: 100%;
-    margin-top: 30px;
-    margin-bottom: -10px;
-}
-
-.password {
-    width: 280px;
-    margin-top: 50px;
-}
-
 .btn {
     background-color: transparent;
     border: none;
-}
-
-.half {
-    /* width: 100%; */
-    max-width: 280px;
-}
-
-.third {
-    width: 100%;
-    max-width: 180px;
 }
 
 .submit-btn {
@@ -93,15 +62,27 @@
     margin-top: 20px;
     background-color: #6eacd5;
     font-size: 16px;
+    transition:all .2s linear;
 }
 
-small {
-    margin-top: 30px;
+.formButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.passError {
-    margin-top: -15px;
-    max-width: 250px;
+.errormsg {
+    height: auto;
+    font-size: 14px;
+    opacity: 0;
+    z-index: -1;
+    margin-top: -30px;
+    transition: all .2s linear;
+}
+
+.errormgsDisplay {
+    opacity: 1;
+    margin-top: 0px;
 }
 
 p {
@@ -136,4 +117,25 @@ button:hover {
 
 .display {
     display: block;
+}
+
+@media (max-width: 600px) {
+    .form-container, .form {
+        width: 100vw;
+        height: 100%;
+        margin-top: 0px;
+    }
+
+    .form-container {
+        box-sizing: border-box;
+        padding: 5%;
+    }
+
+    p {
+        width: 100%;
+    }
+
+    .input-block, .password {
+        width: 100%;
+    }
 }
