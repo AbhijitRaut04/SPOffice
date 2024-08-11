@@ -1,5 +1,6 @@
 package com.Backend.Controller;
 
+import com.Backend.Dto.PoliceDto;
 import com.Backend.Entities.Police;
 import com.Backend.Service.PoliceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +42,12 @@ public class PoliceController {
 
     // Create a new Police
     @PostMapping
-    public ResponseEntity<Police> createPolice(@RequestBody Police police) {
+    public ResponseEntity<Police> createPolice(@RequestBody PoliceDto policeDto) {
         try {
-            Police createdPolice = policeService.createPolice(police);
+            Police createdPolice = policeService.createPolice(policeDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPolice);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 

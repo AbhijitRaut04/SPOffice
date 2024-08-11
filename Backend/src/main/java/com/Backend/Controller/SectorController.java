@@ -1,5 +1,6 @@
 package com.Backend.Controller;
 
+import com.Backend.Dto.SectorDto;
 import com.Backend.Entities.Sector;
 import com.Backend.Service.SectorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +33,15 @@ public class SectorController {
 
     // Create a new sector
     @PostMapping
-    public ResponseEntity<Sector> createSector(@RequestBody Sector sector) {
-        Sector createdSector = sectorService.createSector(sector);
+    public ResponseEntity<Sector> createSector(@RequestBody SectorDto sectorDTO) {
+        Sector createdSector = sectorService.createSector(sectorDTO);
         return ResponseEntity.ok(createdSector);
     }
 
     // Update sector
     @PutMapping("/{id}")
-    public ResponseEntity<Sector> updateSector(@PathVariable Long id, @RequestBody Sector sectorDetails) {
-        Sector updatedSector = sectorService.updateSector(id, sectorDetails);
+    public ResponseEntity<Sector> updateSector(@PathVariable Long id, @RequestBody SectorDto sectorDTO) {
+        Sector updatedSector = sectorService.updateSector(id, sectorDTO);
         return ResponseEntity.ok(updatedSector);
     }
 
