@@ -1,2 +1,39 @@
-<p>event-page works!</p>
-<button (click)="getEvents()">Click Me</button>
+
+<div class="create-event-btn">
+  <app-create-btn></app-create-btn>
+</div>
+
+<mat-accordion>
+  <mat-expansion-panel
+    (opened)="panelOpenState.set(true)"
+    (closed)="panelOpenState.set(false)"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>Event Name Here</mat-panel-title>
+      <mat-panel-description> Event 1 description. </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="event-info">
+      <div class="head">
+        <h4>Designation</h4>
+        <p>Head Name</p>
+      </div>
+      <div class="co-head">
+        <h4>Designation</h4>
+        <p>Head Name</p>
+      </div>
+      <div class="event-date">
+        <h4>Event Date</h4>
+        <p>Event Date Here</p>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button mat-stroked-button>Edit</button>
+      <button mat-flat-button>Print</button>
+    </div>
+
+    <app-create-subevent-form></app-create-subevent-form>
+    
+  </mat-expansion-panel>
+</mat-accordion>

@@ -2,7 +2,6 @@ package com.Backend.Controller;
 
 import com.Backend.Dto.AvailablePoliceUpdateDto;
 import com.Backend.Entities.AvailablePolice;
-import com.Backend.Entities.Subadmin;
 import com.Backend.Service.AvailablePoliceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

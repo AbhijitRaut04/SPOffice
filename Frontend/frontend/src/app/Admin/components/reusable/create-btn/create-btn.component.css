@@ -1,0 +1,16 @@
+/* .create {
+    padding: 20px 0;
+    display: flex;
+    justify-content: end;
+} */
+
+.create-card {
+    /* background-color: #e6dede; */
+    font-size: 3rem;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
