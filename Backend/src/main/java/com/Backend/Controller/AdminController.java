@@ -1,6 +1,7 @@
 package com.Backend.Controller;
 
 import com.Backend.Entities.Admin;
+import com.Backend.Entities.Request;
 import com.Backend.Service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,22 @@ public class AdminController extends BaseController {
     public ResponseEntity<Admin> getAdminById(@PathVariable Long id) {
         Optional<Admin> admin = adminService.getAdminById(id);
         return admin.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/get-requests/{id}")
+    public List<Request> getRequests(@PathVariable Long id) throws Exception{
+
+        try {
+            Optional<Admin> Optionaladmin = adminService.getAdminById(id);
+            if(Optionaladmin.isPresent()) {
+                Admin admin = Optionaladmin.get();
+                return adminService.getRequests(id);
+            }
+            throw new RuntimeException("Request not found");
+            
+        } catch (Exception e) {
+            throw new Exception("Error Getting Requests",e);
+        }
     }
 
     @PostMapping

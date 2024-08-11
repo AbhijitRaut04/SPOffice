@@ -1,5 +1,7 @@
 package com.Backend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,15 +23,21 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne(mappedBy = "request")
-    private Police requestedBy;
     
+    @Column
+    private Long requestedBy;
+
     @ManyToOne
     @JoinColumn(name = "admin_id")
+    @JsonIgnore
     private Admin admin;
 
+    @OneToOne
+    @JoinColumn(name = "subadmin_id")
+    @JsonIgnore
+    private Subadmin subadmin;
+
     @Column
-    private boolean isRejected = false;
+    private String status = "NOT_APPROVED";
 
 }

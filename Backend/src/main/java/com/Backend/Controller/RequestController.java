@@ -38,9 +38,21 @@ public class RequestController extends BaseController  {
         return requestService.createRequest(request);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/reject-request/{id}")
     public ResponseEntity<Request> rejectRequest(@PathVariable Long id) {
-        Optional<Request> updated = Optional.ofNullable(requestService.rejectRequest(id));
+        Optional<Request> updated = Optional.ofNullable(requestService.setRequestToRejected(id));
+        return updated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/pending-request/{id}")
+    public ResponseEntity<Request> pendingRequest(@PathVariable Long id) {
+        Optional<Request> updated = Optional.ofNullable(requestService.setRequestToPending(id));
+        return updated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/approve-request/{id}")
+    public ResponseEntity<Request> approveRequest(@PathVariable Long id) {
+        Optional<Request> updated = Optional.ofNullable(requestService.setRequestToApproved(id));
         return updated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
