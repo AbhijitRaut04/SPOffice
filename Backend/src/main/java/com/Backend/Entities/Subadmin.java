@@ -1,5 +1,6 @@
 package com.Backend.Entities;
 
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,5 +40,8 @@ public class Subadmin {
     private Set<Police> polices;
     @OneToMany(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AvailablePolice> available_polices;
+
+    @OneToOne(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Request subadminRequest;
 
 }
