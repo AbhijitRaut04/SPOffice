@@ -18,12 +18,18 @@ public class SubPatrolling {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "head_id")
     private Police head;
-
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cohead_id")
     private Police cohead;
 
+    @Column
     private String description;
 
+    @Column
     private List<String> instructions;
 
     @ManyToOne(fetch = FetchType.LAZY)

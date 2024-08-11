@@ -1,6 +1,7 @@
 package com.Backend.Controller;
 
 import com.Backend.Entities.Subadmin;
+import com.Backend.Service.RequestService;
 import com.Backend.Service.SubadminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ public class SubadminController {
 
     @Autowired
     private SubadminService subadminService;
+
+    @Autowired
+    private RequestService requestService;
 
     // Get all Subadmins
     @GetMapping
@@ -41,9 +45,13 @@ public class SubadminController {
 
     // Create a new Subadmin
     @PostMapping
-    public ResponseEntity<Subadmin> createSubadmin(@RequestBody Subadmin subadmin) {
+    public ResponseEntity<Subadmin> createSubadmin(
+            @RequestParam Long admin_id,
+            @RequestBody Subadmin subadmin) {
+
         try {
-            Subadmin createdSubadmin = subadminService.createSubadmin(subadmin);
+            // Create Subadmin with the given adminId
+            Subadmin createdSubadmin = subadminService.createSubadmin(subadmin, admin_id);
             return ResponseEntity.ok(createdSubadmin);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

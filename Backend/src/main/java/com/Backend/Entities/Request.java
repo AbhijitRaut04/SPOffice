@@ -1,10 +1,15 @@
 package com.Backend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +23,21 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column
+    private Long requestedBy;
 
-    @Column(nullable = false)
-    private Subadmin requestedBy;
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    @JsonIgnore
+    private Admin admin;
 
-    private boolean isRejected = false;
+    @OneToOne
+    @JoinColumn(name = "subadmin_id")
+    @JsonIgnore
+    private Subadmin subadmin;
+
+    @Column
+    private String status = "NOT_APPROVED";
 
 }

@@ -16,8 +16,10 @@ public class Area {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String areaName;
 
+    @OneToOne(mappedBy = "area")
     private Police head;
 
     @ManyToOne(fetch = FetchType.LAZY)

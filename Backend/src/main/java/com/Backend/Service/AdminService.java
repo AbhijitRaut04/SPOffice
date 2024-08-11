@@ -9,16 +9,20 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.Backend.Entities.Admin;
+import com.Backend.Entities.Request;
 import com.Backend.Repository.AdminRepository;
+import com.Backend.Repository.RequestRepository;
 
 @Service
 public class AdminService {
 
+	@Autowired
     private final AdminRepository adminRepository;
-
-    @Autowired
-    public AdminService(AdminRepository adminRepository) {
+    private final RequestRepository requestRepository;
+	
+    public AdminService(AdminRepository adminRepository, RequestRepository requestRepository) {
         this.adminRepository = adminRepository;
+        this.requestRepository = requestRepository;
     }
 
     public List<Admin> getAllAdmins() {
@@ -41,6 +45,8 @@ public class AdminService {
 
     public Admin createAdmin(Admin admin) {
         try {
+        	System.out.println(admin);
+        	System.out.println("______________________________________________");
             return adminRepository.save(admin);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to create admin", e);
@@ -64,6 +70,10 @@ public class AdminService {
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to update admin", e);
         }
+    }
+
+    public List<Request> getRequests(Long adminId){
+        return requestRepository.findByAdminId(adminId);
     }
 
     public void deleteAdmin(Long id) {

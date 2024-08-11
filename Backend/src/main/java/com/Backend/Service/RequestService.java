@@ -43,13 +43,43 @@ public class RequestService {
         }
     }
 
-    // Reject Request
-    public Request rejectRequest(Long id) {
+    // Sets Request Status to NOT_APPROVED
+    public Request setRequestToRejected(Long id) {
         try {
             Optional<Request> request = requestRepository.findById(id);
             if (request.isPresent()) {
                 Request existingRequest = request.get();
-                existingRequest.setRejected(true);
+                existingRequest.setStatus("NOT_APPROVED");
+                return requestRepository.save(existingRequest);
+            }
+            throw new RuntimeException("Request not found");
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating request", e);
+        }
+    }
+
+    // Set Request status to PENDING
+    public Request setRequestToPending(Long id) {
+        try {
+            Optional<Request> request = requestRepository.findById(id);
+            if (request.isPresent()) {
+                Request existingRequest = request.get();
+                existingRequest.setStatus("PENDING");
+                return requestRepository.save(existingRequest);
+            }
+            throw new RuntimeException("Request not found");
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating request", e);
+        }
+    }
+
+    // Set Request status to APPROVED
+    public Request setRequestToApproved(Long id) {
+        try {
+            Optional<Request> request = requestRepository.findById(id);
+            if (request.isPresent()) {
+                Request existingRequest = request.get();
+                existingRequest.setStatus("APPROVED");
                 return requestRepository.save(existingRequest);
             }
             throw new RuntimeException("Request not found");
