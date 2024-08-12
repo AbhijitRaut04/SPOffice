@@ -1,12 +1,15 @@
 package com.Backend.Entities;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "locations")
