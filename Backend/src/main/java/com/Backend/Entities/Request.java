@@ -24,9 +24,6 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column
-    private Long requestedBy;
-
     @ManyToOne
     @JoinColumn(name = "admin_id")
     @JsonIgnore
@@ -34,7 +31,6 @@ public class Request {
 
     @OneToOne
     @JoinColumn(name = "subadmin_id")
-    @JsonIgnore
     private Subadmin subadmin;
 
     @Column

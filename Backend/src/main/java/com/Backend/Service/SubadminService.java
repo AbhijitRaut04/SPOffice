@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import com.Backend.Entities.Subadmin;
 import com.Backend.Repository.SubadminRepository;
 import com.Backend.Repository.AdminRepository;
-import com.Backend.Repository.RequestRepository;
 
 @Service
 public class SubadminService {
@@ -59,7 +58,6 @@ public class SubadminService {
             request.setAdmin(admin);
             request.setSubadmin(savedSubadmin);
             request.setStatus("NOT_APPROVED");
-            request.setRequestedBy(subadmin.getId());
             requestService.createRequest(request);
             return savedSubadmin;
         } catch (DataAccessException e) {

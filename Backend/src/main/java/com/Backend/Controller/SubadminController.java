@@ -1,7 +1,6 @@
 package com.Backend.Controller;
 
 import com.Backend.Entities.Subadmin;
-import com.Backend.Service.RequestService;
 import com.Backend.Service.SubadminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +17,6 @@ public class SubadminController extends BaseController  {
     @Autowired
     private SubadminService subadminService;
 
-    @Autowired
-    private RequestService requestService;
 
     // Get all Subadmins
     @GetMapping

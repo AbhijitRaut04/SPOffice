@@ -23,6 +23,8 @@ public class RequestController extends BaseController  {
 
     private final RequestService requestService;
 
+    
+
     @Autowired
     public RequestController(RequestService requestService) {
         this.requestService = requestService;
@@ -38,21 +40,22 @@ public class RequestController extends BaseController  {
         return requestService.createRequest(request);
     }
 
-    @PutMapping("/reject-request/{id}")
-    public ResponseEntity<Request> rejectRequest(@PathVariable Long id) {
-        Optional<Request> updated = Optional.ofNullable(requestService.setRequestToRejected(id));
+    @PutMapping("/reject-request/{request_id}")
+    public ResponseEntity<Request> rejectRequest(@PathVariable Long request_id) {
+        Optional<Request> updated = Optional.ofNullable(requestService.setRequestToRejected(request_id));
         return updated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/pending-request/{id}")
-    public ResponseEntity<Request> pendingRequest(@PathVariable Long id) {
-        Optional<Request> updated = Optional.ofNullable(requestService.setRequestToPending(id));
+    @PutMapping("/pending-request/{request_id}")
+    public ResponseEntity<Request> pendingRequest(@PathVariable Long request_id) {
+        Optional<Request> updated = Optional.ofNullable(requestService.setRequestToPending(request_id));
         return updated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/approve-request/{id}")
-    public ResponseEntity<Request> approveRequest(@PathVariable Long id) {
-        Optional<Request> updated = Optional.ofNullable(requestService.setRequestToApproved(id));
+    @PutMapping("/approve-request/{request_id}")
+    public ResponseEntity<Request> approveRequest(@PathVariable Long request_id) {
+        Optional<Request> updated = Optional.ofNullable(requestService.setRequestToApproved(request_id));
+        
         return updated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

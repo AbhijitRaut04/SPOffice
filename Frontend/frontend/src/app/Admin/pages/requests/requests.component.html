@@ -1,1 +1,26 @@
-<p>requests works!</p>
+<mat-chip-set>
+    @for(item of items; track item.index){
+    <mat-chip [ngClass]="{'active':item.active }" (click)="setActive(item.index)">{{item.title}}</mat-chip>
+    }
+</mat-chip-set>
+
+<div class="request-container">
+    @for(request of requests; track request.id){
+    <div class="subadmin-detail">
+        <h3>{{ request.id }}</h3>
+        <div>
+            <h4>{{ request.subadmin.username }} - {{ request.subadmin.station }}</h4>
+        </div>
+        <div class="status-wrapper">
+            @if(request.status === "APPROVED"){
+            <button mat-stroked-button id="status" [style.backgroundColor]="'red'"
+                (click)="reject(request)">Reject</button>
+            }
+            @else {
+            <button mat-stroked-button id="status" [style.backgroundColor]="'green'"
+                (click)="approve(request)">Approve</button>
+            }
+        </div>
+    </div>
+    }
+</div>

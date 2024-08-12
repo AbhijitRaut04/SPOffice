@@ -32,14 +32,13 @@ public class AdminController extends BaseController {
         return admin.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/get-requests/{id}")
-    public List<Request> getRequests(@PathVariable Long id) throws Exception{
+    @GetMapping("/get-requests/{admin_id}")
+    public List<Request> getRequests(@PathVariable Long admin_id) throws Exception{
 
         try {
-            Optional<Admin> Optionaladmin = adminService.getAdminById(id);
+            Optional<Admin> Optionaladmin = adminService.getAdminById(admin_id);
             if(Optionaladmin.isPresent()) {
-                Admin admin = Optionaladmin.get();
-                return adminService.getRequests(id);
+                return adminService.getRequests(admin_id);
             }
             throw new RuntimeException("Request not found");
             
