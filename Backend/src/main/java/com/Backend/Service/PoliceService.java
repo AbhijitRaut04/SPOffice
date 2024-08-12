@@ -1,7 +1,8 @@
 package com.Backend.Service;
 
-import com.Backend.Entities.Police;
-import com.Backend.Repository.PoliceRepository;
+import com.Backend.Dto.PoliceDto;
+import com.Backend.Entities.*;
+import com.Backend.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,18 @@ public class PoliceService {
 
     @Autowired
     private PoliceRepository policeRepository;
+
+    @Autowired
+    private SubadminRepository subadminRepository;
+
+    @Autowired
+    private RequestRepository requestRepository;
+
+    @Autowired
+    private AreaRepository areaRepository;
+
+    @Autowired
+    private SectorRepository sectorRepository;
 
     // Get all Police
     public List<Police> getAllPolices() {
@@ -33,9 +46,36 @@ public class PoliceService {
     }
 
     // Create a new Police
-    public Police createPolice(Police police) {
+    public Police createPolice(PoliceDto policeDto) {
         try {
-            return policeRepository.save(police);
+                Police police = new Police();
+                police.setFullname(policeDto.getFullname());
+                police.setPoliceId(policeDto.getPoliceId());
+                police.setPhone(policeDto.getPhone());
+                police.setEmail(policeDto.getEmail());
+                police.setGender(policeDto.getGender());
+                police.setDesignation(policeDto.getDesignation());
+                if (policeDto.getSubadminId() != null) {
+                    Subadmin subadmin = subadminRepository.findById(policeDto.getSubadminId())
+                            .orElseThrow(() -> new RuntimeException("Subadmin not found"));
+                    police.setSubadmin(subadmin);
+                }
+                if (policeDto.getRequestId() != null) {
+                    Request request = requestRepository.findById(policeDto.getRequestId())
+                            .orElseThrow(() -> new RuntimeException("Request not found"));
+                    police.setRequest(request);
+                }
+                if (policeDto.getAreaId() != null) {
+                    Area area = areaRepository.findById(policeDto.getAreaId())
+                            .orElseThrow(() -> new RuntimeException("Area not found"));
+                    police.setArea(area);
+                }
+                if (policeDto.getSectorId() != null) {
+                    Sector sector = sectorRepository.findById(policeDto.getSectorId())
+                            .orElseThrow(() -> new RuntimeException("Sector not found"));
+                    police.setSector(sector);
+                }
+                return policeRepository.save(police);
         } catch (Exception e) {
             throw new RuntimeException("Error creating police", e);
         }

@@ -1,7 +1,12 @@
 package com.Backend.Service;
 
+import com.Backend.Dto.PatrollingDto;
+import com.Backend.Entities.Admin;
 import com.Backend.Entities.Patrolling;
+import com.Backend.Entities.Police;
+import com.Backend.Repository.AdminRepository;
 import com.Backend.Repository.PatrollingRepository;
+import com.Backend.Repository.PoliceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -14,6 +19,10 @@ public class PatrollingService {
 
     @Autowired
     private PatrollingRepository patrollingRepository;
+    @Autowired
+    private AdminRepository adminRepository;
+    @Autowired
+    private PoliceRepository policeRepository;
 
     public List<Patrolling> getAllPatrollings() {
         return patrollingRepository.findAll();
@@ -23,24 +32,50 @@ public class PatrollingService {
         return patrollingRepository.findById(id);
     }
 
-    public Patrolling createPatrolling(Patrolling patrolling) {
+    public Patrolling createPatrolling(PatrollingDto patrollingDTO) {
+        Patrolling patrolling = new Patrolling();
+        patrolling.setDate(patrollingDTO.getDate());
+        patrolling.setEventname(patrollingDTO.getEventName());
+        patrolling.setDescription(patrollingDTO.getDescription());
+
+        if (patrollingDTO.getAdminId() != null) {
+            Admin admin = adminRepository.findById(patrollingDTO.getAdminId())
+                    .orElseThrow(() -> new RuntimeException("Admin not found"));
+            patrolling.setAdmin(admin);
+        }
+
+        if (patrollingDTO.getHeadId() != null) {
+            Police head = policeRepository.findById(patrollingDTO.getHeadId())
+                    .orElseThrow(() -> new RuntimeException("Police not found"));
+            patrolling.setHead(head);
+        }
+
         return patrollingRepository.save(patrolling);
     }
 
-    public Patrolling updatePatrolling(Long id, Patrolling updatedPatrolling) {
+    public Patrolling updatePatrolling(Long id, PatrollingDto patrollingDTO) {
         try {
-            return patrollingRepository.findById(id)
-                    .map(existingPatrolling -> {
-                        existingPatrolling.setAdmin(updatedPatrolling.getAdmin());
-                        existingPatrolling.setHead(updatedPatrolling.getHead());
-                        existingPatrolling.setDate(updatedPatrolling.getDate());
-                        existingPatrolling.setSubPatrollings(updatedPatrolling.getSubPatrollings());
-                        return patrollingRepository.save(existingPatrolling);
-                    })
-                    .orElseGet(() -> {
-                        updatedPatrolling.setId(id);
-                        return patrollingRepository.save(updatedPatrolling);
-                    });
+            Patrolling patrolling = patrollingRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Patrolling not found"));
+
+            patrolling.setDate(patrollingDTO.getDate());
+            patrolling.setEventname(patrollingDTO.getEventName());
+            patrolling.setDescription(patrollingDTO.getDescription());
+
+            if (patrollingDTO.getAdminId() != null) {
+                Admin admin = adminRepository.findById(patrollingDTO.getAdminId())
+                        .orElseThrow(() -> new RuntimeException("Admin not found"));
+                patrolling.setAdmin(admin);
+            }
+
+            if (patrollingDTO.getHeadId() != null) {
+                Police head = policeRepository.findById(patrollingDTO.getHeadId())
+                        .orElseThrow(() -> new RuntimeException("Police not found"));
+                patrolling.setHead(head);
+            }
+
+            return patrollingRepository.save(patrolling);
+
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to update Patrolling", e);
         }

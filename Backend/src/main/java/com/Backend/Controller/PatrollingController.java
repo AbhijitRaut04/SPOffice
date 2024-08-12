@@ -3,6 +3,7 @@ package com.Backend.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.Backend.Dto.PatrollingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,10 +50,10 @@ public class PatrollingController {
 
     // Create a new Patrolling
     @PostMapping
-    public ResponseEntity<Patrolling> createPatrolling(@RequestBody Patrolling patrolling) {
+    public ResponseEntity<Patrolling> createPatrolling(@RequestBody PatrollingDto patrollingDTO) {
         try {
-            Patrolling createdPatrolling = patrollingService.createPatrolling(patrolling);
-            return ResponseEntity.ok(createdPatrolling);
+            Patrolling patrolling = patrollingService.createPatrolling(patrollingDTO);
+            return ResponseEntity.ok(patrolling);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -60,10 +61,10 @@ public class PatrollingController {
 
     // Update Patrolling
     @PutMapping("/{id}")
-    public ResponseEntity<Patrolling> updatePatrolling(@PathVariable Long id, @RequestBody Patrolling patrollingDetails) {
+    public ResponseEntity<Patrolling> updatePatrolling(@PathVariable Long id, @RequestBody PatrollingDto patrollingDTO) {
         try {
-            Patrolling updatedPatrolling = patrollingService.updatePatrolling(id, patrollingDetails);
-            return new ResponseEntity<>(updatedPatrolling, HttpStatus.OK);
+            Patrolling patrolling = patrollingService.updatePatrolling(id, patrollingDTO);
+            return ResponseEntity.ok(patrolling);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
