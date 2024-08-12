@@ -13,7 +13,6 @@ public class PoliceDto {
     private String gender;
     private String designation;
     private Long subadminId;
-    private Long requestId;
-    private Long areaId;
-    private Long sectorId;
+    // private Long areaId;
+    // private Long sectorId;
 }

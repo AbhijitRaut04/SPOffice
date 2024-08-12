@@ -5,6 +5,9 @@
 </mat-chip-set>
 
 <div class="request-container">
+    @if (requests.length === 0) {
+        <h6>Nothing here</h6>
+    }
     @for(request of requests; let i = $index; track request.id){
     <div class="subadmin-detail">
         <h3>{{ i+1 }}</h3>

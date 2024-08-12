@@ -12,5 +12,8 @@ import com.Backend.Entities.Subadmin;
 public interface SubadminRepository extends JpaRepository<Subadmin, Long> {
     @Query(value = "SELECT * FROM subadmins  WHERE admin_id = :admin_id", nativeQuery = true)
     List<Subadmin> findByAdminId(Long admin_id);
+
+    @Query(value = "SELECT * FROM subadmins  WHERE status = 'APPROVED' AND admin_id = :admin_id", nativeQuery = true)
+    List<Subadmin> findApprovedByAdminId(Long admin_id);
     
 }

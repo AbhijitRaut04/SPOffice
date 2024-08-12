@@ -73,6 +73,15 @@ public class SubadminService {
         }
         return new ArrayList<>();
     }
+
+    public List<Subadmin> getApprovedSubadminsByAdminID(Long admin_id){
+        try {
+            return subadminRepository.findApprovedByAdminId(admin_id);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
     
     // Sets Subadmin Status to NOT_APPROVED
     public Subadmin setStatusToRejected(Long id) {

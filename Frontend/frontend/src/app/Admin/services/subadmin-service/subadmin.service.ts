@@ -2,17 +2,19 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Request } from '../../models/request.model';
+import { Subadmin, Request } from '../../models/subadmin.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RequestService {
+export class SubadminService {
   private apiUrl = `${environment.baseUrl}/api/subadmins`;
 
   admin_id = 2;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.getValidSubadmins();
+  }
 
 
   getRequests(): Observable<Request[]> {
@@ -26,4 +28,9 @@ export class RequestService {
   approveRequest(request: Request): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/requests/approve/${request.id}`, {});
   }
+
+  getValidSubadmins(): any{
+    return this.http.get<Subadmin[]>(`${this.apiUrl}/approved/${this.admin_id}`);
+  }
+
 }

@@ -6,6 +6,7 @@ import { SubadminsComponent } from './Admin/pages/subadmins/subadmins.component'
 import { CreateEventComponent } from './Admin/pages/create-event/create-event.component';
 import { adminGuard } from './Admin/gaurds/admin.guard';
 import { LoginComponent } from './Admin/pages/login/login.component';
+import { SubadminPageComponent } from './Admin/pages/subadmin-page/subadmin-page.component';
 
 
 export const routes: Routes = [
@@ -37,8 +38,17 @@ export const routes: Routes = [
     },
     {
         path:"subadmins",
-        component:SubadminsComponent,
-        canActivate: [adminGuard]
+        canActivate: [adminGuard],
+        children:[
+            {
+                path:"",
+                component:SubadminsComponent,
+            },
+            {
+                path:":subadmin",
+                component: SubadminPageComponent,
+            }
+        ]
     },
     {
         path:"login",
