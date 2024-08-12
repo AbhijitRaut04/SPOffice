@@ -10,16 +10,18 @@ export class AuthService {
     
     if (username === 'admin' && password === 'admin') {
       this.loggedIn = true;
+      localStorage.setItem("admin","token");
       return true;
     }
     return false;
   }
 
   isLoggedIn(): boolean {
-    return this.loggedIn;
+    return localStorage.getItem("admin") === "token";
   }
 
   logout(): void {
     this.loggedIn = false;
+    localStorage.removeItem("admin");
   }
 }

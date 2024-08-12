@@ -3,6 +3,7 @@ package com.Backend.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.Backend.Dto.SubPatrollingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ import com.Backend.Service.SubPatrollingService;
 
 @RestController
 @RequestMapping("/api/sub-patrollings")
-public class SubPatrollingController {
+public class SubPatrollingController extends BaseController  {
 
     @Autowired
     private SubPatrollingService subPatrollingService;
@@ -49,12 +50,14 @@ public class SubPatrollingController {
 
     // Create a new SubPatrolling
     @PostMapping
-    public ResponseEntity<SubPatrolling> createSubPatrolling(@RequestBody SubPatrolling subPatrolling) {
+    public ResponseEntity<?> createSubPatrolling(@RequestBody SubPatrollingDto subPatrollingDTO) {
         try {
-            SubPatrolling createdSubPatrolling = subPatrollingService.createSubPatrolling(subPatrolling);
+            SubPatrolling createdSubPatrolling = subPatrollingService.createSubPatrolling(subPatrollingDTO);
             return ResponseEntity.ok(createdSubPatrolling);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            // Log the full stack trace
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred: " + e.getMessage());
         }
     }
 
@@ -65,7 +68,9 @@ public class SubPatrollingController {
             SubPatrolling updatedSubPatrolling = subPatrollingService.updateSubPatrolling(id, subPatrollingDetails);
             return new ResponseEntity<>(updatedSubPatrolling, HttpStatus.OK);
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+
         }
     }
 

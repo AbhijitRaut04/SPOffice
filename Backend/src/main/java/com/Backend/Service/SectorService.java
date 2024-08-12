@@ -1,6 +1,11 @@
 package com.Backend.Service;
 
+import com.Backend.Dto.SectorDto;
+import com.Backend.Entities.Area;
+import com.Backend.Entities.Police;
 import com.Backend.Entities.Sector;
+import com.Backend.Repository.AreaRepository;
+import com.Backend.Repository.PoliceRepository;
 import com.Backend.Repository.SectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -14,6 +19,10 @@ public class SectorService {
 
     @Autowired
     private SectorRepository sectorRepository;
+    @Autowired
+    private PoliceRepository policeRepository;
+    @Autowired
+    private AreaRepository areaRepository;
 
     public List<Sector> getAllSectors() {
         return sectorRepository.findAll();
@@ -23,24 +32,44 @@ public class SectorService {
         return sectorRepository.findById(id);
     }
 
-    public Sector createSector(Sector sector) {
+    public Sector createSector(SectorDto sectorDTO) {
+
+        Sector sector = new Sector();
+        sector.setName(sectorDTO.getName());
+
+        if (sectorDTO.getHeadId() != null) {
+            Police head = policeRepository.findById(sectorDTO.getHeadId())
+                    .orElseThrow(() -> new RuntimeException("Police not found"));
+            sector.setHead(head);
+        }
+
+        if (sectorDTO.getAreaId() != null) {
+            Area area = areaRepository.findById(sectorDTO.getAreaId())
+                    .orElseThrow(() -> new RuntimeException("Area not found"));
+            sector.setArea(area);
+        }
         return sectorRepository.save(sector);
     }
 
-    public Sector updateSector(Long id, Sector updatedSector) {
+    public Sector updateSector(Long id, SectorDto sectorDTO) {
         try {
-            return sectorRepository.findById(id)
-                .map(sector -> {
-                    sector.setName(updatedSector.getName());
-                    sector.setHead(updatedSector.getHead());
-                    sector.setArea(updatedSector.getArea());
-                    sector.setLocations(updatedSector.getLocations());
-                    return sectorRepository.save(sector);
-                })
-                .orElseGet(() -> {
-                    updatedSector.setId(id);
-                    return sectorRepository.save(updatedSector);
-                });
+            Sector sector = sectorRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Sector not found"));
+            sector.setName(sectorDTO.getName());
+
+            if (sectorDTO.getHeadId() != null) {
+                Police head = policeRepository.findById(sectorDTO.getHeadId())
+                        .orElseThrow(() -> new RuntimeException("Police not found"));
+                sector.setHead(head);
+            }
+
+            if (sectorDTO.getAreaId() != null) {
+                Area area = areaRepository.findById(sectorDTO.getAreaId())
+                        .orElseThrow(() -> new RuntimeException("Area not found"));
+                sector.setArea(area);
+            }
+
+            return sectorRepository.save(sector);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to update sector", e);
         }

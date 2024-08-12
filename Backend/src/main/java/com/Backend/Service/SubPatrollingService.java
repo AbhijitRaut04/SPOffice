@@ -1,6 +1,11 @@
 package com.Backend.Service;
 
+import com.Backend.Dto.SubPatrollingDto;
+import com.Backend.Entities.Patrolling;
+import com.Backend.Entities.Police;
 import com.Backend.Entities.SubPatrolling;
+import com.Backend.Repository.PatrollingRepository;
+import com.Backend.Repository.PoliceRepository;
 import com.Backend.Repository.SubPatrollingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -14,6 +19,10 @@ public class SubPatrollingService {
 
     @Autowired
     private SubPatrollingRepository subPatrollingRepository;
+    @Autowired
+    private PoliceRepository policeRepository;
+    @Autowired
+    private PatrollingRepository patrollingRepository;
 
     // Get all SubPatrollings
     public List<SubPatrolling> getAllSubPatrollings() {
@@ -26,8 +35,22 @@ public class SubPatrollingService {
     }
 
     // Create a new SubPatrolling
-    public SubPatrolling createSubPatrolling(SubPatrolling subPatrolling) {
+    public SubPatrolling createSubPatrolling(SubPatrollingDto subPatrollingDTO) {
         try {
+            SubPatrolling subPatrolling = new SubPatrolling();
+
+            Police head = policeRepository.findById(subPatrollingDTO.getHeadId())
+                    .orElseThrow(() -> new RuntimeException("Head not found"));
+            Police cohead = policeRepository.findById(subPatrollingDTO.getCoheadId())
+                    .orElseThrow(() -> new RuntimeException("Co-head not found"));
+            Patrolling patrolling = patrollingRepository.findById(subPatrollingDTO.getPatrollingId())
+                    .orElseThrow(() -> new RuntimeException("Patrolling not found"));
+
+            subPatrolling.setHead(head);
+            subPatrolling.setCohead(cohead);
+            subPatrolling.setDescription(subPatrollingDTO.getDescription());
+            subPatrolling.setInstructions(subPatrollingDTO.getInstructions());
+            subPatrolling.setPatrolling(patrolling);
             return subPatrollingRepository.save(subPatrolling);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to create SubPatrolling", e);

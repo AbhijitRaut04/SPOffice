@@ -1,7 +1,12 @@
 package com.Backend.Service;
 
+import com.Backend.Dto.AreaDto;
 import com.Backend.Entities.Area;
+import com.Backend.Entities.Police;
+import com.Backend.Entities.SubPatrolling;
 import com.Backend.Repository.AreaRepository;
+import com.Backend.Repository.PoliceRepository;
+import com.Backend.Repository.SubPatrollingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -14,6 +19,10 @@ public class AreaService {
 
     @Autowired
     private AreaRepository areaRepository;
+    @Autowired
+    private PoliceRepository policeRepository;
+    @Autowired
+    private SubPatrollingRepository subPatrollingRepository;
 
     public List<Area> getAllAreas() {
         return areaRepository.findAll();
@@ -23,24 +32,44 @@ public class AreaService {
         return areaRepository.findById(id);
     }
 
-    public Area createArea(Area area) {
+    public Area createArea(AreaDto areaDTO) {
+        Area area = new Area();
+        area.setAreaName(areaDTO.getAreaName());
+
+        if (areaDTO.getHeadId() != null) {
+            Police head = policeRepository.findById(areaDTO.getHeadId())
+                    .orElseThrow(() -> new RuntimeException("Police not found"));
+            area.setHead(head);
+        }
+
+        if (areaDTO.getSubPatrollingId() != null) {
+            SubPatrolling subPatrolling = subPatrollingRepository.findById(areaDTO.getSubPatrollingId())
+                    .orElseThrow(() -> new RuntimeException("SubPatrolling not found"));
+            area.setSubPatrolling(subPatrolling);
+        }
         return areaRepository.save(area);
+
+
     }
 
-    public Area updateArea(Long id, Area updatedArea) {
+    public Area updateArea(Long id, AreaDto areaDTO) {
         try {
-            return areaRepository.findById(id)
-                .map(area -> {
-                    area.setAreaName(updatedArea.getAreaName());
-                    area.setHead(updatedArea.getHead());
-                    area.setSubPatrolling(updatedArea.getSubPatrolling());
-                    area.setSectors(updatedArea.getSectors());
-                    return areaRepository.save(area);
-                })
-                .orElseGet(() -> {
-                    updatedArea.setId(id);
-                    return areaRepository.save(updatedArea);
-                });
+            Area existingArea = areaRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Area not found"));
+            existingArea.setAreaName(areaDTO.getAreaName());
+
+            if (areaDTO.getHeadId() != null) {
+                Police head = policeRepository.findById(areaDTO.getHeadId())
+                        .orElseThrow(() -> new RuntimeException("Police not found"));
+                existingArea.setHead(head);
+            }
+
+            if (areaDTO.getSubPatrollingId() != null) {
+                SubPatrolling subPatrolling = subPatrollingRepository.findById(areaDTO.getSubPatrollingId())
+                        .orElseThrow(() -> new RuntimeException("SubPatrolling not found"));
+                existingArea.setSubPatrolling(subPatrolling);
+            }
+            return areaRepository.save(existingArea);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to update area", e);
         }

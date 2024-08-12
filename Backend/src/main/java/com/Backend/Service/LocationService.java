@@ -1,7 +1,12 @@
 package com.Backend.Service;
 
+import com.Backend.Dto.LocationDto;
 import com.Backend.Entities.Location;
+import com.Backend.Entities.Police;
+import com.Backend.Entities.Sector;
 import com.Backend.Repository.LocationRepository;
+import com.Backend.Repository.PoliceRepository;
+import com.Backend.Repository.SectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -14,6 +19,10 @@ public class LocationService {
 
     @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private SectorRepository sectorRepository;
+    @Autowired
+    private PoliceRepository policeRepository;
 
     public List<Location> getAllLocations() {
         return locationRepository.findAll();
@@ -23,27 +32,53 @@ public class LocationService {
         return locationRepository.findById(id);
     }
 
-    public Location createLocation(Location location) {
+    public Location createLocation(LocationDto locationDTO) {
+
+        Location location = new Location();
+        location.setName(locationDTO.getName());
+        location.setMalePolices(locationDTO.getMalePolices());
+        location.setFemalePolices(locationDTO.getFemalePolices());
+        location.setEquipments(locationDTO.getEquipments());
+
+        if (locationDTO.getHeadId() != null) {
+            Police head = policeRepository.findById(locationDTO.getHeadId())
+                    .orElseThrow(() -> new RuntimeException("Police not found"));
+            location.setHead(head);
+        }
+
+        if (locationDTO.getSectorId() != null) {
+            Sector sector = sectorRepository.findById(locationDTO.getSectorId())
+                    .orElseThrow(() -> new RuntimeException("Sector not found"));
+            location.setSector(sector);
+        }
+
         return locationRepository.save(location);
     }
 
-    public Location updateLocation(Long id, Location updatedLocation) {
+    public Location updateLocation(Long id, LocationDto locationDTO) {
         try {
-            return locationRepository.findById(id)
-                .map(location -> {
-                    location.setName(updatedLocation.getName());
-                    location.setHead(updatedLocation.getHead());
-                    location.setMalePolices(updatedLocation.getMalePolices());
-                    location.setFemalePolices(updatedLocation.getFemalePolices());
-                    location.setEquipments(updatedLocation.getEquipments());
-                    location.setSector(updatedLocation.getSector());
-                    // location.setPolices(updatedLocation.getPolices());
-                    return locationRepository.save(location);
-                })
-                .orElseGet(() -> {
-                    updatedLocation.setId(id);
-                    return locationRepository.save(updatedLocation);
-                });
+            Location existingLocation = locationRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Location not found"));
+
+            if (locationDTO.getHeadId() != null) {
+                Police head = policeRepository.findById(locationDTO.getHeadId())
+                        .orElseThrow(() -> new RuntimeException("Police not found"));
+                existingLocation.setHead(head);
+            }
+
+            if (locationDTO.getSectorId() != null) {
+                Sector sector = sectorRepository.findById(locationDTO.getSectorId())
+                        .orElseThrow(() -> new RuntimeException("Sector not found"));
+                existingLocation.setSector(sector);
+            }
+
+            existingLocation.setName(locationDTO.getName());
+            existingLocation.setMalePolices(locationDTO.getMalePolices());
+            existingLocation.setFemalePolices(locationDTO.getFemalePolices());
+            existingLocation.setEquipments(locationDTO.getEquipments());
+
+            return locationRepository.save(existingLocation);
+
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to update location", e);
         }

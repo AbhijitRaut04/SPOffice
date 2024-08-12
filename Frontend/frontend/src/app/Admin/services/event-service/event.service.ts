@@ -7,12 +7,14 @@ import { Event } from '../../models/event.models';
   providedIn: 'root'
 })
 export class EventService {
-  private apiUrl = `${environment.baseUrl}/api/admins`;
+  private apiUrl = `${environment.baseUrl}/api/subadmins`;
 
   constructor(private http: HttpClient) { }
 
   getEvents() {
-    return this.http.get<Event[]>(this.apiUrl);
+    return this.http.get(this.apiUrl).subscribe(data => {
+      console.log(data);
+    });
   }
 
   addEvent(event: Event) {

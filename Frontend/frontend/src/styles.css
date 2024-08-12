@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root{
+    --primary-color:rgb(84, 84, 255);
+}
+
 * {
     margin: 0;
     padding: 0;

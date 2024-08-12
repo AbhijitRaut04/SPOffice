@@ -1,5 +1,6 @@
 package com.Backend.Controller;
 
+import com.Backend.Dto.AreaDto;
 import com.Backend.Entities.Area;
 import com.Backend.Service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/areas")
-public class AreaController {
+public class AreaController extends BaseController  {
 
     @Autowired
     private AreaService areaService;
@@ -30,13 +31,13 @@ public class AreaController {
     }
 
     @PostMapping
-    public ResponseEntity<Area> createArea(@RequestBody Area area) {
-        Area createdArea = areaService.createArea(area);
+    public ResponseEntity<Area> createArea(@RequestBody AreaDto areaDTO) {
+        Area createdArea = areaService.createArea(areaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdArea);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Area> updateArea(@PathVariable Long id, @RequestBody Area areaDetails) {
+    public ResponseEntity<Area> updateArea(@PathVariable Long id, @RequestBody AreaDto areaDetails) {
         Area updatedArea = areaService.updateArea(id, areaDetails);
         return ResponseEntity.ok(updatedArea);
     }

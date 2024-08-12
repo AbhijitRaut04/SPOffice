@@ -4,11 +4,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "locations")
@@ -25,12 +26,13 @@ public class Location {
 
     @ManyToOne
     @JoinColumn(name = "police_id")
+    @JsonIgnore
     private Police head;
 
-//    @OneToMany
+    @Column
     private List<String> malePolices;
 
-//    @OneToMany
+    @Column
     private List<String> femalePolices;
 
     @Column
@@ -41,9 +43,9 @@ public class Location {
     @JsonIgnore
     private Sector sector;
 
-//    @ElementCollection
-//    @CollectionTable(name = "policeAtLocation", joinColumns = @JoinColumn(name = "location_id"))
-//    @Column(name = "police")
-//    private Set<Police> polices = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "policeAtLocation", joinColumns = @JoinColumn(name = "location_id"))
+    @Column(name = "police")
+    private Set<Police> polices = new HashSet<>();
 
 }
