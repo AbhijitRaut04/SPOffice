@@ -8,20 +8,22 @@ import { Request } from '../../models/request.model';
   providedIn: 'root'
 })
 export class RequestService {
-  private apiUrl = `${environment.baseUrl}/api/requests`;
+  private apiUrl = `${environment.baseUrl}/api/subadmins`;
+
+  admin_id = 2;
 
   constructor(private http: HttpClient) { }
 
 
   getRequests(): Observable<Request[]> {
-    return this.http.get<Request[]>(this.apiUrl);
+    return this.http.get<Request[]>(`${this.apiUrl}/requests/${this.admin_id}`);
   }
 
   rejectRequest(request: Request): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/reject-request/${request.id}`, {});
+    return this.http.put<void>(`${this.apiUrl}/requests/reject/${request.id}`, {});
   }
 
   approveRequest(request: Request): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/approve-request/${request.id}`, {});
+    return this.http.put<void>(`${this.apiUrl}/requests/approve/${request.id}`, {});
   }
 }

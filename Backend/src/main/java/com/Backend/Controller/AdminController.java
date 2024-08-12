@@ -1,8 +1,9 @@
 package com.Backend.Controller;
 
 import com.Backend.Entities.Admin;
-import com.Backend.Entities.Request;
+// import com.Backend.Entities.Request;
 import com.Backend.Service.AdminService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,20 +33,20 @@ public class AdminController extends BaseController {
         return admin.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/get-requests/{admin_id}")
-    public List<Request> getRequests(@PathVariable Long admin_id) throws Exception{
+    // @GetMapping("/get-requests/{admin_id}")
+    // public List<Subadmin> getRequests(@PathVariable Long admin_id) throws Exception{
 
-        try {
-            Optional<Admin> Optionaladmin = adminService.getAdminById(admin_id);
-            if(Optionaladmin.isPresent()) {
-                return adminService.getRequests(admin_id);
-            }
-            throw new RuntimeException("Request not found");
+    //     try {
+    //         Optional<Admin> Optionaladmin = adminService.getAdminById(admin_id);
+    //         if(Optionaladmin.isPresent()) {
+    //             return adminService.getRequests(admin_id);
+    //         }
+    //         throw new RuntimeException("Request not found");
             
-        } catch (Exception e) {
-            throw new Exception("Error Getting Requests",e);
-        }
-    }
+    //     } catch (Exception e) {
+    //         throw new Exception("Error Getting Requests",e);
+    //     }
+    // }
 
     @PostMapping
     public Admin createAdmin(@RequestBody Admin admin) {

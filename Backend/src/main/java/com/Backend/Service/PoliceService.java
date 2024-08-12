@@ -18,8 +18,8 @@ public class PoliceService {
     @Autowired
     private SubadminRepository subadminRepository;
 
-    @Autowired
-    private RequestRepository requestRepository;
+    // @Autowired
+    // private RequestRepository requestRepository;
 
     @Autowired
     private AreaRepository areaRepository;
@@ -60,11 +60,11 @@ public class PoliceService {
                             .orElseThrow(() -> new RuntimeException("Subadmin not found"));
                     police.setSubadmin(subadmin);
                 }
-                if (policeDto.getRequestId() != null) {
-                    Request request = requestRepository.findById(policeDto.getRequestId())
-                            .orElseThrow(() -> new RuntimeException("Request not found"));
-                    police.setRequest(request);
-                }
+                // if (policeDto.getRequestId() != null) {
+                //     Request request = requestRepository.findById(policeDto.getRequestId())
+                //             .orElseThrow(() -> new RuntimeException("Request not found"));
+                //     police.setRequest(request);
+                // }
                 if (policeDto.getAreaId() != null) {
                     Area area = areaRepository.findById(policeDto.getAreaId())
                             .orElseThrow(() -> new RuntimeException("Area not found"));

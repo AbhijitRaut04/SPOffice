@@ -5,11 +5,11 @@
 </mat-chip-set>
 
 <div class="request-container">
-    @for(request of requests; track request.id){
+    @for(request of requests; let i = $index; track request.id){
     <div class="subadmin-detail">
-        <h3>{{ request.id }}</h3>
+        <h3>{{ i+1 }}</h3>
         <div>
-            <h4>{{ request.subadmin.username }} - {{ request.subadmin.station }}</h4>
+            <h4>{{ request.username }} - {{ request.station }}</h4>
         </div>
         <div class="status-wrapper">
             @if(request.status === "APPROVED"){

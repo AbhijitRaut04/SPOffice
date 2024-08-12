@@ -7,7 +7,6 @@ import com.Backend.Entities.SubPatrolling;
 import com.Backend.Repository.AreaRepository;
 import com.Backend.Repository.PoliceRepository;
 import com.Backend.Repository.SubPatrollingRepository;
-import com.Backend.Repository.SubadminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;

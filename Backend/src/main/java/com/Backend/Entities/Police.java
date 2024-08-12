@@ -43,9 +43,9 @@ public class Police {
     @JsonIgnore
     private Subadmin subadmin;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "request_id")
-    private Request request;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "request_id")
+    // private Request request;
     
     @OneToOne(cascade = CascadeType.ALL)
     private Area area;

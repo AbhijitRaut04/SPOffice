@@ -1,6 +1,6 @@
 package com.Backend.Entities;
 
-import java.util.List;
+// import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -25,8 +25,8 @@ public class Admin {
 
     private String district;
 
-    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Request> subAdminRequests;
+    // @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
+    // private List<Request> subAdminRequests;
 
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Subadmin> subadmins;
