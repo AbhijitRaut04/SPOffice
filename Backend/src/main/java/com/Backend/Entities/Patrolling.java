@@ -26,12 +26,17 @@ public class Patrolling {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "police_id")
+    @JsonIgnore
     private Police head;
-
-    // add the timeline and details
 
     @Column
     private Date date;
+
+    @Column
+    private String eventname;
+
+    @Column
+    private String description;
 
     @OneToMany(mappedBy = "patrolling", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SubPatrolling> subPatrollings;

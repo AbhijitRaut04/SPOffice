@@ -4,6 +4,7 @@ package com.Backend.Entities;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,20 +21,23 @@ public class SubPatrolling {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "head_id")
+    @JsonIgnore
     private Police head;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cohead_id")
+    @JsonIgnore
     private Police cohead;
 
     @Column
     private String description;
 
     @Column
-    private List<String> instructions;
+    private String instructions;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patrolling_id")
+    @JsonIgnore
     private Patrolling patrolling;
 
     @OneToMany(mappedBy = "subPatrolling", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -23,12 +23,13 @@ public class Location {
 
     @ManyToOne
     @JoinColumn(name = "police_id")
+    @JsonIgnore
     private Police head;
 
-//    @OneToMany
+    @Column
     private List<String> malePolices;
 
-//    @OneToMany
+    @Column
     private List<String> femalePolices;
 
     @Column
@@ -39,9 +40,9 @@ public class Location {
     @JsonIgnore
     private Sector sector;
 
-//    @ElementCollection
-//    @CollectionTable(name = "policeAtLocation", joinColumns = @JoinColumn(name = "location_id"))
-//    @Column(name = "police")
-//    private Set<Police> polices = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "policeAtLocation", joinColumns = @JoinColumn(name = "location_id"))
+    @Column(name = "police")
+    private Set<Police> polices = new HashSet<>();
 
 }

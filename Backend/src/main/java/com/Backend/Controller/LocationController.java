@@ -1,5 +1,6 @@
 package com.Backend.Controller;
 
+import com.Backend.Dto.LocationDto;
 import com.Backend.Entities.Location;
 import com.Backend.Service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +31,15 @@ public class LocationController extends BaseController  {
     }
 
     @PostMapping
-    public ResponseEntity<Location> createLocation(@RequestBody Location location) {
-        Location createdLocation = locationService.createLocation(location);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdLocation);
+    public ResponseEntity<Location> createLocation(@RequestBody LocationDto locationDTO) {
+        Location createdLocation = locationService.createLocation(locationDTO);
+        return ResponseEntity.ok(createdLocation);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Location> updateLocation(@PathVariable Long id, @RequestBody Location updatedLocation) {
-        Location location = locationService.updateLocation(id, updatedLocation);
-        return ResponseEntity.ok(location);
+    public ResponseEntity<Location> updateLocation(@PathVariable Long id, @RequestBody LocationDto locationDTO) {
+        Location updatedLocation = locationService.updateLocation(id, locationDTO);
+        return ResponseEntity.ok(updatedLocation);
     }
 
     @DeleteMapping("/{id}")
