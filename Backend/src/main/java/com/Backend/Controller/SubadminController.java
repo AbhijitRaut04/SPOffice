@@ -40,13 +40,25 @@ public class SubadminController extends BaseController  {
         }
     }
 
-    
+    // Get approved Subadmins for admin
+    @GetMapping("/approved/{admin_id}")
+    public ResponseEntity<List<Subadmin>> getApprovedSubadminsByAdminId(@PathVariable Long admin_id) {
+        try {
+            List<Subadmin> subadmins = subadminService.getApprovedSubadminsByAdminID(admin_id);
+            return ResponseEntity.ok(subadmins);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    // unapprove subadmin
     @PutMapping("/requests/reject/{subadmin_id}")
     public ResponseEntity<Subadmin> rejectRequest(@PathVariable Long subadmin_id) {
         Optional<Subadmin> updated = Optional.ofNullable(subadminService.setStatusToRejected(subadmin_id));
         return updated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    // approve subadmin
     @PutMapping("/requests/approve/{subadmin_id}")
     public ResponseEntity<Subadmin> qpproveRequest(@PathVariable Long subadmin_id) {
         Optional<Subadmin> updated = Optional.ofNullable(subadminService.setStatusToApproved(subadmin_id));

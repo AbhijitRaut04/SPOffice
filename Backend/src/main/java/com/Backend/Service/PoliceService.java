@@ -60,21 +60,17 @@ public class PoliceService {
                             .orElseThrow(() -> new RuntimeException("Subadmin not found"));
                     police.setSubadmin(subadmin);
                 }
-                // if (policeDto.getRequestId() != null) {
-                //     Request request = requestRepository.findById(policeDto.getRequestId())
-                //             .orElseThrow(() -> new RuntimeException("Request not found"));
-                //     police.setRequest(request);
+                
+                // if (policeDto.getAreaId() != null) {
+                //     Area area = areaRepository.findById(policeDto.getAreaId())
+                //             .orElseThrow(() -> new RuntimeException("Area not found"));
+                //     police.setArea(area);
                 // }
-                if (policeDto.getAreaId() != null) {
-                    Area area = areaRepository.findById(policeDto.getAreaId())
-                            .orElseThrow(() -> new RuntimeException("Area not found"));
-                    police.setArea(area);
-                }
-                if (policeDto.getSectorId() != null) {
-                    Sector sector = sectorRepository.findById(policeDto.getSectorId())
-                            .orElseThrow(() -> new RuntimeException("Sector not found"));
-                    police.setSector(sector);
-                }
+                // if (policeDto.getSectorId() != null) {
+                //     Sector sector = sectorRepository.findById(policeDto.getSectorId())
+                //             .orElseThrow(() -> new RuntimeException("Sector not found"));
+                //     police.setSector(sector);
+                // }
                 return policeRepository.save(police);
         } catch (Exception e) {
             throw new RuntimeException("Error creating police", e);

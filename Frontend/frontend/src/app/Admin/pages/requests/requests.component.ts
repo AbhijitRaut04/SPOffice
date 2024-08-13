@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../../services/request-service/request.service';
-import { Request } from '../../models/request.model';
+import { SubadminService } from '../../services/subadmin-service/subadmin.service';
+import { Request } from '../../models/subadmin.model';
 import { MatButtonModule } from '@angular/material/button';
 import { switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -25,7 +25,7 @@ export class RequestsComponent implements OnInit {
     { title: "Pending", active: false, index: 2 }
   ];
 
-  constructor(private requestService: RequestService) { }
+  constructor(private subadminService: SubadminService) { }
 
   ngOnInit(): void {
     this.getRequests();
@@ -49,10 +49,10 @@ export class RequestsComponent implements OnInit {
   }
 
   getRequests() {
-    this.requestService.getRequests().subscribe(
+    this.subadminService.getRequests().subscribe(
       (data: Request[]) => {
         this.allRequests = data;
-        this.applyFilter(); // Ensure the filter is applied to the initial data
+        this.applyFilter(); 
       },
       error => {
         console.error("Error fetching requests:", error);
@@ -61,8 +61,8 @@ export class RequestsComponent implements OnInit {
   }
 
   reject(request: Request) {
-    this.requestService.rejectRequest(request).pipe(
-      switchMap(() => this.requestService.getRequests()),
+    this.subadminService.rejectRequest(request).pipe(
+      switchMap(() => this.subadminService.getRequests()),
       catchError(error => {
         console.error("Error rejecting request:", error);
         return of([]);
@@ -74,8 +74,8 @@ export class RequestsComponent implements OnInit {
   }
 
   approve(request: Request) {
-    this.requestService.approveRequest(request).pipe(
-      switchMap(() => this.requestService.getRequests()),
+    this.subadminService.approveRequest(request).pipe(
+      switchMap(() => this.subadminService.getRequests()),
       catchError(error => {
         console.error("Error approving request:", error);
         return of([]);
