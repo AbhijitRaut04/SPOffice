@@ -1,1 +1,38 @@
-<p>home works!</p>
+<div class="home-container">
+  <div class="top">
+    <div class="description">
+      <div class="title">
+        Seamless Communication for
+        <span class="highlight"> Events Security</span>
+        <p>
+          SP Office streamlines event communication with police, ensuring
+          smooth, secure events by sharing crucial details and security
+          requirements.
+        </p>
+      </div>
+    </div>
+    <div class="images">
+      <div class="image"><img src="police3.webp" alt=""></div>
+      <div class="image"><img src="police2.webp" alt=""></div>
+      <div class="image"><img src="police1.webp" alt=""></div>
+      <div class="image"><img src="police4.jpg" alt=""></div>
+      <div class="image"><img src="police5.jpg" alt=""></div>
+      <div class="image"><img src="police6.webp" alt=""></div>
+      <div class="image"><img src="police7.jpg" alt=""></div>
+      <div class="image"><img src="policeMarch.jpg" alt=""></div>
+    </div>
+  </div>
+  <!-- <div class="quick-buttons">
+        <div class="quick-button" *ngFor="let button of buttons">
+            {{button.title}}
+        </div>
+    </div> -->
+  <div class="features-main-title">Key Features</div>
+
+  <div class="features">
+    <div *ngFor="let feature of features" class="feature">
+      <div class="feature-title">{{ feature.title }}</div>
+      <div class="feature-description">{{ feature.description }}</div>
+    </div>
+  </div>
+</div>
