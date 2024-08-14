@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Concert+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+.home-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: "Nunito", sans-serif;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.top {
+  padding: 0px 3vw;
+  height: auto;
+  width: 100vw;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.images {
+  height: auto;
+  width: auto;
+  display: grid;
+  justify-content: right;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.image {
+  width: 350px;
+  height: 200px;
+  row-gap: 0px;
+  row-gap: 0px;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  transition: scale .2s linear;
+}
+
+.image img:hover{
+    scale: 1.02;
+    z-index: -1;
+}
+
+.description {
+  padding: 20px;
+  border-radius: 10px;
+  position: absolute;
+  left: 5vw;
+  top: 20vh;
+  max-width: 500px;
+  font-size: clamp(10px, 2vw, 40px);
+  background-color: rgba(255, 255, 255, 0.374);
+  backdrop-filter: blur(5px);
+  z-index: 1;
+}
+
+.title {
+  font-size: clamp(30px, 3vw, 50px);
+  font-weight: 800;
+}
+
+.description p,
+.feature-description {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.highlight {
+  font-weight: 500;
+  padding: 0px 10px;
+  background-color: #243048;
+  color: aliceblue;
+}
+
+.feature:hover {
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.988);
+}
+
+.features {
+  width: 90vw;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.feature {
+  box-sizing: border-box;
+  width: 30%;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: #7fbae1;
+  border: 1px solid rgba(0, 0, 0, 0.574);
+  transition: all 0.2s linear;
+}
+
+.feature-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.feature-description {
+  font-size: 16px;
+}
+
+.features-main-title {
+  width: 90%;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+@media (max-width: 451px) {
+  .about-container {
+    flex-direction: column;
+    margin-left: -6.5vw;
+  }
+
+  .description,
+  .quick-buttons {
+    width: 100vw;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .description {
+    text-align: center;
+    left: 5%;
+    width: 90%;
+  }
+
+  .feature {
+    width: 48%;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+}
