@@ -21,11 +21,11 @@ public class PoliceService {
     // @Autowired
     // private RequestRepository requestRepository;
 
-    @Autowired
-    private AreaRepository areaRepository;
+    // @Autowired
+    // private AreaRepository areaRepository;
 
-    @Autowired
-    private SectorRepository sectorRepository;
+    // @Autowired
+    // private SectorRepository sectorRepository;
 
     // Get all Police
     public List<Police> getAllPolices() {
@@ -55,6 +55,8 @@ public class PoliceService {
                 police.setEmail(policeDto.getEmail());
                 police.setGender(policeDto.getGender());
                 police.setDesignation(policeDto.getDesignation());
+                System.out.println("______________________________________________");
+            System.out.println(police);
                 if (policeDto.getSubadminId() != null) {
                     Subadmin subadmin = subadminRepository.findById(policeDto.getSubadminId())
                             .orElseThrow(() -> new RuntimeException("Subadmin not found"));
@@ -73,6 +75,9 @@ public class PoliceService {
                 // }
                 return policeRepository.save(police);
         } catch (Exception e) {
+            System.out.println("______________________________________________");
+            System.out.println(e);
+            System.out.println("______________________________________________");
             throw new RuntimeException("Error creating police", e);
         }
     }

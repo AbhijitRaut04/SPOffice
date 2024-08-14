@@ -18,17 +18,6 @@ public class SubadminController extends BaseController  {
     private SubadminService subadminService;
 
 
-    // Get all Subadmins
-    @GetMapping
-    public ResponseEntity<List<Subadmin>> getAllSubadmins() {
-        try {
-            List<Subadmin> subadmins = subadminService.getAllSubadmins();
-            return ResponseEntity.ok(subadmins);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
     // Get Subadmins for admin
     @GetMapping("/requests/{admin_id}")
     public ResponseEntity<List<Subadmin>> getSubadminsByAdminId(@PathVariable Long admin_id) {

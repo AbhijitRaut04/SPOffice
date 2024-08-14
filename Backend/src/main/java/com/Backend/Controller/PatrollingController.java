@@ -26,28 +26,6 @@ public class PatrollingController extends BaseController  {
     @Autowired
     private PatrollingService patrollingService;
 
-    // Get all Patrollings
-    @GetMapping
-    public ResponseEntity<List<Patrolling>> getAllPatrollings() {
-        try {
-            List<Patrolling> patrollings = patrollingService.getAllPatrollings();
-            return ResponseEntity.ok(patrollings);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    // Get Patrolling by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Patrolling> getPatrollingById(@PathVariable Long id) {
-        try {
-            Optional<Patrolling> patrolling = patrollingService.getPatrollingById(id);
-            return patrolling.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
     // Create a new Patrolling
     @PostMapping
     public ResponseEntity<Patrolling> createPatrolling(@RequestBody PatrollingDto patrollingDTO) {
@@ -84,4 +62,31 @@ public class PatrollingController extends BaseController  {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+
+    // Get Patrolling by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Patrolling> getPatrollingById(@PathVariable Long id) {
+        try {
+            Optional<Patrolling> patrolling = patrollingService.getPatrollingById(id);
+            return patrolling.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    // Get Patrollings of admin
+    // less importance
+    @GetMapping("/admin/{admin_id}")
+    public ResponseEntity<List<Patrolling>> getPatrollingsOfAdmin(@PathVariable Long admin_id) {
+        try {
+            List<Patrolling> patrollings = patrollingService.getPatrollingsOfAdmin(admin_id);
+            return ResponseEntity.ok(patrollings);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+
+    
 }

@@ -3,14 +3,15 @@
   <app-create-btn></app-create-btn>
 </div>
 
+@for (event  of events; track $index) {
 <mat-accordion>
   <mat-expansion-panel
     (opened)="panelOpenState.set(true)"
     (closed)="panelOpenState.set(false)"
   >
     <mat-expansion-panel-header>
-      <mat-panel-title>Event Name Here</mat-panel-title>
-      <mat-panel-description> Event 1 description. </mat-panel-description>
+      <mat-panel-title>{{event.eventname}}</mat-panel-title>
+      <mat-panel-description> {{event.description}} </mat-panel-description>
     </mat-expansion-panel-header>
 
     <div class="event-info">
@@ -37,3 +38,4 @@
     
   </mat-expansion-panel>
 </mat-accordion>
+}

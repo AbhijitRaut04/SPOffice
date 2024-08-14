@@ -1,6 +1,7 @@
 package com.Backend.Entities;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,6 +20,15 @@ public class Patrolling {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    private Date date;
+
+    @Column
+    private String eventname;
+
+    @Column
+    private String description;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id")
     @JsonIgnore
@@ -29,20 +39,11 @@ public class Patrolling {
     @JsonIgnore
     private Police head;
 
-    @Column
-    private Date date;
-
-    @Column
-    private String eventname;
-
-    @Column
-    private String description;
-
     @OneToMany(mappedBy = "patrolling", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<SubPatrolling> subPatrollings;
+    private Set<SubPatrolling> subPatrollings = new HashSet<>();
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AvailablePolice> available_polices;
-    
+    @OneToOne(mappedBy = "patrolling", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Attendance attendance;
+
 
 }

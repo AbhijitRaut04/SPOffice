@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.Backend.Entities.Admin;
-// import com.Backend.Entities.Request;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -21,23 +20,10 @@ public class SubadminService {
     private final SubadminRepository subadminRepository;
     private final AdminRepository adminRepository;
 
-    // @Autowired
-    // private RequestService requestService;
-
-
     @Autowired
     public SubadminService(SubadminRepository subadminRepository, AdminRepository adminRepository){
         this.subadminRepository = subadminRepository;
         this.adminRepository = adminRepository;
-    }
-
-    public List<Subadmin> getAllSubadmins(){
-        try {
-            return subadminRepository.findAll();
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-        }
-        return new ArrayList<>();
     }
 
     public Optional<Subadmin> getSubadminById(Long id) {
@@ -54,11 +40,6 @@ public class SubadminService {
                     .orElseThrow(() -> new IllegalArgumentException("Admin not found with id: " + adminId));
             subadmin.setAdmin(admin);
             Subadmin savedSubadmin = subadminRepository.save(subadmin);
-            // Request request = new Request();
-            // request.setAdmin(admin);
-            // request.setSubadmin(savedSubadmin);
-            // request.setStatus("NOT_APPROVED");
-            // requestService.createRequest(request);
             return savedSubadmin;
         } catch (DataAccessException e) {
             e.printStackTrace();}
