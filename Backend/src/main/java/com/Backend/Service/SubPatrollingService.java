@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,10 +23,6 @@ public class SubPatrollingService {
     @Autowired
     private PatrollingRepository patrollingRepository;
 
-    // Get all SubPatrollings
-    public List<SubPatrolling> getAllSubPatrollings() {
-        return subPatrollingRepository.findAll();
-    }
 
     // Get SubPatrolling by ID
     public Optional<SubPatrolling> getSubPatrollingById(Long id) {

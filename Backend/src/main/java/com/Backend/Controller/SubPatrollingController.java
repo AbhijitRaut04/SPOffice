@@ -1,6 +1,5 @@
 package com.Backend.Controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.Backend.Dto.SubPatrollingDto;
@@ -26,16 +25,6 @@ public class SubPatrollingController extends BaseController  {
     @Autowired
     private SubPatrollingService subPatrollingService;
 
-    // Get all SubPatrollings
-    @GetMapping
-    public ResponseEntity<List<SubPatrolling>> getAllSubPatrollings() {
-        try {
-            List<SubPatrolling> subPatrollings = subPatrollingService.getAllSubPatrollings();
-            return ResponseEntity.ok(subPatrollings);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
 
     // Get SubPatrolling by ID
     @GetMapping("/{id}")

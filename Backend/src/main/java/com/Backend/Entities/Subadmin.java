@@ -25,8 +25,11 @@ public class Subadmin {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String contact;
+    @Column
+    private String phone;
+
+    @Column
+    private String email;
 
     @Column(nullable = false)
     private String station;

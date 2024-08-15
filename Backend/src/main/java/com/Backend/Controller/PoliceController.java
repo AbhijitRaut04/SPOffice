@@ -29,6 +29,17 @@ public class PoliceController extends BaseController  {
         }
     }
 
+    // // Get polices of subadmin
+    // @GetMapping("/subadmin/{subadmin_id}")
+    // public ResponseEntity<List<Police>> getPolicesofSubadmin(@PathVariable Long subadmin_id) {
+    //     try {
+    //         List<Police> polices = policeService.getPolicesofSubadmin(subadmin_id);
+    //         return ResponseEntity.ok(polices);
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    //     }
+    // }
+
     // Get Police by ID
     @GetMapping("/{id}")
     public ResponseEntity<Police> getPoliceById(@PathVariable Long id) {
