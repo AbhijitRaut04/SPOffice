@@ -1,7 +1,5 @@
 package com.Backend.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,30 +7,16 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.Backend.Entities.Admin;
-// import com.Backend.Entities.Request;
 import com.Backend.Repository.AdminRepository;
-// import com.Backend.Repository.RequestRepository;
 
 @Service
 public class AdminService {
 
 	@Autowired
     private final AdminRepository adminRepository;
-    // private final RequestRepository requestRepository;
 	
     public AdminService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
-        // this.requestRepository = requestRepository;
-    }
-
-    public List<Admin> getAllAdmins() {
-        try {
-            return adminRepository.findAll();
-        } catch (DataAccessException e) {
-            
-            e.printStackTrace();
-        }
-        return new ArrayList<>();
     }
 
     public Optional<Admin> getAdminById(Long id) {
@@ -45,8 +29,6 @@ public class AdminService {
 
     public Admin createAdmin(Admin admin) {
         try {
-        	System.out.println(admin);
-        	System.out.println("______________________________________________");
             return adminRepository.save(admin);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to create admin", e);
@@ -71,10 +53,6 @@ public class AdminService {
             throw new RuntimeException("Failed to update admin", e);
         }
     }
-
-    // public List<Request> getRequests(Long adminId){
-    //     return requestRepository.findByAdminId(adminId);
-    // }
 
     public void deleteAdmin(Long id) {
         try {

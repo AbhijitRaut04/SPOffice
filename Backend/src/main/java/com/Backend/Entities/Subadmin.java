@@ -1,5 +1,6 @@
 package com.Backend.Entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,15 +36,12 @@ public class Subadmin {
     @JsonIgnore
     private Admin admin;
 
-    @OneToMany(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Police> polices;
-    
-    @OneToMany(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AvailablePolice> available_polices;
+    @ManyToMany(mappedBy = "subadmins", cascade = CascadeType.ALL)
+    private Set<Attendance> attendances = new HashSet<>();
 
-    // @OneToOne(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
-    // @JsonIgnore
-    // private Request subadminRequest;
+    @OneToMany(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Police> polices = new HashSet<>();
+    
 
     @Column
     private String status = "NOT_APPROVED";

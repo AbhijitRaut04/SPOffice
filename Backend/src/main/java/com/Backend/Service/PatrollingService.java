@@ -28,6 +28,10 @@ public class PatrollingService {
         return patrollingRepository.findAll();
     }
 
+    public List<Patrolling> getPatrollingsOfAdmin(Long admin_id) {
+        return patrollingRepository.findPatrollingsOfAdmin(admin_id);
+    }
+
     public Optional<Patrolling> getPatrollingById(Long id) {
         return patrollingRepository.findById(id);
     }
@@ -35,7 +39,7 @@ public class PatrollingService {
     public Patrolling createPatrolling(PatrollingDto patrollingDTO) {
         Patrolling patrolling = new Patrolling();
         patrolling.setDate(patrollingDTO.getDate());
-        patrolling.setEventname(patrollingDTO.getEventName());
+        patrolling.setEventname(patrollingDTO.getEventname());
         patrolling.setDescription(patrollingDTO.getDescription());
 
         if (patrollingDTO.getAdminId() != null) {
@@ -59,7 +63,7 @@ public class PatrollingService {
                     .orElseThrow(() -> new RuntimeException("Patrolling not found"));
 
             patrolling.setDate(patrollingDTO.getDate());
-            patrolling.setEventname(patrollingDTO.getEventName());
+            patrolling.setEventname(patrollingDTO.getEventname());
             patrolling.setDescription(patrollingDTO.getDescription());
 
             if (patrollingDTO.getAdminId() != null) {

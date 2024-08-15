@@ -11,8 +11,9 @@ public class PatrollingDto {
         private Long adminId;
         private Long headId;
         private Date date;
-        private String eventName;
+        private String eventname;
         private String description;
+        private Long attendanceId;
 }
 
 

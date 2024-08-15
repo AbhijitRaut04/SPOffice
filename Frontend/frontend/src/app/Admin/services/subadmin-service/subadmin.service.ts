@@ -10,7 +10,7 @@ import { Subadmin, Request } from '../../models/subadmin.model';
 export class SubadminService {
   private apiUrl = `${environment.baseUrl}/api/subadmins`;
 
-  admin_id = 2;
+  admin_id = 1;
 
   constructor(private http: HttpClient) { 
     this.getValidSubadmins();

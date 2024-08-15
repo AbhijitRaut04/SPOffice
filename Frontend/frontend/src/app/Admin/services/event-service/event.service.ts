@@ -2,19 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Event } from '../../models/event.models';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  private apiUrl = `${environment.baseUrl}/api/subadmins`;
+  private apiUrl = `${environment.baseUrl}/api/patrollings`;
+
+  admin_id = 1;
 
   constructor(private http: HttpClient) { }
 
-  getEvents() {
-    return this.http.get(this.apiUrl).subscribe(data => {
-      console.log(data);
-    });
+  getEvents(): Observable<Event[]>{
+    return this.http.get<Event[]>(`${this.apiUrl}/admin/${this.admin_id}`);
   }
 
   addEvent(event: Event) {
