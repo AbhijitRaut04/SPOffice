@@ -1,0 +1,7 @@
+@for (event of events; track $index) {
+    <div class="event-wrapper" (click)="viewEvent(event)">
+        <h2>{{ event.eventname }}</h2>
+        <p><strong>Date:</strong> {{ event.date | dateFormat:'longDate' }}</p>
+        <p><strong>Description:</strong> {{ event.description }}</p>
+    </div>
+}

@@ -1,0 +1,28 @@
+.event-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    max-width: 400px;
+    margin: auto;
+}
+
+.event-wrapper{
+    cursor: pointer;
+    background: #c6c6c6;
+    padding: 10px;
+    margin: 10px;
+    
+}
+
+h2 {
+    margin-top: 0;
+}
+
+p {
+    margin: 8px 0;
+}
+
+strong {
+    color: #333;
+}
