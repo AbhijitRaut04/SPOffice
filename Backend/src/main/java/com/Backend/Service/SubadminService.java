@@ -101,7 +101,8 @@ public class SubadminService {
                 .map(subadmin -> {
                     subadmin.setUsername(updatedSubadmin.getUsername());
                     subadmin.setPassword(updatedSubadmin.getPassword());
-                    subadmin.setContact(updatedSubadmin.getContact());
+                    subadmin.setEmail(updatedSubadmin.getEmail());
+                    subadmin.setPhone(updatedSubadmin.getPhone());
                     subadmin.setStation(updatedSubadmin.getStation());
                     return subadminRepository.save(subadmin);
                 })

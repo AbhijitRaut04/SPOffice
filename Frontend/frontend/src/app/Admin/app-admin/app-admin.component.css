@@ -1,0 +1,9 @@
+.wrapper {
+    position: relative;
+    min-height: 100vh;
+}
+
+.outlet {
+    padding: 10px 0px;
+    padding-bottom: 5rem;
+}
