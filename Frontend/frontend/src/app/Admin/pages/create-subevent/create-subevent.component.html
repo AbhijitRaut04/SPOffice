@@ -1,14 +1,14 @@
 <div class="sub-nav">
   <app-back-btn></app-back-btn>
   <div class="sub-nav-title">
-    <h1>Create Event</h1>
+    <h1>Create Subvent</h1>
   </div>
 </div>
 <div class="wrapper">
   <div class="content">
     <mat-card class="event-info" appearance="outlined">
       <mat-card-header>
-        <mat-card-title><h2>Event name</h2></mat-card-title>
+        <mat-card-title><h2>Subevent 1</h2></mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div>
@@ -46,7 +46,7 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-fab matTooltip="add subevent" (click)="navigateToCreateEvent()">
+        <button mat-fab matTooltip="add sector">
           <mat-icon>add</mat-icon>
         </button>
       </mat-card-actions>
@@ -54,9 +54,7 @@
     </mat-card>
 
     <mat-card appearance="outlined">
-      <mat-card-content (click)="navigateToCreateEvent()"
-        >Subevent 1</mat-card-content
-      >
+      <mat-card-content>sector 1</mat-card-content>
     </mat-card>
   </div>
   <app-sidebar></app-sidebar>

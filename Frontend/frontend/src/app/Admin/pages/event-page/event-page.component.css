@@ -1,29 +1,21 @@
+* {
+    padding: 0 2rem;
+}
 .create-event-btn{
     padding: 1rem 0;
     padding-left: auto;
     display: flex;
     justify-content: flex-end;
 }
-mat-expansion-panel-header {
-    height: 100px;
-    padding: 2rem;
+
+.no-events{
+    display: flex;
+    justify-content: center;
+    padding-top: 3rem;
+    height: 100vh;
 }
 
-mat-panel-title {
-    font-size: 2rem;
-}
-
-.event-info{
-    /* background-color: #eec7c7; */
-    height: 40vh;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: flex-start;
-    gap: 5rem;
-}
-.buttons{
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    padding-left: auto;
+mat-card{
+    margin-bottom: 1rem;
+    cursor: pointer;
 }

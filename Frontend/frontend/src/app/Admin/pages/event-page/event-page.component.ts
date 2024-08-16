@@ -14,10 +14,9 @@ import { Event } from '../../models/event.models';
 @Component({
   selector: 'app-event-page',
   standalone: true,
-  imports: [MatCardModule, RouterModule, MatExpansionModule, MatButtonModule, CreateBtnComponent, CreateSubeventFormComponent],
+  imports: [MatCardModule, CreateBtnComponent, CreateSubeventFormComponent],
   templateUrl: './event-page.component.html',
   styleUrl: './event-page.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventPageComponent implements OnInit {
 
@@ -32,7 +31,6 @@ export class EventPageComponent implements OnInit {
     console.log("+ button clicked!");
     this.router.navigate(['events/create']);
   }
-  readonly panelOpenState = signal(false);
   getEvents() {
     this.eventService.getEvents().pipe(
       switchMap(() => this.eventService.getEvents()),
