@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal, viewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -14,6 +14,17 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { SubadminService } from '../../services/subadmin-service/subadmin.service';
 import { Router } from '@angular/router';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../services/subadmin-auth/auth.service';
+
 @Component({
   selector: 'app-sub-admin-signup',
   standalone: true,
@@ -23,6 +34,15 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubAdminSignupComponent implements OnInit {
+
+  readonly dialog = inject(MatDialog);
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
 
   constructor(private router:Router, private subadminService: SubadminService, private _snackBar: MatSnackBar){
     
@@ -36,7 +56,7 @@ export class SubAdminSignupComponent implements OnInit {
       admin_id: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       phone: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{10}$/)]),
-      station: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{10}$/)]),
+      station: new FormControl(null, [Validators.required, Validators.required]),
       password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/)]),
       confirmPassword: new FormControl(null, [Validators.required]),
     });
@@ -76,18 +96,26 @@ export class SubAdminSignupComponent implements OnInit {
   // Submitting Form 
   submit() {
     if (this.reactiveForm.invalid) {
-      this.displayError = true;
+      this.openDialog('200ms','200ms');
     }
     else {
       this.subadminService.registerSubadmin(this.reactiveForm.value).subscribe();
-      this.router.navigate(['/subadmin/login']);
+      new AuthService().login("subadmin","subadmin");
+      this.router.navigate(['/subadmin/']);
       this._snackBar.open("Subadmin registered Successfully", "OK");
     }
   }
-
-  //pop up error box handling
-  displayError = false;
-  closeErrorBox() {
-    this.displayError = false;
-  }
 }
+
+@Component({
+  selector: 'dialog-animations-example',
+  templateUrl: 'dialog.html',
+  standalone: true,
+  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+
+export class DialogAnimationsExampleDialog {
+  readonly dialogRef = inject(MatDialogRef<DialogAnimationsExampleDialog>);
+}
+
