@@ -7,6 +7,7 @@ import { CreateEventComponent } from './Admin/pages/create-event/create-event.co
 import { adminGuard } from './Admin/gaurds/admin.guard';
 import { LoginComponent } from './Admin/pages/login/login.component';
 import { SubadminPageComponent } from './Admin/pages/subadmin-page/subadmin-page.component';
+import { CreateSubeventComponent } from './Admin/pages/create-subevent/create-subevent.component';
 
 
 export const routes: Routes = [
@@ -25,8 +26,19 @@ export const routes: Routes = [
             },
             {
                 path:"create",
-                component:CreateEventComponent,
-                canActivate: [adminGuard]
+                children: [
+                    {
+                        path:"",
+                        component:CreateEventComponent,
+                        canActivate: [adminGuard]
+                    },
+                    {
+                        path:"subevent",
+                        component:CreateSubeventComponent,
+                        canActivate: [adminGuard]
+        
+                    }
+                ]
 
             }
         ]
