@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy,Component, OnInit, signal, viewChild} from '@angular/core';
+import {ChangeDetectionStrategy,Component, inject, OnInit, signal, viewChild} from '@angular/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
@@ -11,6 +11,11 @@ import {
 } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { NgClass, NgFor, NgIf } from '@angular/common';
+import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { PoliceService } from '../../services/police-service/police.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 
@@ -25,19 +30,30 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 })
 export class PoliceSignupComponent implements OnInit {
 
+  readonly dialog = inject(MatDialog);
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  constructor(private router:Router, private policeService: PoliceService, private _snackBar: MatSnackBar){
+    
+  }
 
   // Details in Form with Validators 
   reactiveForm: FormGroup;
   ngOnInit() {
       this.reactiveForm = new FormGroup({
         fullname: new FormControl(null, Validators.required),
-        policeID: new FormControl(null, Validators.required),
-        subAdmin: new FormControl(null, Validators.required),
+        policeId: new FormControl(null, Validators.required),
+        subadminId: new FormControl(null, Validators.required),
         designation: new FormControl(null, Validators.required),
         email: new FormControl(null,[Validators.required, Validators.email]),
         phone: new FormControl(null,[Validators.required, Validators.pattern(/^[0-9]{10}$/)]),
-        password: new FormControl(null,[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/)]),
-        confirmPassword: new FormControl(null, [Validators.required]),
+        gender: new FormControl(null, Validators.required)
       });
   }
 
@@ -73,20 +89,25 @@ export class PoliceSignupComponent implements OnInit {
   }
 
   // Submitting Form 
-  // Get Form data using
-  // console.log(this.reactiveForm)
-  formSubmitted() {
+  submit() {
     if(this.reactiveForm.invalid){
-      this.displayError= true;
+      this.openDialog('200ms','200ms');
     }
     else {
-      console.log('form submitted')
+      this.policeService.registerPolice(this.reactiveForm.value).subscribe();
+      this.router.navigate(['/subadmin/police']);
+      this._snackBar.open("Police registered Successfully", "OK");
     }
   }
-  
-  //pop up error box handling
-  displayError = false;
-  closeErrorBox(){
-    this.displayError= false;
-  }
+}
+@Component({
+  selector: 'dialog-animations-example',
+  templateUrl: 'dialog.html',
+  standalone: true,
+  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+
+export class DialogAnimationsExampleDialog {
+  readonly dialogRef = inject(MatDialogRef<DialogAnimationsExampleDialog>);
 }

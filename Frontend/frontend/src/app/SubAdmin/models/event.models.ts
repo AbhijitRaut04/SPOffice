@@ -6,4 +6,10 @@ export interface Event {
   date: Date;
   eventname:string;
   description:string;
+  attendances:Attendance;
+}
+
+export interface Attendance{
+  id: number;
+  polices: [Police];
 }

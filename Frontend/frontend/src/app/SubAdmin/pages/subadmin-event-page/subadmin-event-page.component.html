@@ -2,4 +2,11 @@
 <p>{{event.description}}</p>
 <p>{{event.date | dateFormat:'longDate'}}</p>
 
-<button>Submit Attendance</button>
+@if (submitted) {
+
+    <button>View Attendance</button>
+}
+@else {
+
+    <button>Submit Attendance</button>
+}
