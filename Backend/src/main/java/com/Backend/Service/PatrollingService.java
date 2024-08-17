@@ -2,6 +2,7 @@ package com.Backend.Service;
 
 import com.Backend.Dto.PatrollingDto;
 import com.Backend.Entities.Admin;
+import com.Backend.Entities.Attendance;
 import com.Backend.Entities.Patrolling;
 import com.Backend.Entities.Police;
 import com.Backend.Entities.Subadmin;
@@ -28,6 +29,8 @@ public class PatrollingService {
     private PoliceRepository policeRepository;
     @Autowired
     private SubadminRepository subadminRepository;
+    @Autowired
+    private AttendanceService attendanceService;
 
     public List<Patrolling> getAllPatrollings() {
         return patrollingRepository.findAll();
@@ -104,4 +107,37 @@ public class PatrollingService {
             throw new RuntimeException("Failed to delete Patrolling", e);
         }
     }
+
+    public Patrolling createAttendance(Long id) {
+        try {
+            Patrolling patrolling = patrollingRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Patrolling not found"));
+
+            Attendance attendance = attendanceService.createAttendance(id);
+
+            patrolling.setAttendance(attendance);
+
+            return patrollingRepository.save(patrolling);
+
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Failed to create Attendance", e);
+        }
+    }
+
+    public Patrolling sendAttendance(Long patrolling_id, Long subadmin_id, List<Long> polices ) {
+        try {
+            Patrolling patrolling = patrollingRepository.findById(patrolling_id)
+                    .orElseThrow(() -> new RuntimeException("Patrolling not found"));
+
+            Attendance attendance = attendanceService.sendAttendance(patrolling.getAttendance().getId(), subadmin_id, polices);
+
+            patrolling.setAttendance(attendance);
+
+            return patrollingRepository.save(patrolling);
+
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Failed to create Attendance", e);
+        }
+    }
+
 }

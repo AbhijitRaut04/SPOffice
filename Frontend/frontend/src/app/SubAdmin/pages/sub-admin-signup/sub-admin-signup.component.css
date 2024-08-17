@@ -98,16 +98,6 @@ p {
     flex-direction: column;
 }
 
-.InvalidForm {
-    position: absolute;
-    height: 200px;
-    width: 300px;
-    background-color: rgb(230, 110, 110);
-    text-align: center;
-    font-size: 30px;
-    border-radius: 10px;
-    display: none;
-}
 
 .errorBoxBtn {
     height: 20%;
@@ -119,13 +109,6 @@ p {
     transition: all .2s linear;
 }
 
-button:hover {
-    transform: scale(.95);
-}
-
-.display {
-    display: block;
-}
 
 @media (max-width: 600px) {
 

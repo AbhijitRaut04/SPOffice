@@ -9,7 +9,7 @@
 
     <!-- main Form body  -->
 
-    <form class="form" [formGroup]="reactiveForm" (ngSubmit)="formSubmitted()">
+    <form class="form" [formGroup]="reactiveForm" (ngSubmit)="submit()">
       
       <!-- Name Field  -->
       <p>
@@ -18,12 +18,23 @@
           <input class="input" matInput formControlName="fullname" />
         </mat-form-field>
       </p>
+      
+      <!-- Gender Field  -->
+      <p>
+        <mat-form-field class="input-block" appearance="outline">
+          <mat-label class="label">Gender</mat-label>
+          <mat-select formControlName="gender">
+              <mat-option value="Male">Male</mat-option>
+              <mat-option value="Female">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
 
       <!-- Police Id Field  -->
       <p>
         <mat-form-field class="input-block" appearance="outline">
           <mat-label class="label">Police ID</mat-label>
-          <input class="input" matInput formControlName="policeID" />
+          <input class="input" matInput formControlName="policeId" />
         </mat-form-field>
       </p>
 
@@ -73,7 +84,7 @@
           <mat-label>Designation</mat-label>
           <mat-select formControlName="designation">
             <div class="option" *ngFor="let option of designationOptions">
-              <mat-option value="option">{{ option }}</mat-option>
+              <mat-option [value]="option">{{ option }}</mat-option>
             </div>
           </mat-select>
         </mat-form-field>
@@ -82,93 +93,18 @@
       <!-- Admin Field  -->
       <p>
         <mat-form-field class="input-block" appearance="outline">
-          <mat-label class="label">Sub Admin</mat-label>
-          <input class="input" matInput formControlName="admin" />
+          <mat-label class="label">SubAdmin</mat-label>
+          <input class="input" matInput formControlName="subadminId" />
         </mat-form-field>
       </p>
-
-
-      <!-- Create Password  -->
-      <p>
-        <mat-form-field class="input-block" appearance="outline">
-          <mat-label>Create password</mat-label>
-          <input
-            matInput
-            [type]="hide1() ? 'password' : 'text'"
-            formControlName="password"
-          />
-          <button
-            class="btn"
-            mat-icon-button
-            matSuffix
-            type="button"
-            (click)="clickEvent1($event)"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide1()"
-          >
-            <mat-icon>{{ hide1() ? "visibility_off" : "visibility" }}</mat-icon>
-          </button>
-        </mat-form-field>
-      </p>
-      <!-- Invalid Password Error -->
-      <div
-        [ngClass]="{
-          errormsg: true,
-          errormgsDisplay:
-            reactiveForm.get('password').invalid &&
-            reactiveForm.get('password').touched
-        }"
-      >
-        *password must contain Uppercase, Lowercase and number
-      </div>
-
-      <!-- Confirm Password  -->
-      <p>
-        <mat-form-field class="input-block" appearance="outline">
-          <mat-label>Confirm password</mat-label>
-          <input
-            matInput
-            [type]="hide2() ? 'password' : 'text'"
-            formControlName="confirmPassword"
-          />
-          <button
-            class="btn"
-            mat-icon-button
-            matSuffix
-            type="button"
-            (click)="clickEvent2($event)"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide2()"
-          >
-            <mat-icon>{{ hide2() ? "visibility_off" : "visibility" }}</mat-icon>
-          </button>
-        </mat-form-field>
-      </p>
-      <!-- Confirm Password Error  -->
-      <div
-        [ngClass]="{
-          errormsg: true,
-          errormgsDisplay:
-            reactiveForm.get('confirmPassword').invalid &&
-            reactiveForm.get('confirmPassword').touched
-        }"
-      >
-        *password and confirm password dont match
-      </div>
 
       <!--Form buttons submit || reset  -->
 
       <div class="formButtons">
+        <button type="reset" class="reset-btn">Reset</button>
         <button type="submit" class="submit-btn">Submit</button>
-        <button type="reset" class="submit-btn">Reset</button>
       </div>
     </form>
 
-    <!-- pop up error msg  -->
-
-    <div [ngClass]="{ InvalidForm: true, display: displayError }">
-      <p>Fill all the details correctly</p>
-      <button class="errorBoxBtn" (click)="closeErrorBox()">Fill Again</button>
-    </div>
   </div>
 </div>

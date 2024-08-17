@@ -3,6 +3,7 @@ package com.Backend.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.Backend.Dto.AttendanceDTO;
 import com.Backend.Dto.PatrollingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -98,6 +99,25 @@ public class PatrollingController extends BaseController  {
         }
     }
 
+    @PutMapping("/create-attendance/{patrolling_id}")
+    public ResponseEntity<Patrolling> createAttendance(@PathVariable Long patrolling_id) {
+        try {
+            Patrolling patrolling = patrollingService.createAttendance(patrolling_id);
+            return ResponseEntity.ok(patrolling);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
+    // send attendance for subadmin
+    @PutMapping("/send-attendance")
+    public ResponseEntity<Patrolling> sendAttendance(@RequestBody AttendanceDTO attendanceDTO) {
+        try {
+            Patrolling patrolling = patrollingService.sendAttendance(attendanceDTO.getPatrollingId(), attendanceDTO.getSubadminId(), attendanceDTO.getPolices());
+            return ResponseEntity.ok(patrolling);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
     
 }
