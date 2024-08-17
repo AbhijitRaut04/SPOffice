@@ -1,10 +1,3 @@
-.wrapper{
-    display: flex;
-
-    gap: 1rem;
-    margin: 1rem;
-}
-
 .sub-nav{
     /* background-color: #ec9797; */
     width: 100%;
@@ -15,59 +8,12 @@
     gap: 2rem;
 }
 
-.back-btn{
-    margin-left: 1rem;
-    color: #fff;
-}
-
-.content{
-    flex: 1;
-
+.wrapper{
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1rem;
-}
 
-.event-info{
+    gap: 1rem;
+    margin: 1rem;
+}
+app-create-event-form{
     flex: 1;
-    padding-left: 2rem;
-    /* display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem; */
-
-}
-
-.create-card{
-    flex: 1;
-}
-
-.create-subevent-button{
-    padding: 1rem 0;
-    padding-left: auto;
-    display: flex;
-    justify-content: flex-end;
-}
-
-mat-card-header{
-
-    margin: 1rem 0 2rem 0;
-    position: relative;
-}
-mat-card-content{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    > div {
-        display: flex;
-        flex-direction: row;
-        gap: 2rem;
-    }
-}
-
-mat-card-actions{
-    position: absolute;
-    bottom: 0;
-    right: 0;
 }

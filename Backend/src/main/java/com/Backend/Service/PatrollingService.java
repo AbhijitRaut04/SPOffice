@@ -4,9 +4,12 @@ import com.Backend.Dto.PatrollingDto;
 import com.Backend.Entities.Admin;
 import com.Backend.Entities.Patrolling;
 import com.Backend.Entities.Police;
+import com.Backend.Entities.Subadmin;
 import com.Backend.Repository.AdminRepository;
 import com.Backend.Repository.PatrollingRepository;
 import com.Backend.Repository.PoliceRepository;
+import com.Backend.Repository.SubadminRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,8 @@ public class PatrollingService {
     private AdminRepository adminRepository;
     @Autowired
     private PoliceRepository policeRepository;
+    @Autowired
+    private SubadminRepository subadminRepository;
 
     public List<Patrolling> getAllPatrollings() {
         return patrollingRepository.findAll();
@@ -30,6 +35,12 @@ public class PatrollingService {
 
     public List<Patrolling> getPatrollingsOfAdmin(Long admin_id) {
         return patrollingRepository.findPatrollingsOfAdmin(admin_id);
+    }
+
+    public List<Patrolling> getPatrollingsOfSubdmin(Long subadmin_id) {
+        Optional<Subadmin> subadmin = subadminRepository.findById(subadmin_id);
+        Subadmin sub = subadmin.get();
+        return patrollingRepository.findPatrollingsOfAdmin(sub.getAdmin().getId());
     }
 
     public Optional<Patrolling> getPatrollingById(Long id) {

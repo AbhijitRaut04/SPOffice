@@ -36,6 +36,15 @@ public class PoliceService {
         }
     }
 
+    // // Get Polices for subadmin
+    // public List<Police> getPolicesofSubadmin(Long subadmin_id) {
+    //     try {
+    //         return policeRepository.findPolicesofSubadmin(subadmin_id);
+    //     } catch (Exception e) {
+    //         throw new RuntimeException("Error fetching all polices", e);
+    //     }
+    // }
+
     // Get Police by ID
     public Optional<Police> getPoliceById(Long id) {
         try {

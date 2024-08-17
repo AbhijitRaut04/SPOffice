@@ -55,12 +55,13 @@
 }
 
 .submit-btn {
-    height: 50px;
-    width: 30%;
-    border-radius: 10px;
+    height: 40px;
+    width: 100%;
+    border-radius:6px;
     border: 0px;
     margin-top: 20px;
-    background-color: #6eacd5;
+    background-color: #0039c9;
+    color: #fff;
     font-size: 16px;
     transition:all .2s linear;
     cursor: pointer;
@@ -80,7 +81,8 @@
 
 .signup strong {
     padding: 0px 5px;
-    background-color: rgb(250, 117, 117);
+    text-decoration: underline;
+    color: blue;
     cursor: pointer;
 }
 

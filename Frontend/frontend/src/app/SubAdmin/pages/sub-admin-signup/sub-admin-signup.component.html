@@ -3,29 +3,21 @@
       <!-- title -->
   
       <div class="title">
-        <h3>Sub Admin Registeration Form</h3>
-        <p>Fill your details and wait for your validation</p>
+        <h3>Sub Admin Registration Form</h3>
       </div>
   
       <!-- main Form body  -->
   
-      <form class="form" [formGroup]="reactiveForm" (ngSubmit)="formSubmitted()">
+      <form class="form" [formGroup]="reactiveForm" (ngSubmit)="submit()">
         
         <!-- Name Field  -->
         <p>
           <mat-form-field class="input-block" appearance="outline">
-            <mat-label class="label">Name</mat-label>
-            <input class="input" matInput formControlName="fullname" />
+            <mat-label class="label">Subadmin Name</mat-label>
+            <input class="input" matInput formControlName="username" />
           </mat-form-field>
         </p>
-  
-        <!-- Police Id Field  -->
-        <p>
-          <mat-form-field class="input-block" appearance="outline">
-            <mat-label class="label">Police ID</mat-label>
-            <input class="input" matInput formControlName="policeID" />
-          </mat-form-field>
-        </p>
+
   
         <!-- Email Field  -->
         <p>
@@ -71,7 +63,7 @@
         <p>
             <mat-form-field class="input-block" appearance="outline">
               <mat-label class="label">Admin</mat-label>
-              <input class="input" matInput formControlName="admin" />
+              <input class="input" matInput formControlName="admin_id" />
             </mat-form-field>
           </p>
 
@@ -93,7 +85,7 @@
               formControlName="password"
             />
             <button
-              class="btn"
+              class="eye-btn"
               mat-icon-button
               matSuffix
               type="button"
@@ -127,7 +119,7 @@
               formControlName="confirmPassword"
             />
             <button
-              class="btn"
+              class="eye-btn"
               mat-icon-button
               matSuffix
               type="button"
@@ -154,8 +146,8 @@
         <!--Form buttons submit || reset  -->
   
         <div class="formButtons">
+          <button type="reset" class="reset-btn">Reset</button>
           <button type="submit" class="submit-btn">Submit</button>
-          <button type="reset" class="submit-btn">Reset</button>
         </div>
       </form>
   

@@ -1,0 +1,22 @@
+<header>
+    <div class="logo-container">
+        SubAdmin
+    </div>
+    <nav>
+        <ul>
+            <li><a routerLink="/subadmin">Home</a></li>
+            <li><a routerLink="/subadmin/police">Police</a></li>
+            <li><a routerLink="/subadmin/events">Events</a></li>
+            <li>
+                @if (this.authService.isLoggedIn()) {
+                    <a routerLink="/subadmin/login" (click)="handleLogout()">Logout</a>
+                }
+                @else {
+                    <a routerLink="/subadmin/login">Login</a>
+                    /
+                    <a routerLink="/subadmin/signup">SignUp</a>
+                }
+            </li>
+        </ul>
+    </nav>
+</header>

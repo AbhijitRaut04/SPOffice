@@ -4,18 +4,18 @@
       <strong>Enter your details</strong>
     </div>
 
-    <form class="form" [formGroup]="reactiveForm" (ngSubmit)="formSubmitted()">
+    <form class="form" [formGroup]="reactiveForm" (ngSubmit)="login()">
       <!-- Name Field  -->
       <p>
         <mat-form-field class="input-block" appearance="outline">
           <mat-label class="label">Name</mat-label>
-          <input class="input" matInput formControlName="fullname" />
+          <input class="input" matInput formControlName="username" />
         </mat-form-field>
       </p>
-      <!-- Create Password  -->
+      <!-- Password  -->
       <p>
         <mat-form-field class="input-block" appearance="outline">
-          <mat-label>Create password</mat-label>
+          <mat-label>Password</mat-label>
           <input
             matInput
             [type]="hide1() ? 'password' : 'text'"
@@ -36,9 +36,8 @@
       </p>
       <div class="formButtons">
         <button class="submit-btn" type="submit">Log In</button>
-        <button class="submit-btn" type="reset">Reset</button>
       </div>
-      <div class="signup"> Don't have account ? <strong>Register here</strong></div>
+      <div class="signup" routerLink="/subadmin/signup"> Don't have account ? <strong>Register here</strong></div>
     </form>
   </div>
 </div>

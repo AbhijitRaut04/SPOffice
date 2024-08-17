@@ -22,6 +22,7 @@ public class SubadminController extends BaseController  {
     @GetMapping("/requests/{admin_id}")
     public ResponseEntity<List<Subadmin>> getSubadminsByAdminId(@PathVariable Long admin_id) {
         try {
+
             List<Subadmin> subadmins = subadminService.getSubadminsByAdminID(admin_id);
             return ResponseEntity.ok(subadmins);
         } catch (Exception e) {
@@ -70,7 +71,7 @@ public class SubadminController extends BaseController  {
     public ResponseEntity<Subadmin> createSubadmin(
             @RequestParam Long admin_id,
             @RequestBody Subadmin subadmin) {
-
+        System.out.println("___________________________________________");
         try {
             // Create Subadmin with the given adminId
             Subadmin createdSubadmin = subadminService.createSubadmin(subadmin, admin_id);

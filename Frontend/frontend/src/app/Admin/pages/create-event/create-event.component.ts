@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { CreateBtnComponent } from '../../components/reusable/create-btn/create-btn.component';
@@ -8,8 +8,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BackBtnComponent } from '../../components/reusable/back-btn/back-btn.component';
+
+interface EventObject {
+  id: string;
+  name: string;
+  // Add other properties as needed
+}
 
 @Component({
   selector: 'app-create-event',
@@ -30,13 +36,19 @@ import { BackBtnComponent } from '../../components/reusable/back-btn/back-btn.co
   styleUrl: './create-event.component.css',
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateEventComponent {
+export class CreateEventComponent implements OnInit {
+  constructor(private router: Router, private route: ActivatedRoute) { }
+  currentPath: string;
+  isCreate: boolean;
+  eventObject: EventObject;
 
-  constructor(private router: Router) { }
-
-  
-  navigateToCreateEvent() {
-    console.log("+ button clicked!");
-    this.router.navigate(['events/create/subevent']);
+  ngOnInit(){
+    this.eventObject = history.state.eventObject;
+    if (this.eventObject) {
+      console.log(this.eventObject);
+    } else {
+      console.log('No event object found in state');
+    }
   }
 }
+

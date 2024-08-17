@@ -87,6 +87,17 @@ public class PatrollingController extends BaseController  {
         }
     }
 
+    // Get Patrollings of subadmin
+    @GetMapping("/subadmin/{subadmin_id}")
+    public ResponseEntity<List<Patrolling>> getPatrollingsOfSubadmin(@PathVariable Long subadmin_id) {
+        try {
+            List<Patrolling> patrollings = patrollingService.getPatrollingsOfSubdmin(subadmin_id);
+            return ResponseEntity.ok(patrollings);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 
     
 }

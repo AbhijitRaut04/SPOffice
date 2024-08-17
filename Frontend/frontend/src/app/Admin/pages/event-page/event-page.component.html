@@ -4,7 +4,7 @@
 
 <div class="event-list">
   @for (event of events; track $index) {
-  <mat-card appearance="outlined" (click)="navigateToCreateEvent()" >
+  <mat-card appearance="outlined" (click)="navigateToEvent()" >
     <mat-card-content>{{ event.eventname }}</mat-card-content>
   </mat-card>
   } @empty{
