@@ -1,12 +1,4 @@
-<mat-accordion class="transition-height">
-    <mat-expansion-panel
-      (opened)="panelOpenState.set(true)"
-      (closed)="panelOpenState.set(false)"
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title>Create Event</mat-panel-title>
-        <mat-panel-description> Create a new event. </mat-panel-description>
-      </mat-expansion-panel-header>
+<mat-card>
       <div class="card-content-wrapper">
         <div class="create-form">
           <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
@@ -86,5 +78,4 @@
           </form>
         </div>
       </div>
-    </mat-expansion-panel>
-  </mat-accordion>
+  </mat-card>

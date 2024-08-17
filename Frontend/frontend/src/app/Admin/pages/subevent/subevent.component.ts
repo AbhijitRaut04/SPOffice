@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
-import { provideNativeDateAdapter } from '@angular/material/core';
 import { CreateBtnComponent } from '../../components/reusable/create-btn/create-btn.component';
 import { CreateEventFormComponent } from '../../components/reusable/create-event-form/create-event-form.component';
 import { CreateSubeventFormComponent } from '../../components/reusable/create-subevent-form/create-subevent-form.component';
@@ -8,17 +7,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BackBtnComponent } from '../../components/reusable/back-btn/back-btn.component';
-
-interface EventObject {
-  id: string;
-  name: string;
-  // Add other properties as needed
-}
+import { SearchToolbarComponent } from '../../components/reusable/search-toolbar/search-toolbar.component';
 
 @Component({
-  selector: 'app-create-event',
+  selector: 'app-subevent',
   standalone: true,
   imports: [
     SidebarComponent,
@@ -30,25 +24,36 @@ interface EventObject {
     MatIconModule,
     MatTooltipModule,
     BackBtnComponent,
+    SearchToolbarComponent,
   ],
-  providers: [provideNativeDateAdapter()],
-  templateUrl: './create-event.component.html',
-  styleUrl: './create-event.component.css',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './subevent.component.html',
+  styleUrl: './subevent.component.css'
 })
-export class CreateEventComponent implements OnInit {
-  constructor(private router: Router, private route: ActivatedRoute) { }
-  currentPath: string;
-  isCreate: boolean;
-  eventObject: EventObject;
+export class SubeventComponent implements OnInit {
+  subeventName: string;
+  subeventId: string;
 
-  ngOnInit(){
-    this.eventObject = history.state.eventObject;
-    if (this.eventObject) {
-      console.log(this.eventObject);
-    } else {
-      console.log('No event object found in state');
-    }
+  constructor(private route: ActivatedRoute, private router: Router) { }
+
+  ngOnInit(): void {
+    this.subeventName = this.route.snapshot.paramMap.get('name');
+
+    this.route.queryParams.subscribe(params => {
+      this.subeventId = params['id'];
+    });
+
+    console.log(`Subevent Name: ${this.subeventName}`);
+    console.log(`Subevent ID: ${this.subeventId}`);
+  }
+
+  navigateToEditEvent() {
+    const currentPath = this.router.url;
+    const eventObject = {};
+    this.router.navigate([`${currentPath}/edit`], { state: { eventObject } });
+  }
+  
+  editEvent() {
+    console.log("edit button clicked!");
+    this.router.navigate(['events/create']);
   }
 }
-

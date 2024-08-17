@@ -6,6 +6,7 @@ import { CreateEventComponent } from './Admin/pages/create-event/create-event.co
 import { adminGuard } from './Admin/gaurds/admin.guard';
 import { LoginComponent } from './Admin/pages/login/login.component';
 import { SubadminPageComponent } from './Admin/pages/subadmin-page/subadmin-page.component';
+import { CreateSubeventComponent } from './Admin/pages/create-subevent/create-subevent.component';
 import { SubadminHomeComponent } from './SubAdmin/pages/subadmin-home/subadmin-home.component';
 import { SubAdminSignupComponent } from './SubAdmin/pages/sub-admin-signup/sub-admin-signup.component';
 import { AppAdminComponent } from './Admin/app-admin/app-admin.component';
@@ -16,6 +17,8 @@ import { EventPageComponent } from './Admin/pages/event-page/event-page.componen
 import { subadminGuard } from './SubAdmin/gaurds/subadmin.guard';
 import { SubadminLoginComponent } from './SubAdmin/pages/login/subadmin-login.component';
 import { SubadminEventPageComponent } from './SubAdmin/pages/subadmin-event-page/subadmin-event-page.component';
+import { EventComponent } from './Admin/pages/event/event.component';
+import { SubeventComponent } from './Admin/pages/subevent/subevent.component';
 import { PoliceSignupComponent } from './SubAdmin/pages/police-signup/police-signup.component';
 
 
@@ -38,10 +41,48 @@ export const routes: Routes = [
                     },
                     {
                         path: "create",
-                        component: CreateEventComponent,
-                        canActivate: [adminGuard]
+                        canActivate: [adminGuard],
+                        children: [
+                            {
+                                path:"",
+                                component:CreateEventComponent,
+                            },
+                            {
+                                path:"subevent",
+                                component:CreateSubeventComponent,
+                
+                            }
+                        ]
 
-                    }
+                    },
+                    {
+                        path: ":name",
+                        // component: EventComponent,
+                        canActivate: [adminGuard],
+                        children: [
+                            {
+                                path:"",
+                                component:EventComponent,
+                            },
+                            {
+                                path:"edit",
+                                component:CreateEventComponent,
+                            },
+                            {
+                                path:"subevent",
+                                children: [
+                                    {
+                                        path:"edit",
+                                        component:CreateEventComponent,
+                                    },
+                                    {
+                                        path:":name",
+                                        component:SubeventComponent,
+                                    }
+                                ]
+                            }
+                        ]
+                    },
                 ]
             },
             {

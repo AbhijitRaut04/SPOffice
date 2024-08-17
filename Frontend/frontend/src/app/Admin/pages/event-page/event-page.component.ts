@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Router, RouterModule } from '@angular/router';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 import { CreateBtnComponent } from '../../components/reusable/create-btn/create-btn.component';
 import { CreateSubeventFormComponent } from '../../components/reusable/create-subevent-form/create-subevent-form.component';
 
@@ -14,10 +12,9 @@ import { Event } from '../../models/event.models';
 @Component({
   selector: 'app-event-page',
   standalone: true,
-  imports: [MatCardModule, RouterModule, MatExpansionModule, MatButtonModule, CreateBtnComponent, CreateSubeventFormComponent],
+  imports: [MatCardModule, CreateBtnComponent, CreateSubeventFormComponent],
   templateUrl: './event-page.component.html',
   styleUrl: './event-page.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventPageComponent implements OnInit {
 
@@ -28,11 +25,12 @@ export class EventPageComponent implements OnInit {
     this.getEvents();
   }
 
-  navigateToCreateEvent() {
-    console.log("+ button clicked!");
-    this.router.navigate(['events/create']);
+  eventName:string = 'example-event';
+  eventId:string = '12345';
+
+  navigateToEvent() {
+    this.router.navigate(['/events', this.eventName], { queryParams: { id: this.eventId } });  
   }
-  readonly panelOpenState = signal(false);
   getEvents() {
     this.eventService.getEvents().pipe(
       switchMap(() => this.eventService.getEvents()),
