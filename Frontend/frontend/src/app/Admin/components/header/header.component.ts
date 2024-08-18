@@ -52,13 +52,21 @@ export class HeaderComponent implements OnInit {
   login() {
     this.authService.login("admin", "admin");
     this.updateNavElements();
-    this._snackBar.open("User Logged In", "OK");
+    this._snackBar.open("User Logged In", "OK",
+      {
+        duration:5000
+      }
+    );
   }
 
   logout() {
     this.authService.logout();
     this.updateNavElements();
-    this._snackBar.open("Logged Out", "OK");
+    this._snackBar.open("Logged Out", "OK",
+      {
+        duration:5000
+      }
+    );
   }
 
   private updateNavElements() {
