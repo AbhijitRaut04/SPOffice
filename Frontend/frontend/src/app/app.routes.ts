@@ -1,24 +1,25 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './Admin/pages/home/home.component';
 import { RequestsComponent } from './Admin/pages/requests/requests.component';
-import { SubadminsComponent } from './Admin/pages/subadmins/subadmins.component';
-import { CreateEventComponent } from './Admin/pages/create-event/create-event.component';
+import { SubadminsComponent } from './Admin/pages/subadmin-tab/subadmins/subadmins.component';
+import { CreateEventComponent } from './Admin/pages/event-tab/create/create-event/create-event.component';
 import { adminGuard } from './Admin/gaurds/admin.guard';
-import { LoginComponent } from './Admin/pages/login/login.component';
-import { SubadminPageComponent } from './Admin/pages/subadmin-page/subadmin-page.component';
-import { CreateSubeventComponent } from './Admin/pages/create-subevent/create-subevent.component';
+import { LoginComponent } from './Admin/pages/auth/login/login.component';
+import { SubadminPageComponent } from './Admin/pages/subadmin-tab/subadmin-page/subadmin-page.component';
+import { CreateSubeventComponent } from './Admin/pages/event-tab/create/create-subevent/create-subevent.component';
 import { SubadminHomeComponent } from './SubAdmin/pages/subadmin-home/subadmin-home.component';
 import { SubAdminSignupComponent } from './SubAdmin/pages/sub-admin-signup/sub-admin-signup.component';
 import { AppAdminComponent } from './Admin/app-admin/app-admin.component';
 import { AppSubadminComponent } from './SubAdmin/app-subadmin/app-subadmin.component';
 import { PolicePageComponent } from './SubAdmin/pages/police-page/police-page.component';
 import { EventsPageComponent } from './SubAdmin/pages/events-page/events-page.component';
-import { EventPageComponent } from './Admin/pages/event-page/event-page.component';
+import { EventPageComponent } from './Admin/pages/event-tab/event-page/event-page.component';
 import { subadminGuard } from './SubAdmin/gaurds/subadmin.guard';
 import { SubadminLoginComponent } from './SubAdmin/pages/login/subadmin-login.component';
 import { SubadminEventPageComponent } from './SubAdmin/pages/subadmin-event-page/subadmin-event-page.component';
-import { EventComponent } from './Admin/pages/event/event.component';
-import { SubeventComponent } from './Admin/pages/subevent/subevent.component';
+import { EventComponent } from './Admin/pages/event-tab/show/event/event.component';
+import { SubeventComponent } from './Admin/pages/event-tab/show/subevent/subevent.component';
+import { PageNotFoundComponent } from './Admin/pages/page-not-found/page-not-found.component';
 import { PoliceSignupComponent } from './SubAdmin/pages/police-signup/police-signup.component';
 
 
@@ -57,7 +58,6 @@ export const routes: Routes = [
                     },
                     {
                         path: ":name",
-                        // component: EventComponent,
                         canActivate: [adminGuard],
                         children: [
                             {
@@ -157,5 +157,9 @@ export const routes: Routes = [
                 component: SubadminLoginComponent
             }
         ]
+    },
+    {
+        path: "**",
+        component: PageNotFoundComponent
     }
 ];
