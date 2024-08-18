@@ -20,6 +20,7 @@ import { SubadminEventPageComponent } from './SubAdmin/pages/subadmin-event-page
 import { EventComponent } from './Admin/pages/event-tab/show/event/event.component';
 import { SubeventComponent } from './Admin/pages/event-tab/show/subevent/subevent.component';
 import { PageNotFoundComponent } from './Admin/pages/page-not-found/page-not-found.component';
+import { PoliceSignupComponent } from './SubAdmin/pages/police-signup/police-signup.component';
 
 
 export const routes: Routes = [
@@ -136,7 +137,16 @@ export const routes: Routes = [
             {
                 path: "police",
                 canActivate:[subadminGuard],
-                component: PolicePageComponent
+                children:[
+                    {
+                        path:"",
+                        component: PolicePageComponent
+                    },
+                    {
+                        path:"register-police",
+                        component:PoliceSignupComponent
+                    }
+                ],
             },
             {
                 path: "signup",

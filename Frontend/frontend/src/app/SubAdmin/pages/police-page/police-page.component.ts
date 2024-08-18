@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { SubadminService } from '../../services/subadmin-service/subadmin.service';
 import { CurrentSubadmin } from '../../models/subadmin.models';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-police-page',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './police-page.component.html',
   styleUrls: ['./police-page.component.css'] 
 })
