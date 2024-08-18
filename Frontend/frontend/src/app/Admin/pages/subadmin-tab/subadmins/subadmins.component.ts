@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SubadminService } from '../../services/subadmin-service/subadmin.service';
-import { Subadmin } from '../../models/subadmin.model';
+import { SubadminService } from '../../../services/subadmin-service/subadmin.service';
+import { Subadmin } from '../../../models/subadmin.model';
 import { Router } from '@angular/router';
 
 @Component({
