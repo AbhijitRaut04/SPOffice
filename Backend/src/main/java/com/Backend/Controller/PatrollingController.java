@@ -1,7 +1,7 @@
 package com.Backend.Controller;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 import com.Backend.Dto.AttendanceDTO;
 import com.Backend.Dto.PatrollingDto;
@@ -67,21 +67,20 @@ public class PatrollingController extends BaseController  {
 
     // Get Patrolling by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Patrolling> getPatrollingById(@PathVariable Long id) {
+    public ResponseEntity<PatrollingDto> getPatrollingById(@PathVariable Long id) {
         try {
-            Optional<Patrolling> patrolling = patrollingService.getPatrollingById(id);
-            return patrolling.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+            PatrollingDto patrolling = patrollingService.getPatrollingById(id);
+            return ResponseEntity.ok(patrolling);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     // Get Patrollings of admin
-    // less importance
     @GetMapping("/admin/{admin_id}")
-    public ResponseEntity<List<Patrolling>> getPatrollingsOfAdmin(@PathVariable Long admin_id) {
+    public ResponseEntity<Set<PatrollingDto>> getPatrollingsOfAdmin(@PathVariable Long admin_id) {
         try {
-            List<Patrolling> patrollings = patrollingService.getPatrollingsOfAdmin(admin_id);
+            Set<PatrollingDto> patrollings = patrollingService.getPatrollingsOfAdmin(admin_id);
             return ResponseEntity.ok(patrollings);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
