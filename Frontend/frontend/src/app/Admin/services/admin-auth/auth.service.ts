@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -6,22 +9,29 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private loggedIn = false;
 
-  login(username: string, password: string): boolean {
-    
-    if (username === 'admin' && password === 'admin') {
-      this.loggedIn = true;
-      localStorage.setItem("admin","token");
-      return true;
-    }
-    return false;
+
+  private apiUrl = environment.baseUrl + "/api/admins";
+
+  constructor(private http: HttpClient, private router: Router) { }
+
+  private token: string;
+
+  login(data: { username: string, password: string }): void {
+    this.http.post<{ jwtToken: string }>(`${this.apiUrl}/login`, data)
+      .subscribe(response => {
+        localStorage.setItem("admin_token", response.jwtToken);
+        this.router.navigate(['/']);
+        this.token = response.jwtToken;
+        this.loggedIn = true;
+      });
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem("admin") === "token";
+    return localStorage.getItem("admin_token") !== null;
   }
 
   logout(): void {
     this.loggedIn = false;
-    localStorage.removeItem("admin");
+    localStorage.removeItem("admin_token");
   }
 }

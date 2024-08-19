@@ -100,7 +100,7 @@ export class SubAdminSignupComponent implements OnInit {
     }
     else {
       this.subadminService.registerSubadmin(this.reactiveForm.value).subscribe();
-      new AuthService().login("subadmin","subadmin");
+      // new AuthService().login("subadmin","subadmin");
       this.router.navigate(['/subadmin/']);
       this._snackBar.open("Subadmin registered Successfully", "OK");
     }

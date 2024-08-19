@@ -8,8 +8,8 @@
       <!-- Name Field -->
       <mat-form-field class="input-block" appearance="outline">
         <mat-label class="label">Name</mat-label>
-        <input matInput formControlName="fullname" />
-        <mat-error *ngIf="reactiveForm.get('fullname').hasError('required')">
+        <input matInput formControlName="username" />
+        <mat-error *ngIf="reactiveForm.get('username').hasError('required')">
           Name is required
         </mat-error>
       </mat-form-field>
