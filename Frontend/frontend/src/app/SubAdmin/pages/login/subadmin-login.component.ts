@@ -46,7 +46,7 @@ export class SubadminLoginComponent implements OnInit{
 
     login() {
       if(this.reactiveForm.valid){
-        this.authService.login("subadmin", "subadmin");
+        this.authService.login(this.reactiveForm.value);
         this.router.navigate(['/subadmin']);
         this._snackBar.open("Subadmin Logged In", "OK");
       }

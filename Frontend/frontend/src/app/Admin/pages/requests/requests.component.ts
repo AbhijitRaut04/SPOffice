@@ -53,6 +53,7 @@ export class RequestsComponent implements OnInit {
       (data: Request[]) => {
         this.allRequests = data;
         this.applyFilter(); 
+        console.log(this.requests);
       },
       error => {
         console.error("Error fetching requests:", error);

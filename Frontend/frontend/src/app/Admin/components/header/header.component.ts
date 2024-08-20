@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     { img: 'https://cdn-icons-png.flaticon.com/128/3503/3503827.png', title: 'Events', active: false, path: '/events' },
     { img: 'https://cdn-icons-png.flaticon.com/128/1077/1077063.png', title: 'SubAdmins', active: false, path: '/subadmins' },
     { img: 'https://cdn-icons-png.flaticon.com/128/833/833593.png', title: 'Requests', active: false, path: '/requests' },
-    { img: 'https://cdn-icons-png.flaticon.com/128/1286/1286853.png', title: 'Login', active: false, path: '/' }
+    { img: 'https://cdn-icons-png.flaticon.com/128/1286/1286853.png', title: 'Login', active: false, path: '/login' }
   ];
 
   constructor(
@@ -50,15 +50,17 @@ export class HeaderComponent implements OnInit {
   }
 
   login() {
-    this.authService.login("admin", "admin");
     this.updateNavElements();
-    this._snackBar.open("User Logged In", "OK");
   }
 
   logout() {
     this.authService.logout();
     this.updateNavElements();
-    this._snackBar.open("Logged Out", "OK");
+    this._snackBar.open("Logged Out", "OK",
+      {
+        duration:2000
+      }
+    );
   }
 
   private updateNavElements() {

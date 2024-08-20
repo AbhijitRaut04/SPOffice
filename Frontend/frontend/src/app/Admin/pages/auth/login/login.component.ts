@@ -12,6 +12,8 @@ import {
 } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { NgClass, NgFor, NgIf } from '@angular/common';
+import { AuthService } from '../../../services/admin-auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -24,10 +26,11 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 })
 export class LoginComponent implements OnInit{
 
+
   reactiveForm: FormGroup;
   ngOnInit() {
       this.reactiveForm = new FormGroup({
-        fullname: new FormControl(null, Validators.required),
+        username: new FormControl(null, Validators.required),
         
         password: new FormControl(null,Validators.required),
       });
@@ -35,16 +38,21 @@ export class LoginComponent implements OnInit{
 
   hide1 = true; // Initial state for password visibility
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService:AuthService, private _snackBar: MatSnackBar) {
     this.reactiveForm = this.fb.group({
-      fullname: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
   submit() {
     if (this.reactiveForm.valid) {
-      console.log('Form Submitted:', this.reactiveForm.value);
+      this.authService.login(this.reactiveForm.value);
+      this._snackBar.open("User Logged In", "OK",
+        {
+          duration:5000
+        }
+      );
     } else {
       console.log('Form is not valid');
     }

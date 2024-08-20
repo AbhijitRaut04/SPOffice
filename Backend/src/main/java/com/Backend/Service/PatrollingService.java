@@ -1,6 +1,7 @@
 package com.Backend.Service;
 
 import com.Backend.Dto.PatrollingDto;
+import com.Backend.Dto.PoliceDto;
 import com.Backend.Entities.Admin;
 import com.Backend.Entities.Attendance;
 import com.Backend.Entities.Patrolling;
@@ -15,8 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PatrollingService {
@@ -36,9 +41,18 @@ public class PatrollingService {
         return patrollingRepository.findAll();
     }
 
-    public List<Patrolling> getPatrollingsOfAdmin(Long admin_id) {
-        return patrollingRepository.findPatrollingsOfAdmin(admin_id);
+    public Set<PatrollingDto> getPatrollingsOfAdmin(Long adminId) {
+        List<Patrolling> patrollings = patrollingRepository.findPatrollingsOfAdmin(adminId);
+        
+        if (patrollings == null || patrollings.isEmpty()) {
+            return Collections.emptySet();
+        }
+
+        return patrollings.stream()
+                .map(patrolling -> getPatrollingById(patrolling.getId()))
+                .collect(Collectors.toSet());
     }
+    
 
     public List<Patrolling> getPatrollingsOfSubdmin(Long subadmin_id) {
         Optional<Subadmin> subadmin = subadminRepository.findById(subadmin_id);
@@ -46,9 +60,27 @@ public class PatrollingService {
         return patrollingRepository.findPatrollingsOfAdmin(sub.getAdmin().getId());
     }
 
-    public Optional<Patrolling> getPatrollingById(Long id) {
-        return patrollingRepository.findById(id);
+    public PatrollingDto getPatrollingById(Long id) {
+        Patrolling patrolling = patrollingRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Patrolling not found with id: " + id));
+    
+        if (patrolling.getAttendance() == null || patrolling.getAttendance().getPolices() == null) {
+            return new PatrollingDto().buildPatrolling(patrolling, Collections.emptyMap());
+        }
+    
+        // Transform the Police entities into PoliceDto and group by Subadmin ID
+        Map<Long, Set<PoliceDto>> attendance = patrolling.getAttendance().getPolices().stream()
+                .collect(Collectors.groupingBy(
+                        police -> police.getSubadmin().getId(), 
+                        Collectors.mapping(
+                                police -> new PoliceDto().buildPolice(police),
+                                Collectors.toSet() 
+                        )
+                ));
+    
+        return new PatrollingDto().buildPatrolling(patrolling, attendance);
     }
+    
 
     public Patrolling createPatrolling(PatrollingDto patrollingDTO) {
         Patrolling patrolling = new Patrolling();
@@ -124,12 +156,13 @@ public class PatrollingService {
         }
     }
 
-    public Patrolling sendAttendance(Long patrolling_id, Long subadmin_id, List<Long> polices ) {
+    public Patrolling sendAttendance(Long patrolling_id, Long subadmin_id, List<Long> polices) {
         try {
             Patrolling patrolling = patrollingRepository.findById(patrolling_id)
                     .orElseThrow(() -> new RuntimeException("Patrolling not found"));
 
-            Attendance attendance = attendanceService.sendAttendance(patrolling.getAttendance().getId(), subadmin_id, polices);
+            Attendance attendance = attendanceService.sendAttendance(patrolling.getAttendance().getId(), subadmin_id,
+                    polices);
 
             patrolling.setAttendance(attendance);
 

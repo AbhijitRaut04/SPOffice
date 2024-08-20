@@ -23,6 +23,7 @@ export class SubadminsComponent implements OnInit {
     this.subadminService.getValidSubadmins().subscribe(
       (data: Subadmin[]) => {
         this.subadmins = data;
+        console.log(this.subadmins);
       },
       error => {
         console.error("Error fetching subadmins:", error);

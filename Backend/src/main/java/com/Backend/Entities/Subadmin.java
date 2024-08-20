@@ -40,7 +40,7 @@ public class Subadmin {
     private Admin admin;
 
     @ManyToMany(mappedBy = "subadmins", cascade = CascadeType.ALL)
-    @JsonIgnore
+    // @JsonIgnore
     private Set<Attendance> attendances = new HashSet<>();
 
     @OneToMany(mappedBy = "subadmin", cascade = CascadeType.ALL, orphanRemoval = true)
