@@ -3,42 +3,49 @@ import {
   Component,
   signal,
   OnInit,
+  inject
 } from '@angular/core';
 import { SubadminService } from '../../services/subadmin-service/subadmin.service';
 import { CurrentSubadmin } from '../../models/subadmin.models';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Police } from '../../models/police.models';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-police-page',
   standalone: true,
-  imports: [NgFor, MatExpansionModule,MatButtonModule, MatDividerModule, ],
+  imports: [RouterLink, NgFor , NgIf, MatExpansionModule,MatButtonModule, MatIconModule, MatDividerModule,MatDialogModule,FormsModule, MatFormFieldModule, MatInputModule ],
   templateUrl: './police-page.component.html',
   styleUrls: ['./police-page.component.css'],
 })
 export class PolicePageComponent {
-  // subadmin?: CurrentSubadmin;
+  subadmin?: CurrentSubadmin;
 
-  // constructor(private subadminService: SubadminService) { }
+  constructor(private subadminService: SubadminService) { }
 
-  // ngOnInit(): void {
-  //   this.fetchSubadmin();
-  // }
+  ngOnInit(): void {
+    this.fetchSubadmin();
+  }
 
-  // fetchSubadmin(): void {
-  //   this.subadminService.fetchSubadmin().subscribe(
-  //     (data: CurrentSubadmin) => {
-  //       this.subadmin = data;
-  //       console.log('Fetched Subadmin:', data);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching subadmin:', error);
-  //     }
-  //   );
-  // }
+  fetchSubadmin(): void {
+    this.subadminService.fetchSubadmin().subscribe(
+      (data: CurrentSubadmin) => {
+        this.subadmin = data;
+        console.log('Fetched Subadmin:', data);
+      },
+      (error) => {
+        console.error('Error fetching subadmin:', error);
+      }
+    );
+  }
 
   // Toggle the collapse/expand state for all panels
   expandAll: boolean = false;
@@ -47,6 +54,17 @@ export class PolicePageComponent {
   }
 
   readonly panelOpenState = signal(false);
+
+  //delete button
+  deleteById(policeId:number) {
+    console.log('delete button clicked', policeId);
+  }
+
+  openEditDialog:boolean = false;
+
+  editById(policeId:number) {
+    this.openEditDialog = !this.openEditDialog
+  }
 
   policeArray: Police[] = [
     {
@@ -141,3 +159,4 @@ export class PolicePageComponent {
     },
   ];
 }
+

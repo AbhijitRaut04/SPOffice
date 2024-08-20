@@ -1,0 +1,13 @@
+<div class="create-event-btn">
+  <app-create-btn></app-create-btn>
+</div>
+
+<div class="event-list">
+  @for (event of events; track $index) {
+  <mat-card appearance="outlined" (click)="navigateToEvent()" >
+    <mat-card-content>{{ event.eventname }}</mat-card-content>
+  </mat-card>
+  } @empty{
+  <div class="no-events">No events</div>
+  }
+</div>

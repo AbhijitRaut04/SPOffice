@@ -37,6 +37,8 @@ public class Police {
     @Column(nullable = false)
     private String designation;
 
+    // private Long subadminId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subadmin_id")
     @JsonIgnore

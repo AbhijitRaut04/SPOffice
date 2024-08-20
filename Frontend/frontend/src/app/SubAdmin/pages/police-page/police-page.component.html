@@ -1,20 +1,14 @@
-<!-- @for (police of subadmin?.polices; track $index) {
-<p><strong>Full Name:</strong> {{ police.fullname }}</p>
-<p><strong>Police ID:</strong> {{ police.policeId }}</p>
-<p><strong>Phone:</strong> {{ police.phone }}</p>
-<p><strong>Email:</strong> {{ police.email }}</p>
-<p><strong>Gender:</strong> {{ police.gender }}</p>
-<p><strong>Designation:</strong> {{ police.designation }}</p>
-<hr />
-}  -->
-
 <div class="expandBtn">
   <button mat-fab extended (click)="toggleAllPanels()">
     {{ expandAll ? 'Collapse All' : 'Expand All' }}
   </button>
 </div>
 
-<div *ngFor="let police of policeArray; let i = index">
+
+
+
+@for (police of subadmin?.polices; track $index) {
+
   <mat-expansion-panel
     (opened)="panelOpenState.set(true)"
     (closed)="panelOpenState.set(false)"
@@ -25,7 +19,10 @@
         <p><strong> Name : </strong>{{ police.designation }} {{ police.fullname }} </p>
       </mat-panel-title>
       <mat-panel-description>
-        {{ panelOpenState() ? "less" : "more" }}
+         <button  (click)="deleteById(police.policeId)"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>         </button>
+
+         <button  (click)="editById(police.policeId)"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit"></mat-icon>
+         </button>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p><strong>Police ID:</strong> {{ police.policeId }}</p>
@@ -34,5 +31,29 @@
     <p><strong>Gender:</strong> {{ police.gender }}</p>
     <p><strong>Designation:</strong> {{ police.designation }}</p>
   </mat-expansion-panel>
+}
 
-</div>
+<!-- <div class="editDialog" *ngIf="openEditDialog === true">
+    <form action="submit">
+      <mat-form-field class="input-field">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="fulllname" value={{police.fullname}}>
+      </mat-form-field>
+      <mat-form-field class="input-field">
+        <mat-label>Police ID</mat-label>
+        <input matInput placeholder="policeID" value={{police.policeId}}>
+      </mat-form-field>
+      <mat-form-field class="input-field">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="fulllname" value={{police.fullname}}>
+      </mat-form-field>
+      <mat-form-field class="input-field">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="fulllname" value={{police.fullname}}>
+      </mat-form-field>
+      <mat-form-field class="input-field">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="fulllname" value={{police.fullname}}>
+      </mat-form-field>
+    </form> -->
+<!-- </div> -->

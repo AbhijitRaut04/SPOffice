@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,14 +32,20 @@ import { map, Observable, startWith } from 'rxjs';
 export class CreateEventFormComponent {
 
   options: string[] = ['One', 'Two', 'Three'];
+  @Input() eventObject: { id: string, name: string };
 
 
   filteredOptions: Observable<string[]>;
   eventForm: FormGroup;
   
   constructor() {
+    
+  }
+
+  initializeForm() {
+    console.log(this.eventObject);
     this.eventForm = new FormGroup({
-      eventName: new FormControl(''),
+      eventName: new FormControl(this.eventObject?.name),
       description: new FormControl(''),
       head: new FormControl(''),
       coHead: new FormControl(''),
@@ -48,6 +54,9 @@ export class CreateEventFormComponent {
   }
 
   ngOnInit() {
+
+    this.initializeForm();
+    
     this.filteredOptions = this.eventForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))

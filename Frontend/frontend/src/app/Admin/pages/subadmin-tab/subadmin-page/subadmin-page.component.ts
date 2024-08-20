@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subadmin } from '../../models/subadmin.model';
+import { Subadmin } from '../../../models/subadmin.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

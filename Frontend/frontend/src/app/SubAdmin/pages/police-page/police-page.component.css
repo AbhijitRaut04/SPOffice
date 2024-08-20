@@ -19,4 +19,18 @@ div {
   height: 50px;
   
 }
+
+button {
+  background-color: transparent;
+  border: none;
+  margin-right: 5px;
+}
+
+.editDialog {
+  position: fixed;
+  height: 100px;
+  width: 100px;
+  bottom: 0px;
+  background-color: #fff;
+}
   
