@@ -76,6 +76,17 @@ public class PatrollingController extends BaseController  {
         }
     }
 
+    // Get Patrollings of loggedin user
+    @GetMapping
+    public ResponseEntity<List<Patrolling>> getPatrollings() {
+        try {
+            List<Patrolling> patrollings = patrollingService.getPatrollings();
+            return ResponseEntity.ok(patrollings);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     // Get Patrollings of admin
     @GetMapping("/admin/{admin_id}")
     public ResponseEntity<Set<PatrollingDto>> getPatrollingsOfAdmin(@PathVariable Long admin_id) {

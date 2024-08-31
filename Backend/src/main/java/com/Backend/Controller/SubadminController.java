@@ -26,7 +26,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/subadmins")
-public class SubadminController extends BaseController  {
+public class SubadminController extends BaseController {
 
     @Autowired
     private SubadminService subadminService;
@@ -34,15 +34,15 @@ public class SubadminController extends BaseController  {
     @Autowired
     private final PasswordChecker passwordChecker;
 
-    public SubadminController(PasswordChecker passwordChecker, JwtUtil jwtUtil){
+    public SubadminController(PasswordChecker passwordChecker, JwtUtil jwtUtil) {
         this.passwordChecker = passwordChecker;
         this.jwtUtil = jwtUtil;
 
     }
 
-
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest,
+            HttpServletResponse response) {
 
         Optional<Subadmin> subadminOptional = subadminService.getSubdminByUsername(loginRequest.getUsername());
         if (subadminOptional.isEmpty()) {
@@ -51,13 +51,18 @@ public class SubadminController extends BaseController  {
         }
 
         Subadmin subadmin = subadminOptional.get();
+        if (!subadmin.getStatus().equals("APPROVED")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Collections.singletonMap("error", "Subadmin not Approved."));
+        }
 
         if (!passwordChecker.checkPassword(loginRequest.getPassword(), subadmin.getPassword())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body(Collections.singletonMap("error", "Invalid Credentials"));
         }
 
-        final UserDetails userDetails = new User(subadmin.getUsername(), subadmin.getPassword(), Collections.emptyList());
+        final UserDetails userDetails = new User(subadmin.getUsername(), subadmin.getPassword(),
+                Collections.emptyList());
         final String jwt = jwtUtil.generateToken(userDetails.getUsername()).toString();
 
         Cookie jwtCookie = new Cookie("jwtToken", jwt);
@@ -70,13 +75,11 @@ public class SubadminController extends BaseController  {
         return ResponseEntity.ok(map);
     }
 
-
     // Get Subadmins for admin
-    @GetMapping("/requests/{admin_id}")
-    public ResponseEntity<Set<SubadminDto>> getSubadminsByAdminId(@PathVariable Long admin_id) {
+    @GetMapping("/requests")
+    public ResponseEntity<Set<SubadminDto>> getSubadminsByAdminId() {
         try {
-
-            Set<SubadminDto> subadmins = subadminService.getSubadminsByAdminID(admin_id);
+            Set<SubadminDto> subadmins = subadminService.getSubadminsByAdminID();
             return ResponseEntity.ok(subadmins);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -84,10 +87,10 @@ public class SubadminController extends BaseController  {
     }
 
     // Get approved Subadmins for admin
-    @GetMapping("/approved/{admin_id}")
-    public ResponseEntity<List<Subadmin>> getApprovedSubadminsByAdminId(@PathVariable Long admin_id) {
+    @GetMapping("/approved")
+    public ResponseEntity<List<Subadmin>> getApprovedSubadminsByAdminId() {
         try {
-            List<Subadmin> subadmins = subadminService.getApprovedSubadminsByAdminID(admin_id);
+            List<Subadmin> subadmins = subadminService.getApprovedSubadminsByAdminID();
             return ResponseEntity.ok(subadmins);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -119,12 +122,20 @@ public class SubadminController extends BaseController  {
         }
     }
 
+    // Get Current Subadmin
+    @GetMapping("/current-subadmin")
+    public ResponseEntity<SubadminDto> getCurrentSubadmin() {
+        try {
+            SubadminDto subadmin = subadminService.currentSubadmin();
+            return ResponseEntity.ok(subadmin);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     // Create a new Subadmin
     @PostMapping
-    public ResponseEntity<Subadmin> createSubadmin(
-            @RequestParam Long admin_id,
-            @RequestBody Subadmin subadmin) {
-        System.out.println("___________________________________________");
+    public ResponseEntity<Subadmin> createSubadmin(@RequestParam Long admin_id, @RequestBody Subadmin subadmin) {
         try {
             // Create Subadmin with the given adminId
             Subadmin createdSubadmin = subadminService.createSubadmin(subadmin, admin_id);

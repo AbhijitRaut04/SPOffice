@@ -12,6 +12,10 @@ public class PasswordChecker {
         passwordEncoder = new BCryptPasswordEncoder();
     }
 
+    public String encodePassword(String rawPassword){
+        return passwordEncoder.encode(rawPassword);
+    }
+
     public boolean checkPassword(String rawPassword, String storedHash) {
         return passwordEncoder.matches(rawPassword, storedHash);
     }

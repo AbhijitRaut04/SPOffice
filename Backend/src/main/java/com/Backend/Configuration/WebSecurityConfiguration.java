@@ -37,7 +37,8 @@ public class WebSecurityConfiguration {
                 .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/admins/**").authenticated())
                 .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/subadmins/**").authenticated())
                 .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/patrollings/**").authenticated())
-                // .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/**").permitAll())
+                .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/polices/**").authenticated())
+                .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/**").permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

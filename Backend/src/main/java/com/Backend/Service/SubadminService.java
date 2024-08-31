@@ -15,10 +15,14 @@ import com.Backend.Entities.Police;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.Backend.Entities.Subadmin;
 import com.Backend.Repository.SubadminRepository;
+import com.Backend.Utils.PasswordChecker;
 import com.Backend.Repository.AdminRepository;
 
 @Service
@@ -26,11 +30,14 @@ public class SubadminService {
 
     private final SubadminRepository subadminRepository;
     private final AdminRepository adminRepository;
+    private final PasswordChecker passwordChecker;
 
     @Autowired
-    public SubadminService(SubadminRepository subadminRepository, AdminRepository adminRepository) {
+    public SubadminService(SubadminRepository subadminRepository, AdminRepository adminRepository,
+            PasswordChecker passwordChecker) {
         this.subadminRepository = subadminRepository;
         this.adminRepository = adminRepository;
+        this.passwordChecker = new PasswordChecker();
     }
 
     public Optional<Subadmin> getSubdminByUsername(String username) {
@@ -68,11 +75,46 @@ public class SubadminService {
         }
     }
 
+    public SubadminDto currentSubadmin() {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = null;
+
+            if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+                username = ((UserDetails) authentication.getPrincipal()).getUsername();
+            } else if (authentication != null) {
+                username = authentication.getName();
+            }
+            Optional<Subadmin> optionalSubadmin = subadminRepository.getSubdminByUsername(username);
+            Subadmin subadmin = optionalSubadmin.get();
+            Set<PoliceDto> policeDtos = subadmin.getPolices().stream()
+                    .map(police -> new PoliceDto().buildPolice(police))
+                    .collect(Collectors.toSet());
+
+            Set<Attendance> attendances = subadmin.getAttendances().stream()
+                    .map(attendance -> {
+                        Set<Police> polices = attendance.getPolices().stream()
+                                .filter(police -> police.getSubadmin().getId().equals(subadmin.getId()))
+                                .collect(Collectors.toSet());
+                        attendance.setPolices(polices);
+
+                        return attendance;
+                    })
+                    .collect(Collectors.toSet());
+
+            return new SubadminDto().buildSubadmin(subadmin, policeDtos, attendances);
+
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Failed to fetch current subadmin", e);
+        }
+    }
+
     public Subadmin createSubadmin(Subadmin subadmin, Long adminId) {
         try {
             Admin admin = adminRepository.findById(adminId)
                     .orElseThrow(() -> new IllegalArgumentException("Admin not found with id: " + adminId));
             subadmin.setAdmin(admin);
+            subadmin.setPassword(passwordChecker.encodePassword(subadmin.getPassword()));
             Subadmin savedSubadmin = subadminRepository.save(subadmin);
             return savedSubadmin;
         } catch (DataAccessException e) {
@@ -81,25 +123,45 @@ public class SubadminService {
         return null;
     }
 
-    public Set<SubadminDto> getSubadminsByAdminID(Long adminId) {
+    public Set<SubadminDto> getSubadminsByAdminID() {
         try {
-            List<Subadmin> subadmins = subadminRepository.findByAdminId(adminId);
-    
+
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = null;
+
+            if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+                username = ((UserDetails) authentication.getPrincipal()).getUsername();
+            } else if (authentication != null) {
+                username = authentication.getName();
+            }
+            Optional<Admin> optionalAdmin = adminRepository.getAdminByUsername(username);
+            Admin admin = optionalAdmin.orElseThrow(() -> new IllegalArgumentException("Admin not found with username"));
+            List<Subadmin> subadmins = subadminRepository.findByAdminId(admin.getId());
+
             return subadmins.stream()
-                    .map(subadmin -> this.getSubadminById(subadmin.getId())) 
+                    .map(subadmin -> this.getSubadminById(subadmin.getId()))
                     .collect(Collectors.toSet());
-    
+
         } catch (DataAccessException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
-    
+
         return Collections.emptySet();
     }
-    
 
-    public List<Subadmin> getApprovedSubadminsByAdminID(Long admin_id) {
+    public List<Subadmin> getApprovedSubadminsByAdminID() {
         try {
-            return subadminRepository.findApprovedByAdminId(admin_id);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = null;
+
+            if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+                username = ((UserDetails) authentication.getPrincipal()).getUsername();
+            } else if (authentication != null) {
+                username = authentication.getName();
+            }
+            Optional<Admin> optionalAdmin = adminRepository.getAdminByUsername(username);
+            Admin admin = optionalAdmin.orElseThrow(() -> new IllegalArgumentException("Admin not found with username"));
+            return subadminRepository.findApprovedByAdminId(admin.getId());
         } catch (DataAccessException e) {
             e.printStackTrace();
         }
