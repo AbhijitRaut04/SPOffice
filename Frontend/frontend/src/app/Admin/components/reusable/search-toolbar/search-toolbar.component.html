@@ -1,10 +1,9 @@
 <div class="search-toolbar">
-  <input type="text" placeholder="Search..." />
-  <button mat-fab matTooltip="add subevent">
-    <mat-icon>search</mat-icon>
-  </button>
-  <button mat-fab matTooltip="add subevent"
-  (click)="navigateToCreateEvent()">
+  <div class="search">
+    <input type="text" placeholder="Search Area ......">
+    <mat-icon fontIcon="search"></mat-icon>
+  </div>
+  <button mat-fab matTooltip="add subevent" (click)="navigateToCreateEvent()">
     <mat-icon>add</mat-icon>
   </button>
 </div>

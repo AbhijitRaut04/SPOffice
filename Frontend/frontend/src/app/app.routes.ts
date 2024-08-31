@@ -21,6 +21,7 @@ import { EventComponent } from './Admin/pages/event-tab/show/event/event.compone
 import { SubeventComponent } from './Admin/pages/event-tab/show/subevent/subevent.component';
 import { PageNotFoundComponent } from './Admin/pages/page-not-found/page-not-found.component';
 import { PoliceSignupComponent } from './SubAdmin/pages/police-signup/police-signup.component';
+import { CreateAreaComponent } from './Admin/pages/event-tab/create/create-area/create-area.component';
 
 
 export const routes: Routes = [
@@ -34,53 +35,82 @@ export const routes: Routes = [
             },
             {
                 path: "events",
+                canActivate: [adminGuard],
                 children: [
                     {
                         path: "",
                         component: EventPageComponent,
-                        canActivate: [adminGuard]
                     },
                     {
-                        path: "create",
-                        canActivate: [adminGuard],
-                        children: [
-                            {
-                                path:"",
-                                component:CreateEventComponent,
-                            },
-                            {
-                                path:"subevent",
-                                component:CreateSubeventComponent,
+                        path: "create-event",
+                        component:CreateEventComponent
+                        // children: [
+                        //     {
+                        //         path:"",
+                        //         component:CreateEventComponent,
+                        //     },
+                        //     {
+                        //         path:"subevent",
+                        //         component:CreateSubeventComponent,
                 
-                            }
-                        ]
+                        //     }
+                        // ]
 
                     },
                     {
                         path: ":name",
-                        canActivate: [adminGuard],
                         children: [
                             {
                                 path:"",
-                                component:EventComponent,
-                            },
-                            {
-                                path:"edit",
-                                component:CreateEventComponent,
-                            },
-                            {
-                                path:"subevent",
                                 children: [
+                                    {
+                                        path:"",
+                                        component:EventComponent,
+                                    },
                                     {
                                         path:"edit",
                                         component:CreateEventComponent,
                                     },
                                     {
+                                        path:"add-subevent",
+                                        component:CreateSubeventComponent
+                                    },
+                                    {
                                         path:":name",
-                                        component:SubeventComponent,
+                                        children:[
+                                            {
+                                                path:"",
+                                                component:SubeventComponent,
+                                            },
+                                            {
+                                                path:"edit",
+                                                component:CreateSubeventComponent,
+                                            },
+                                            {
+                                                path:"add-area",
+                                                component:CreateAreaComponent
+                                            }
+                                        ]
                                     }
                                 ]
-                            }
+                            },
+                            // {
+                            //     path:"edit",
+                            //     component:CreateEventComponent,
+                            // },
+                            // {
+                            //     path:"",
+                            //     children: [
+                            //         {
+                            //             path:"edit",
+                            //             component:CreateEventComponent,
+                            //         },
+                            //         {
+                            //             path:":name",
+                            //             component:SubeventComponent,
+                            //         }
+                            //     ]
+                            // }
                         ]
                     },
                 ]

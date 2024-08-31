@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { CreateBtnComponent } from '../../../../components/reusable/create-btn/create-btn.component';
@@ -10,6 +10,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-btn.component';
+import { Event } from '../../../../models/event.models';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AsyncPipe } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { map, Observable, startWith } from 'rxjs';
 
 interface EventObject {
   id: string;
@@ -30,6 +39,16 @@ interface EventObject {
     MatIconModule,
     MatTooltipModule,
     BackBtnComponent,
+    MatExpansionModule,
+      MatCardModule,
+      MatFormFieldModule,
+      MatInputModule,
+      FormsModule,
+      MatAutocompleteModule,
+      ReactiveFormsModule,
+      AsyncPipe,
+      MatDatepickerModule,
+      MatButtonModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './create-event.component.html',
@@ -38,17 +57,47 @@ interface EventObject {
 })
 export class CreateEventComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) { }
-  currentPath: string;
-  isCreate: boolean;
-  eventObject: EventObject;
+  // event: Event;
+  eventForm:FormGroup;
+
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]>;
+
+  initializeForm() {
+    this.eventForm = new FormGroup({
+      eventname: new FormControl(''),
+      description: new FormControl(''),
+      head: new FormControl(''),
+      cohead: new FormControl(''),
+      date: new FormControl('')
+    });
+  }
 
   ngOnInit(){
-    this.eventObject = history.state.eventObject;
-    if (this.eventObject) {
-      console.log(this.eventObject);
-    } else {
-      console.log('No event object found in state');
-    }
+    // this.route.queryParams.subscribe(params => {
+    //   this.event = history.state.event;
+    // });
+    this.initializeForm();
+    
+    this.filteredOptions = this.eventForm.get('head')!.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value || ''))
+    );
   }
+
+  
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
+  }
+
+  onSubmit() {
+    console.log(this.eventForm.value);
+  }
+  
+  readonly panelOpenState = signal(false);
 }
 

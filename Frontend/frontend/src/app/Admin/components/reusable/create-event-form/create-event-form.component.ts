@@ -10,6 +10,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { map, Observable, startWith } from 'rxjs';
+import { Event } from '../../../models/event.models';
 
 @Component({
   selector: 'app-create-event-form',
@@ -32,7 +33,7 @@ import { map, Observable, startWith } from 'rxjs';
 export class CreateEventFormComponent {
 
   options: string[] = ['One', 'Two', 'Three'];
-  @Input() eventObject: { id: string, name: string };
+  @Input() event: Event;
 
 
   filteredOptions: Observable<string[]>;
@@ -43,9 +44,9 @@ export class CreateEventFormComponent {
   }
 
   initializeForm() {
-    console.log(this.eventObject);
+    console.log(this.event);
     this.eventForm = new FormGroup({
-      eventName: new FormControl(this.eventObject?.name),
+      eventName: new FormControl(this.event.eventname),
       description: new FormControl(''),
       head: new FormControl(''),
       coHead: new FormControl(''),

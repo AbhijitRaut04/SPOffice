@@ -12,6 +12,7 @@ import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-
 import { SearchToolbarComponent } from '../../../../components/reusable/search-toolbar/search-toolbar.component';
 import { Event } from '../../../../models/event.models';
 import { DateFormatPipe } from '../../../../../pipes/date-format/date-format.pipe';
+import { Subevent } from '../../../../models/subevent.models';
 
 @Component({
   selector: 'app-event',
@@ -39,37 +40,24 @@ export class EventComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      const eventFromState = history.state.event;
-      if (eventFromState) {
-        this.event = eventFromState;
-        console.log(this.event);
-      }
+      this.event = history.state.event;
     });
   }
 
-  navigateToSubevent() {
-    console.log("edit button clicked!");
-    // this.router.navigate(['/create/subevent']);
-    this.router.navigate([this.event.eventname], { state: { event:this.event } });  
+  navigateToSubevent(subevent:Subevent) {
+    const currentPath = this.router.url;
+    this.router.navigate([`${currentPath}/${subevent.subpatrollingname.toLowerCase().replace(" ","-")}`], { state: { subevent } });
+  }
 
-    // const currentPath = this.router.url;
-    // const eventObject = {
-    //   id: this.event.id,
-    //   name: this.event.eventname,
-    // };
-    // console.log(`${currentPath}/subevent`, this.event.eventname)
-    // this.router.navigate([`${currentPath}/subevent`, this.event.eventname], { state: { eventObject } });
-    
+  navigateToAddSubevent(){
+    const currentPath = this.router.url;
+    this.router.navigate([`${currentPath}/add-subevent`]);
   }
 
 
   
   navigateToEditEvent() {
     const currentPath = this.router.url;
-    const eventObject = {
-      id: this.event.id,
-      name: this.event.eventname,
-    };
-    this.router.navigate([`${currentPath}/edit`], { state: { eventObject } });
+    this.router.navigate([`${currentPath}/edit`], { state: { event:this.event } });
   }
 }

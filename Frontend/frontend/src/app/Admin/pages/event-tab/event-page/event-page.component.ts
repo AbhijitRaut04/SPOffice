@@ -28,11 +28,12 @@ export class EventPageComponent implements OnInit {
     this.getEvents();
   }
 
-  eventName:string = 'example-event';
-  eventId:string = '12345';
+  addEvent(){
+    this.router.navigate(['/events/create-event'])
+  }
 
   navigateToEvent(event:Event) {
-    this.router.navigate(['/events', event.eventname], { state: { event } });  
+    this.router.navigate(['/events', event.eventname.toLowerCase().replaceAll(" ","-")], { state: { event } });  
   }
   getEvents() {
     this.isLoading = true;

@@ -116,16 +116,27 @@ public class PatrollingService {
         patrolling.setEventname(patrollingDTO.getEventname());
         patrolling.setDescription(patrollingDTO.getDescription());
 
-        if (patrollingDTO.getAdminId() != null) {
-            Admin admin = adminRepository.findById(patrollingDTO.getAdminId())
-                    .orElseThrow(() -> new RuntimeException("Admin not found"));
-            patrolling.setAdmin(admin);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = null;
+
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            username = ((UserDetails) authentication.getPrincipal()).getUsername();
+        } else if (authentication != null) {
+            username = authentication.getName();
         }
+        Optional<Admin> optionalAdmin = adminRepository.getAdminByUsername(username);
+        Admin admin = optionalAdmin.orElseThrow(() -> new IllegalArgumentException("Admin not found with username"));
+        patrolling.setAdmin(admin);
 
         if (patrollingDTO.getHead() != null) {
             Police head = policeRepository.findById(patrollingDTO.getHead().getId())
                     .orElseThrow(() -> new RuntimeException("Police not found"));
             patrolling.setHead(head);
+        }
+        if (patrollingDTO.getCohead() != null) {
+            Police cohead = policeRepository.findById(patrollingDTO.getCohead().getId())
+                    .orElseThrow(() -> new RuntimeException("Police not found"));
+            patrolling.setCohead(cohead);
         }
 
         return patrollingRepository.save(patrolling);
@@ -150,6 +161,11 @@ public class PatrollingService {
                 Police head = policeRepository.findById(patrollingDTO.getHead().getId())
                         .orElseThrow(() -> new RuntimeException("Police not found"));
                 patrolling.setHead(head);
+            }
+            if (patrollingDTO.getCohead() != null) {
+                Police cohead = policeRepository.findById(patrollingDTO.getCohead().getId())
+                        .orElseThrow(() -> new RuntimeException("Police not found"));
+                patrolling.setCohead(cohead);
             }
 
             return patrollingRepository.save(patrolling);
