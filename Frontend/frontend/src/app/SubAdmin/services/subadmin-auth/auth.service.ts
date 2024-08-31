@@ -20,7 +20,6 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   private loggedIn = false;
-  private token: string;
 
 
   login(data: { username: string, password: string }): void {
@@ -28,7 +27,6 @@ export class AuthService {
       .subscribe(response => {
         localStorage.setItem("subadmin_token", response.jwtToken);
         this.router.navigate(['/subadmin/']);
-        this.token = response.jwtToken;
         this.loggedIn = true;
       });
   }
@@ -37,7 +35,7 @@ export class AuthService {
 
 
   isLoggedIn(): boolean {
-    return localStorage.getItem("subadmin_token") === this.token;
+    return localStorage.getItem("subadmin_token") !== null;
   }
 
   logout(): void {

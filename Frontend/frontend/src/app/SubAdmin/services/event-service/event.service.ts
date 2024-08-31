@@ -10,12 +10,10 @@ import { Observable } from 'rxjs';
 export class EventService {
   private apiUrl = `${environment.baseUrl}/api/patrollings`;
 
-  subadmin_id = 1;
-
   constructor(private http: HttpClient) { }
 
   getEvents(): Observable<Event[]>{
-    return this.http.get<Event[]>(`${this.apiUrl}/subadmin/${this.subadmin_id}`);
+    return this.http.get<Event[]>(`${this.apiUrl}`);
   }
 
 }

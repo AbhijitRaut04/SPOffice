@@ -12,12 +12,11 @@ import { throwError } from 'rxjs';
 export class SubadminService {
 
   private apiUrl = `${environment.baseUrl}/api/subadmins`;
-  private subadminId = 1;
 
   constructor(private http: HttpClient) { }
 
   fetchSubadmin(): Observable<CurrentSubadmin> {
-    return this.http.get<CurrentSubadmin>(`${this.apiUrl}/${this.subadminId}`).pipe(
+    return this.http.get<CurrentSubadmin>(`${this.apiUrl}/current-subadmin`).pipe(
       catchError(error => {
         return throwError(error);
       })

@@ -14,21 +14,11 @@ export class HeaderComponent {
 
   constructor(private router: Router, public authService:AuthService,private _snackBar: MatSnackBar){}
 
-  handleLogin(){
-    this.login();
-  }
   handleLogout(){
-    this.logout();
-  }
-
-  login() {
-    // this.authService.login("subadmin", "subadmin");
-    this._snackBar.open("Subadmin Logged In", "OK");
-  }
-
-  logout() {
     this.authService.logout();
     this.router.navigate(['/subadmin/login']);
-    this._snackBar.open("Logged Out", "OK");
+    this._snackBar.open("Logged Out", "OK", {
+      duration: 3000
+    });
   }
 }
