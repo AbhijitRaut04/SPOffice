@@ -10,6 +10,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-btn.component';
 import { SearchToolbarComponent } from '../../../../components/reusable/search-toolbar/search-toolbar.component';
+import { Event } from '../../../../models/event.models';
+import { DateFormatPipe } from '../../../../../pipes/date-format/date-format.pipe';
 
 @Component({
   selector: 'app-event',
@@ -25,40 +27,38 @@ import { SearchToolbarComponent } from '../../../../components/reusable/search-t
     MatTooltipModule,
     BackBtnComponent,
     SearchToolbarComponent,
+    DateFormatPipe
   ],
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
-  eventName: string;
-  eventId: string;
-  eventObject: object;
+  event:Event;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.eventName = this.route.snapshot.paramMap.get('name');
-
     this.route.queryParams.subscribe(params => {
-      this.eventId = params['id'];
+      const eventFromState = history.state.event;
+      if (eventFromState) {
+        this.event = eventFromState;
+        console.log(this.event);
+      }
     });
-
-    console.log(`Event Name: ${this.eventName}`);
-    console.log(`Event ID: ${this.eventId}`);
   }
 
   navigateToSubevent() {
     console.log("edit button clicked!");
     // this.router.navigate(['/create/subevent']);
-    this.router.navigate([this.eventName], { queryParams: { id: this.eventId } });  
+    this.router.navigate([this.event.eventname], { state: { event:this.event } });  
 
-    const currentPath = this.router.url;
-    const eventObject = {
-      id: this.eventId,
-      name: this.eventName,
-    };
-    console.log(`${currentPath}/subevent`, this.eventName)
-    this.router.navigate([`${currentPath}/subevent`, this.eventName], { state: { eventObject } });
+    // const currentPath = this.router.url;
+    // const eventObject = {
+    //   id: this.event.id,
+    //   name: this.event.eventname,
+    // };
+    // console.log(`${currentPath}/subevent`, this.event.eventname)
+    // this.router.navigate([`${currentPath}/subevent`, this.event.eventname], { state: { eventObject } });
     
   }
 
@@ -67,8 +67,8 @@ export class EventComponent implements OnInit {
   navigateToEditEvent() {
     const currentPath = this.router.url;
     const eventObject = {
-      id: this.eventId,
-      name: this.eventName,
+      id: this.event.id,
+      name: this.event.eventname,
     };
     this.router.navigate([`${currentPath}/edit`], { state: { eventObject } });
   }

@@ -1,23 +1,21 @@
+.main-wrapper{
+    padding: 10px 20px;
+}
+
 .wrapper{
     display: flex;
-
     gap: 1rem;
     margin: 1rem;
 }
 
-.sub-nav{
-    /* background-color: #ec9797; */
-    width: 100%;
-    height: 3rem;
-
+.btns{
     display: flex;
-    align-items: center;
-    gap: 2rem;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
-
-.back-btn{
-    margin-left: 1rem;
-    color: #fff;
+.btns .btn-wrap{
+    display: flex;
+    gap: 20px;
 }
 
 .content{
@@ -30,10 +28,38 @@
 }
 
 .event-info{
-    flex: 1;
-    padding-left: 2rem;
-    padding-bottom: 3rem;
+    border: 0px solid rgb(93, 93, 93);
+    box-shadow: 0 0 10px rgb(114, 114, 114);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
+.title{
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    font-weight: 500;
+}
+.heads{
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+}
+.heads div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.police{
+    padding: 5px 10px;
+    background: rgb(5, 89, 255);
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
 }
 
 .create-card{
@@ -45,6 +71,12 @@
     padding-left: auto;
     display: flex;
     justify-content: flex-end;
+}
+
+.description-info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 

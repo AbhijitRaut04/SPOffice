@@ -122,8 +122,8 @@ public class PatrollingService {
             patrolling.setAdmin(admin);
         }
 
-        if (patrollingDTO.getHeadId() != null) {
-            Police head = policeRepository.findById(patrollingDTO.getHeadId())
+        if (patrollingDTO.getHead() != null) {
+            Police head = policeRepository.findById(patrollingDTO.getHead().getId())
                     .orElseThrow(() -> new RuntimeException("Police not found"));
             patrolling.setHead(head);
         }
@@ -146,8 +146,8 @@ public class PatrollingService {
                 patrolling.setAdmin(admin);
             }
 
-            if (patrollingDTO.getHeadId() != null) {
-                Police head = policeRepository.findById(patrollingDTO.getHeadId())
+            if (patrollingDTO.getHead() != null) {
+                Police head = policeRepository.findById(patrollingDTO.getHead().getId())
                         .orElseThrow(() -> new RuntimeException("Police not found"));
                 patrolling.setHead(head);
             }

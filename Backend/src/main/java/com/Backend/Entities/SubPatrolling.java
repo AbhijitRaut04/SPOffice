@@ -20,13 +20,16 @@ public class SubPatrolling {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "head_id")
-    @JsonIgnore
+    // @JsonIgnore
     private Police head;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cohead_id")
-    @JsonIgnore
+    // @JsonIgnore
     private Police cohead;
+
+    @Column
+    private String subpatrollingname;
 
     @Column
     private String description;

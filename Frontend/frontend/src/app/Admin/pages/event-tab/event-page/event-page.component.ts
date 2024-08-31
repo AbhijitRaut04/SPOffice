@@ -6,11 +6,14 @@ import { CreateBtnComponent } from '../../../components/reusable/create-btn/crea
 import { CreateSubeventFormComponent } from '../../../components/reusable/create-subevent-form/create-subevent-form.component';
 import { EventService } from '../../../services/event-service/event.service';
 import { Event } from '../../../models/event.models';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-event-page',
   standalone: true,
-  imports: [MatCardModule, CreateBtnComponent, CreateSubeventFormComponent],
+  imports: [MatCardModule, CreateBtnComponent, CreateSubeventFormComponent, MatButtonModule, MatIconModule, MatProgressBarModule],
   templateUrl: './event-page.component.html',
   styleUrl: './event-page.component.css',
 })
@@ -19,6 +22,8 @@ export class EventPageComponent implements OnInit {
   events:Event[] = [];
   constructor(private router: Router, private eventService: EventService) { }
 
+  isLoading:boolean = true;
+
   ngOnInit(): void {
     this.getEvents();
   }
@@ -26,10 +31,11 @@ export class EventPageComponent implements OnInit {
   eventName:string = 'example-event';
   eventId:string = '12345';
 
-  navigateToEvent() {
-    this.router.navigate(['/events', this.eventName], { queryParams: { id: this.eventId } });  
+  navigateToEvent(event:Event) {
+    this.router.navigate(['/events', event.eventname], { state: { event } });  
   }
   getEvents() {
+    this.isLoading = true;
     this.eventService.getEvents().pipe(
       switchMap(() => this.eventService.getEvents()),
       catchError(error => {
@@ -40,5 +46,6 @@ export class EventPageComponent implements OnInit {
       this.events = data;
       console.log(this.events)
     });
+    this.isLoading = false;
   }
 }

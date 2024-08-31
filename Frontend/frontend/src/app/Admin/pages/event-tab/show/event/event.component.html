@@ -1,71 +1,63 @@
-<div class="sub-nav">
-  <app-back-btn></app-back-btn>
-  <div class="sub-nav-title">
-    <h1>Event ID: {{ eventId }}</h1>
-  </div>
-</div>
-<div class="wrapper">
-  <div class="content">
-    <mat-card class="event-info" appearance="outlined">
-      <mat-card-header>
-        <mat-card-title
-          ><h2>{{ eventName }}</h2></mat-card-title
-        >
-      </mat-card-header>
-      <mat-card-content>
-        <div>
-          <div class="head-info">
-            <h3>Head</h3>
-            <p>Head name</p>
-          </div>
-          <div class="cohead-info">
-            <h3>Cohead</h3>
-            <p>Cohead name</p>
-          </div>
-        </div>
-        <div>
-          <div class="date-info">
-            <h3>Date</h3>
-            <p>date</p>
-          </div>
-          <div class="time-info">
-            <h3>Time</h3>
-            <p>time</p>
-          </div>
-        </div>
-        <div>
-          <div class="location-info">
-            <h3>Location</h3>
-            <p>location</p>
-          </div>
-        </div>
 
-        <div>
-          <div class="description-info">
-            <h3>Description</h3>
-            <p>description</p>
-          </div>
+<div class="main-wrapper">
+
+  <div class="btns">
+    <app-back-btn></app-back-btn>
+    <div class="btn-wrap">
+      <button matTooltip="add subevent" mat-fab (click)="navigateToEditEvent()">
+        <mat-icon >add</mat-icon>
+      </button>
+      <button matTooltip="edit event" mat-fab (click)="navigateToEditEvent()">
+        <mat-icon >edit</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="wrappr">
+    <div class="content">
+      <div class="event-info" appearance="outlined">
+        <div class="title">
+          <p>{{ event.eventname }}</p>
+          <p>{{event.date | dateFormat:'shortDate' }}</p>
         </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
+        <!-- <mat-card-content> -->
+          <div class="heads">
+            <div>
+              <h4>Head</h4>
+              <div class="police">{{event.head.fullname + " (" + event.head.designation + ")"}}</div>
+            </div>
+            <div>
+              <h4>Cohead</h4>
+              <div class="police">{{event.cohead.fullname + " (" + event.cohead.designation + ")"}}</div>
+            </div>
+          </div>
+          
+          
+          <!-- <div> -->
+            <div class="description-info">
+              <h4>Description</h4>
+              <p>{{event.description}}</p>
+            </div>
+          <!-- </div> -->
+        <!-- </mat-card-content> -->
+        <!-- <mat-card-actions> -->
+          <!-- <button
           mat-fab
           matTooltip="edit event"
           (click)="navigateToEditEvent()"
-        >
+          >
           <mat-icon>edit</mat-icon>
-        </button>
-      </mat-card-actions>
+        </button> -->
+      <!-- </mat-card-actions> -->
       <!-- <mat-card-footer>footer</mat-card-footer> -->
-    </mat-card>
-
-    <app-search-toolbar></app-search-toolbar>
-
+    </div>
+    
+    <!-- <app-search-toolbar></app-search-toolbar> -->
+    @for (subevent of event.subpatrollings; track $index) {
     <mat-card appearance="outlined">
-      <mat-card-content (click)="navigateToSubevent()"
-        >Subevent 1</mat-card-content
-      >
+      <mat-card-content (click)="navigateToSubevent()">{{subevent.description}}</mat-card-content>
     </mat-card>
+  }
   </div>
-  <app-sidebar></app-sidebar>
+  <!-- <app-sidebar></app-sidebar> -->
+</div>
 </div>

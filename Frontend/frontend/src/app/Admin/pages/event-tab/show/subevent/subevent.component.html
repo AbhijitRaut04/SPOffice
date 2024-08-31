@@ -1,9 +1,10 @@
-<div class="sub-nav">
-  <app-back-btn></app-back-btn>
-  <div class="sub-nav-title">
-    <h1>Subvent ID: {{ subeventId }}</h1>
+<div class="main-wrapper">
+  <div class="btns">
+    <app-back-btn></app-back-btn>
+    <button mat-fab (click)="navigateToEditEvent()">
+      <mat-icon  matTooltip="edit event" >edit</mat-icon>
+    </button>
   </div>
-</div>
 <div class="wrapper">
   <div class="content">
     <mat-card class="event-info" appearance="outlined">
@@ -67,4 +68,5 @@
     </mat-card>
   </div>
   <app-sidebar></app-sidebar>
+</div>
 </div>
