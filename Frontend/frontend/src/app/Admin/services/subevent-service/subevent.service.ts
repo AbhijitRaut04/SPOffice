@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { Event } from '../../models/event.models';
 import { Observable } from 'rxjs';
 import { Subevent } from '../../models/subevent.models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SubeventService {
-  private apiUrl = `${environment.baseUrl}/api/patrollings`;
+  private apiUrl = `${environment.baseUrl}/api/sub-patrollings`;
 
   admin_id = 1;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getSubevents(): Observable<Subevent[]>{
-    return this.http.get<Subevent[]>(`${this.apiUrl}/admin/${this.admin_id}`);
+  getSubevents(): Observable<Subevent[]> {
+    return this.http.get<Subevent[]>(`${this.apiUrl}/${this.admin_id}`);
   }
 
   addSubevents(subevent: Subevent) {
@@ -27,11 +26,3 @@ export class SubeventService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
-
-// {
-//   "headId": 0,
-//   "coheadId": 0,
-//   "description": "",
-//   "instructions": "",
-//   "patrollingId": 0
-// }
