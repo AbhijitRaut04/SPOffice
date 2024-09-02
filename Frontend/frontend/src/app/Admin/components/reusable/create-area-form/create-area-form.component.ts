@@ -19,7 +19,7 @@ import { Event } from '../../../models/event.models';
 import { EventService } from '../../../services/event-service/event.service';
 
 @Component({
-  selector: 'app-create-event-form',
+  selector: 'app-create-area-form',
   standalone: true,
   imports: [
     MatExpansionModule,
@@ -34,10 +34,10 @@ import { EventService } from '../../../services/event-service/event.service';
     MatButtonModule,
   ],
   providers: [provideNativeDateAdapter()],
-  templateUrl: './create-event-form.component.html',
-  styleUrl: './create-event-form.component.css',
+  templateUrl: './create-area-form.component.html',
+  styleUrl: './create-area-form.component.css',
 })
-export class CreateEventFormComponent implements OnInit {
+export class CreateAreaFormComponent implements OnInit {
   options: string[] = ['One', 'Two', 'Three'];
   @Input() event: Event;
 
@@ -54,7 +54,6 @@ export class CreateEventFormComponent implements OnInit {
       eventName: new FormControl(this.event?.eventname),
       description: new FormControl(''),
       head: new FormControl(''),
-      cohead: new FormControl(''),
       date: new FormControl(''),
     });
   }
@@ -83,7 +82,7 @@ export class CreateEventFormComponent implements OnInit {
       eventname: this.eventForm.value.eventName,
       description: this.eventForm.value.description,
       head: this.eventForm.value.head,
-      cohead: this.eventForm.value.cohead,
+      cohead: null,
       date: this.eventForm.value.date,
       subpatrollings: null,
     };
