@@ -5,7 +5,6 @@ export interface Event {
   id: number;
   adminId: number;
   head: Police;
-  cohead: Police;
   subpatrollings:[Subevent];
   date: Date;
   eventname:string;

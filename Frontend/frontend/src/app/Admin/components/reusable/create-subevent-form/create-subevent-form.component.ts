@@ -10,6 +10,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { map, Observable, startWith } from 'rxjs';
+import { SubeventService } from '../../../services/subevent-service/subevent.service';
+import { Subevent } from '../../../models/subevent.models';
 
 @Component({
   selector: 'app-create-subevent-form',
@@ -37,9 +39,12 @@ export class CreateSubeventFormComponent {
   filteredOptions: Observable<string[]>;
   eventForm: FormGroup;
   
-  constructor() {
+  constructor(private subEventService: SubeventService) {
+
+
+    
     this.eventForm = new FormGroup({
-      eventName: new FormControl(''),
+      subeventName: new FormControl(''),
       description: new FormControl(''),
       head: new FormControl(''),
       coHead: new FormControl(''),
@@ -64,6 +69,28 @@ export class CreateSubeventFormComponent {
 
   onSubmit() {
     console.log(this.eventForm.value);
+
+    const newEvent: Subevent = {
+      id: null,
+      subpatrollingname: this.eventForm.value.eventName,
+      description: this.eventForm.value.description,
+      head: this.eventForm.value.headId,
+      cohead: this.eventForm.value.headId,
+      instructions: "",
+    };
+    
+
+    this.subEventService.addSubevents(newEvent).subscribe({
+      next: (response) => {
+        console.log('Subevent created successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error creating subevent:', error);
+      },
+      complete: () => {
+        console.log('Subevent creation process completed.');
+      }
+    });
   }
   
   readonly panelOpenState = signal(false);

@@ -40,7 +40,6 @@ interface EventObject {
     MatTooltipModule,
     BackBtnComponent,
     MatExpansionModule,
-      MatCardModule,
       MatFormFieldModule,
       MatInputModule,
       FormsModule,
@@ -48,56 +47,11 @@ interface EventObject {
       ReactiveFormsModule,
       AsyncPipe,
       MatDatepickerModule,
-      MatButtonModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './create-event.component.html',
   styleUrl: './create-event.component.css',
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateEventComponent implements OnInit {
-  constructor(private router: Router, private route: ActivatedRoute) { }
-  // event: Event;
-  eventForm:FormGroup;
-
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]>;
-
-  initializeForm() {
-    this.eventForm = new FormGroup({
-      eventname: new FormControl(''),
-      description: new FormControl(''),
-      head: new FormControl(''),
-      cohead: new FormControl(''),
-      date: new FormControl('')
-    });
-  }
-
-  ngOnInit(){
-    // this.route.queryParams.subscribe(params => {
-    //   this.event = history.state.event;
-    // });
-    this.initializeForm();
-    
-    this.filteredOptions = this.eventForm.get('head')!.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value || ''))
-    );
-  }
-
-  
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter((option) =>
-      option.toLowerCase().includes(filterValue)
-    );
-  }
-
-  onSubmit() {
-    console.log(this.eventForm.value);
-  }
-  
-  readonly panelOpenState = signal(false);
-}
+export class CreateEventComponent{}
 
