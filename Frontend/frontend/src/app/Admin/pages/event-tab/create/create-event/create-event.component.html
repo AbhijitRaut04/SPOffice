@@ -1,59 +1,10 @@
-<app-back-btn></app-back-btn>
+<div class="sub-nav">
+  <app-back-btn></app-back-btn>
+  <div class="sub-nav-title">
+    <h1>Create Event</h1>
+  </div>
+</div>
 <div class="wrapper">
-  <mat-card>
-    <div class="card-content-wrapper">
-      <div class="create-form">
-        <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
-          <mat-form-field appearance="fill">
-            <mat-label>Event Name</mat-label>
-            <input matInput placeholder="Enter event name" formControlName="eventname" required />
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
-            <textarea matInput placeholder="Enter description" formControlName="description" required></textarea>
-          </mat-form-field>
-
-          <div class="heads">
-            <mat-form-field>
-              <mat-label>Head Officer</mat-label>
-              <input type="text" placeholder="Enter head name" aria-label="Number" matInput formControlName="head"
-                [matAutocomplete]="auto" required />
-              <mat-autocomplete #auto="matAutocomplete">
-                @for (option of filteredOptions | async; track option) {
-                <mat-option [value]="option">{{ option }}</mat-option>
-                }
-              </mat-autocomplete>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
-              <mat-label>Co-Head officer</mat-label>
-              <input type="text" placeholder="Enter co-head name" aria-label="Number" matInput formControlName="cohead"
-                [matAutocomplete]="auto" />
-              <mat-autocomplete #auto="matAutocomplete">
-                @for (option of filteredOptions | async; track option) {
-                <mat-option [value]="option">{{ option }}</mat-option>
-                }
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
-
-          <div id="date-input">
-            <mat-form-field>
-              <mat-label>Choose a date</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="date" />
-              <mat-hint>MM/DD/YYYY</mat-hint>
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
-
-          <button class="submit-button" mat-raised-button type="submit">
-            Create Event
-          </button>
-        </form>
-      </div>
-    </div>
-  </mat-card>
+  <app-create-event-form [eventObject]="eventObject"></app-create-event-form>
   <app-sidebar></app-sidebar>
 </div>
