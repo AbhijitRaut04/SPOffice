@@ -1,6 +1,11 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, signal } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, Input, OnInit, signal } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,13 +15,14 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { map, Observable, startWith } from 'rxjs';
-import { SubeventService } from '../../../services/subevent-service/subevent.service';
-import { Subevent } from '../../../models/subevent.models';
+import { Event } from '../../../models/event.models';
+import { EventService } from '../../../services/event-service/event.service';
 
 @Component({
-  selector: 'app-create-subevent-form',
+  selector: 'app-create-area-form',
   standalone: true,
-  imports: [MatExpansionModule,
+  imports: [
+    MatExpansionModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -28,32 +34,34 @@ import { Subevent } from '../../../models/subevent.models';
     MatButtonModule,
   ],
   providers: [provideNativeDateAdapter()],
-  templateUrl: './create-subevent-form.component.html',
-  styleUrl: './create-subevent-form.component.css'
+  templateUrl: './create-area-form.component.html',
+  styleUrl: './create-area-form.component.css',
 })
-export class CreateSubeventFormComponent {
-
+export class CreateAreaFormComponent implements OnInit {
   options: string[] = ['One', 'Two', 'Three'];
+  @Input() event: Event;
 
+  admin_id: number = 1;
 
-  filteredOptions: Observable<string[]>;
+  filteredOptionsHead: Observable<string[]>;
+
   eventForm: FormGroup;
-  
-  constructor(private subEventService: SubeventService) {
 
+  constructor(private eventService: EventService) {}
 
-    
+  initializeForm() {
     this.eventForm = new FormGroup({
-      subeventName: new FormControl(''),
+      eventName: new FormControl(this.event?.eventname),
       description: new FormControl(''),
       head: new FormControl(''),
-      coHead: new FormControl(''),
-      myControl: new FormControl(''),
+      date: new FormControl(''),
     });
   }
 
   ngOnInit() {
-    this.filteredOptions = this.eventForm.get('head')!.valueChanges.pipe(
+    this.initializeForm();
+
+    this.filteredOptionsHead = this.eventForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
@@ -68,32 +76,29 @@ export class CreateSubeventFormComponent {
   }
 
   onSubmit() {
-    console.log(this.eventForm.value);
-
-    const newEvent: Subevent = {
+    const newEvent: Event = {
       id: null,
-      subpatrollingname: this.eventForm.value.eventName,
+      adminId: this.admin_id,
+      eventname: this.eventForm.value.eventName,
       description: this.eventForm.value.description,
-      head: this.eventForm.value.headId,
-      cohead: this.eventForm.value.headId,
-      instructions: "",
+      head: this.eventForm.value.head,
+      cohead: null,
+      date: this.eventForm.value.date,
+      subpatrollings: null,
     };
-    
 
-    this.subEventService.addSubevents(newEvent).subscribe({
+    this.eventService.addEvent(newEvent).subscribe({
       next: (response) => {
-        console.log('Subevent created successfully:', response);
+        console.log('Event created successfully:', response);
       },
       error: (error) => {
-        console.error('Error creating subevent:', error);
+        console.error('Error creating event:', error);
       },
       complete: () => {
-        console.log('Subevent creation process completed.');
-      }
+        console.log('Event creation process completed.');
+      },
     });
   }
-  
-  readonly panelOpenState = signal(false);
 
-  
+  // readonly panelOpenState = signal(false);
 }

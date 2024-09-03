@@ -22,6 +22,7 @@ import { SubeventComponent } from './Admin/pages/event-tab/show/subevent/subeven
 import { PageNotFoundComponent } from './Admin/pages/page-not-found/page-not-found.component';
 import { PoliceSignupComponent } from './SubAdmin/pages/police-signup/police-signup.component';
 import { CreateAreaComponent } from './Admin/pages/event-tab/create/create-area/create-area.component';
+import { AdminSignupComponent } from './Admin/pages/auth/admin-signup/admin-signup.component';
 
 
 export const routes: Routes = [
@@ -137,6 +138,10 @@ export const routes: Routes = [
             {
                 path: "login",
                 component: LoginComponent
+            },
+            {
+                path: "signup",
+                component: AdminSignupComponent
             },
         ]
     },

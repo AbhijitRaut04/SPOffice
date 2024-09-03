@@ -1,6 +1,11 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, Input, signal } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, Input, OnInit, signal } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -11,11 +16,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { map, Observable, startWith } from 'rxjs';
 import { Event } from '../../../models/event.models';
+import { EventService } from '../../../services/event-service/event.service';
 
 @Component({
   selector: 'app-create-event-form',
   standalone: true,
-  imports: [MatExpansionModule,
+  imports: [
+    MatExpansionModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -28,37 +35,34 @@ import { Event } from '../../../models/event.models';
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './create-event-form.component.html',
-  styleUrl: './create-event-form.component.css'
+  styleUrl: './create-event-form.component.css',
 })
-export class CreateEventFormComponent {
-
+export class CreateEventFormComponent implements OnInit {
   options: string[] = ['One', 'Two', 'Three'];
   @Input() event: Event;
 
+  admin_id: number = 1;
 
-  filteredOptions: Observable<string[]>;
+  filteredOptionsHead: Observable<string[]>;
+
   eventForm: FormGroup;
-  
-  constructor() {
-    
-  }
+
+  constructor(private eventService: EventService) {}
 
   initializeForm() {
-    console.log(this.event);
     this.eventForm = new FormGroup({
-      eventName: new FormControl(this.event.eventname),
+      eventName: new FormControl(this.event?.eventname),
       description: new FormControl(''),
       head: new FormControl(''),
-      coHead: new FormControl(''),
-      myControl: new FormControl(''),
+      cohead: new FormControl(''),
+      date: new FormControl(''),
     });
   }
 
   ngOnInit() {
-
     this.initializeForm();
-    
-    this.filteredOptions = this.eventForm.get('head')!.valueChanges.pipe(
+
+    this.filteredOptionsHead = this.eventForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
@@ -73,10 +77,29 @@ export class CreateEventFormComponent {
   }
 
   onSubmit() {
-    console.log(this.eventForm.value);
-  }
-  
-  readonly panelOpenState = signal(false);
+    const newEvent: Event = {
+      id: null,
+      adminId: this.admin_id,
+      eventname: this.eventForm.value.eventName,
+      description: this.eventForm.value.description,
+      head: this.eventForm.value.head,
+      cohead: this.eventForm.value.cohead,
+      date: this.eventForm.value.date,
+      subpatrollings: null,
+    };
 
-  
+    this.eventService.addEvent(newEvent).subscribe({
+      next: (response) => {
+        console.log('Event created successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error creating event:', error);
+      },
+      complete: () => {
+        console.log('Event creation process completed.');
+      },
+    });
+  }
+
+  // readonly panelOpenState = signal(false);
 }

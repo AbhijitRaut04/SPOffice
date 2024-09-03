@@ -1,11 +1,14 @@
 <div class="main-wrapper">
-
   <div class="btns">
     <app-back-btn></app-back-btn>
     <div class="btn-wrap">
-      <!-- <button matTooltip="add subevent" mat-fab (click)="navigateToEditEvent()">
+      <button
+        matTooltip="add subevent"
+        mat-fab
+        (click)="navigateToAddSubevent()"
+      >
         <mat-icon>add</mat-icon>
-      </button> -->
+      </button>
       <button matTooltip="edit event" mat-fab (click)="navigateToEditEvent()">
         <mat-icon>edit</mat-icon>
       </button>
@@ -16,53 +19,60 @@
       <div class="event-info" appearance="outlined">
         <div class="title">
           <p>{{ event.eventname }}</p>
-          <p>{{event.date | dateFormat:'shortDate' }}</p>
+          <p>{{ event.date | dateFormat : "shortDate" }}</p>
         </div>
         <div class="heads">
           <div class="police-wrapper">
             <h4>Head</h4>
-            <div class="police">{{event.head.fullname + " (" + event.head.designation + ")"}}</div>
-            <!-- <div class="police-info">
-              <p>{{event.head.fullname}}</p>
-              <p>{{event.head.email}}</p>
-              <p>{{event.head.phone}}</p>
-              <p>{{event.head.policeId}}</p>
-              <p>{{event.head.designation}}</p>
-            </div> -->
+            <div class="police">
+              {{ event.head.fullname + " (" + event.head.designation + ")" }}
+            </div>
+            <div class="police-info">
+              <p>{{ event.head.fullname }}</p>
+              <p>{{ event.head.email }}</p>
+              <p>{{ event.head.phone }}</p>
+              <p>{{ event.head.policeId }}</p>
+              <p>{{ event.head.designation }}</p>
+            </div>
           </div>
           <div class="police-wrapper">
             <h4>Cohead</h4>
-            <div class="police">{{event.cohead.fullname + " (" + event.cohead.designation + ")"}}</div>
-            <!-- <div class="police-info">
-              <p>{{event.cohead.fullname}}</p>
-              <p>{{event.cohead.email}}</p>
-              <p>{{event.cohead.phone}}</p>
-              <p>{{event.cohead.policeId}}</p>
-              <p>{{event.cohead.designation}}</p>
-            </div> -->
+            <div class="police">
+              {{
+                event.cohead.fullname + " (" + event.cohead.designation + ")"
+              }}
+            </div>
+            <div class="police-info">
+              <p>{{ event.cohead.fullname }}</p>
+              <p>{{ event.cohead.email }}</p>
+              <p>{{ event.cohead.phone }}</p>
+              <p>{{ event.cohead.policeId }}</p>
+              <p>{{ event.cohead.designation }}</p>
+            </div>
           </div>
         </div>
 
         <div class="description-info">
           <h4>Description</h4>
-          <p>{{event.description}}</p>
+          <p>{{ event.description }}</p>
         </div>
       </div>
       <!-- <app-search-toolbar></app-search-toolbar> -->
       <div class="search-toolbar">
         <div class="search">
-          <input type="text" placeholder="Search Subevent ......">
+          <input type="text" placeholder="Search Subevent ......" />
           <mat-icon fontIcon="search"></mat-icon>
         </div>
-        <button mat-fab matTooltip="add Subevent" (click)="navigateToAddSubevent()">
+        <!-- <button mat-fab matTooltip="add Subevent" (click)="navigateToAddSubevent()">
           <mat-icon>add</mat-icon>
-        </button>
+        </button> -->
       </div>
-  
 
       @for (subevent of event.subpatrollings; track $index) {
       <mat-card appearance="outlined">
-        <mat-card-content (click)="navigateToSubevent(subevent)">{{subevent.subpatrollingname}}</mat-card-content>
+        <mat-card-content (click)="navigateToSubevent(subevent)">{{
+          subevent.subpatrollingname
+        }}</mat-card-content>
       </mat-card>
       }
     </div>

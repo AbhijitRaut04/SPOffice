@@ -19,7 +19,8 @@ export class EventService {
   }
 
   addEvent(event: Event) {
-    return this.http.post<Event>(this.apiUrl, event);
+    const eventWithAdminId = { ...event, admin_id: this.admin_id };
+    return this.http.post<Event>(this.apiUrl, eventWithAdminId);
   }
 
   deleteEvent(id: number) {
