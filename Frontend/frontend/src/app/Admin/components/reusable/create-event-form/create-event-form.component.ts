@@ -86,19 +86,20 @@ export class CreateEventFormComponent implements OnInit {
       cohead: this.eventForm.value.cohead,
       date: this.eventForm.value.date,
       subpatrollings: null,
+      attendance:null
     };
 
-    this.eventService.addEvent(newEvent).subscribe({
-      next: (response) => {
-        console.log('Event created successfully:', response);
-      },
-      error: (error) => {
-        console.error('Error creating event:', error);
-      },
-      complete: () => {
-        console.log('Event creation process completed.');
-      },
-    });
+    // this.eventService.addEvent(newEvent).subscribe({
+    //   next: (response) => {
+    //     console.log('Event created successfully:', response);
+    //   },
+    //   error: (error) => {
+    //     console.error('Error creating event:', error);
+    //   },
+    //   complete: () => {
+    //     console.log('Event creation process completed.');
+    //   },
+    // });
   }
 
   // readonly panelOpenState = signal(false);

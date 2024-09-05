@@ -1,6 +1,7 @@
 import { Police } from "./police.models";
 
 export class Subadmin {
+    id:number;
     username: string;
     password: string;
     phone: string;
@@ -10,6 +11,7 @@ export class Subadmin {
 }
 
 export class CurrentSubadmin{
+    id:number;
     username: string;
     password: string;
     phone: string;

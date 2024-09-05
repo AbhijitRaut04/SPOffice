@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/polices")
@@ -20,9 +20,9 @@ public class PoliceController extends BaseController  {
 
     // Get all Polices
     @GetMapping
-    public ResponseEntity<List<Police>> getAllPolices() {
+    public ResponseEntity<Set<PoliceDto>> getAllPolices() {
         try {
-            List<Police> polices = policeService.getAllPolices();
+            Set<PoliceDto> polices = policeService.getAllPolices();
             return ResponseEntity.ok(polices);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

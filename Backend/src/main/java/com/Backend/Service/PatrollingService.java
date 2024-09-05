@@ -202,9 +202,12 @@ public class PatrollingService {
 
     public Patrolling sendAttendance(Long patrolling_id, Long subadmin_id, List<Long> polices) {
         try {
+            System.out.println(patrolling_id +" "+subadmin_id+" "+polices);
             Patrolling patrolling = patrollingRepository.findById(patrolling_id)
                     .orElseThrow(() -> new RuntimeException("Patrolling not found"));
-
+            if(patrolling.getAttendance() == null){
+                patrolling = createAttendance(patrolling_id);
+            }
             Attendance attendance = attendanceService.sendAttendance(patrolling.getAttendance().getId(), subadmin_id,
                     polices);
 

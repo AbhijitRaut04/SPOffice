@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.Backend.Entities.Patrolling;
-import com.Backend.Entities.Police;
 import com.Backend.Entities.SubPatrolling;
 
 import lombok.AllArgsConstructor;
@@ -23,8 +22,8 @@ public class PatrollingDto {
 
         private Long id;
         private Long adminId;
-        private Police head;
-        private Police cohead;
+        private PoliceDto head;
+        private PoliceDto cohead;
         private Date date;
         private String eventname;
         private String description;
@@ -35,8 +34,8 @@ public class PatrollingDto {
                 PatrollingDto patrollingDto = PatrollingDto.builder()
                                 .id(patrolling.getId())
                                 .adminId(patrolling.getAdmin().getId())
-                                .head(patrolling.getHead())
-                                .cohead(patrolling.getCohead())
+                                .head(new PoliceDto().buildPolice(patrolling.getHead()))
+                                .cohead(new PoliceDto().buildPolice(patrolling.getCohead()))
                                 .date(patrolling.getDate())
                                 .eventname(patrolling.getEventname())
                                 .description(patrolling.getDescription())

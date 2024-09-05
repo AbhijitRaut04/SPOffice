@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PoliceService {
@@ -32,9 +34,12 @@ public class PoliceService {
     // private SectorRepository sectorRepository;
 
     // Get all Police
-    public List<Police> getAllPolices() {
+    public Set<PoliceDto> getAllPolices() {
         try {
-            return policeRepository.findAll();
+            List<Police> polices = policeRepository.findAll();
+            Set<PoliceDto> policesDto = polices.stream().map(police -> new PoliceDto().buildPolice(police))
+                                .collect(Collectors.toSet());
+            return policesDto;
         } catch (Exception e) {
             throw new RuntimeException("Error fetching all polices", e);
         }

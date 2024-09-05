@@ -7,4 +7,5 @@ export interface Subevent{
     id:number;
     description:string;
     instructions:string;
+    patrollingId:number;
 }

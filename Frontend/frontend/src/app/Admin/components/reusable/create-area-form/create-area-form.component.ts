@@ -85,6 +85,7 @@ export class CreateAreaFormComponent implements OnInit {
       cohead: null,
       date: this.eventForm.value.date,
       subpatrollings: null,
+      attendance:null
     };
 
     this.eventService.addEvent(newEvent).subscribe({

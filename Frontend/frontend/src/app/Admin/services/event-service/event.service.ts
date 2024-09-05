@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Event } from '../../models/event.models';
 import { Observable } from 'rxjs';
+import { Police } from '../../models/police.models';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,10 @@ export class EventService {
     return this.http.get<Event[]>(`${this.apiUrl}/admin/${this.admin_id}`);
   }
 
+
   addEvent(event: Event) {
-    const eventWithAdminId = { ...event, admin_id: this.admin_id };
-    return this.http.post<Event>(this.apiUrl, eventWithAdminId);
+    console.log(event)
+    return this.http.post<Event>(this.apiUrl, event);
   }
 
   deleteEvent(id: number) {

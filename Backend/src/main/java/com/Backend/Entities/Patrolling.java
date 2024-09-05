@@ -36,18 +36,18 @@ public class Patrolling {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "head_police_id")
-    @JsonIgnore
+    // @JsonIgnore
     private Police head;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cohead_police_id")
-    @JsonIgnore
+    // @JsonIgnore
     private Police cohead;
 
     @OneToMany(mappedBy = "patrolling", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SubPatrolling> subPatrollings = new HashSet<>();
 
     @OneToOne(mappedBy = "patrolling", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Attendance attendance;
+    private Attendance attendance = new Attendance();
 
 
 }

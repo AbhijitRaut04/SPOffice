@@ -10,4 +10,10 @@ export interface Event {
   date: Date;
   eventname: string;
   description: string;
+  attendance: Map<number, Police>;
+}
+
+export interface Pair{
+  subadminId: number;
+  polices: Police[];
 }

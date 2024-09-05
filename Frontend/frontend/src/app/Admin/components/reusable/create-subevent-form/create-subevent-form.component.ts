@@ -70,27 +70,27 @@ export class CreateSubeventFormComponent {
   onSubmit() {
     console.log(this.eventForm.value);
 
-    const newEvent: Subevent = {
-      id: null,
-      subpatrollingname: this.eventForm.value.eventName,
-      description: this.eventForm.value.description,
-      head: this.eventForm.value.headId,
-      cohead: this.eventForm.value.headId,
-      instructions: "",
-    };
+    // const newEvent: Subevent = {
+    //   id: null,
+    //   subpatrollingname: this.eventForm.value.eventName,
+    //   description: this.eventForm.value.description,
+    //   head: this.eventForm.value.headId,
+    //   cohead: this.eventForm.value.headId,
+    //   instructions: "",
+    // };
     
 
-    this.subEventService.addSubevents(newEvent).subscribe({
-      next: (response) => {
-        console.log('Subevent created successfully:', response);
-      },
-      error: (error) => {
-        console.error('Error creating subevent:', error);
-      },
-      complete: () => {
-        console.log('Subevent creation process completed.');
-      }
-    });
+    // this.subEventService.addSubevents(newEvent).subscribe({
+    //   next: (response) => {
+    //     console.log('Subevent created successfully:', response);
+    //   },
+    //   error: (error) => {
+    //     console.error('Error creating subevent:', error);
+    //   },
+    //   complete: () => {
+    //     console.log('Subevent creation process completed.');
+    //   }
+    // });
   }
   
   readonly panelOpenState = signal(false);

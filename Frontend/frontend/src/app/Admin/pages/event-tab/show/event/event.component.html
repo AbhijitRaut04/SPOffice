@@ -2,12 +2,8 @@
   <div class="btns">
     <app-back-btn></app-back-btn>
     <div class="btn-wrap">
-      <button
-        matTooltip="add subevent"
-        mat-fab
-        (click)="navigateToAddSubevent()"
-      >
-        <mat-icon>add</mat-icon>
+      <button matTooltip="view Attendance" mat-fab (click)="viewAttendance()">
+        <mat-icon>person</mat-icon>
       </button>
       <button matTooltip="edit event" mat-fab (click)="navigateToEditEvent()">
         <mat-icon>edit</mat-icon>
@@ -63,9 +59,9 @@
           <input type="text" placeholder="Search Subevent ......" />
           <mat-icon fontIcon="search"></mat-icon>
         </div>
-        <!-- <button mat-fab matTooltip="add Subevent" (click)="navigateToAddSubevent()">
+        <button mat-fab matTooltip="add Subevent" (click)="navigateToAddSubevent()">
           <mat-icon>add</mat-icon>
-        </button> -->
+        </button>
       </div>
 
       @for (subevent of event.subpatrollings; track $index) {
