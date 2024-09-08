@@ -10,7 +10,6 @@ import { Subadmin, Request } from '../../models/subadmin.model';
 export class SubadminService {
   private apiUrl = `${environment.baseUrl}/api/subadmins`;
 
-  admin_id = 1;
 
   constructor(private http: HttpClient) { 
     this.getValidSubadmins();
@@ -18,7 +17,7 @@ export class SubadminService {
 
 
   getRequests(): Observable<Request[]> {
-    return this.http.get<Request[]>(`${this.apiUrl}/requests/${this.admin_id}`);
+    return this.http.get<Request[]>(`${this.apiUrl}/requests`);
   }
 
   rejectRequest(request: Request): Observable<void> {
@@ -30,7 +29,7 @@ export class SubadminService {
   }
 
   getValidSubadmins(): any{
-    return this.http.get<Subadmin[]>(`${this.apiUrl}/approved/${this.admin_id}`);
+    return this.http.get<Subadmin[]>(`${this.apiUrl}/approved`);
   }
 
 }

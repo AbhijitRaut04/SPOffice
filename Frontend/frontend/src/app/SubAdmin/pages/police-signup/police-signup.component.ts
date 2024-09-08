@@ -49,7 +49,7 @@ export class PoliceSignupComponent implements OnInit {
     this.reactiveForm = new FormGroup({
       fullname: new FormControl(null, Validators.required),
       policeId: new FormControl(null, Validators.required),
-      subadminId: new FormControl(null, Validators.required),
+      // subadminId: new FormControl(null, Validators.required),
       designation: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       phone: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{10}$/)]),
@@ -98,7 +98,9 @@ export class PoliceSignupComponent implements OnInit {
     else {
       this.policeService.registerPolice(this.reactiveForm.value).subscribe();
       this.router.navigate(['/subadmin/police']);
-      this._snackBar.open("Police registered Successfully", "OK");
+      this._snackBar.open("Police registered Successfully", "OK", {
+        duration: 3000
+      });
     }
   }
 }

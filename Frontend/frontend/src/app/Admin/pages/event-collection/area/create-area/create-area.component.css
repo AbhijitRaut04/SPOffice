@@ -1,4 +1,4 @@
-.sub-nav{
+.sub-nav {
     /* background-color: #ec9797; */
     width: 100%;
     height: 3rem;
@@ -8,12 +8,13 @@
     gap: 2rem;
 }
 
-.wrapper{
+.wrapper {
     display: flex;
 
     gap: 1rem;
     margin: 1rem;
 }
-app-create-event-form{
+
+app-create-area-form {
     flex: 1;
 }

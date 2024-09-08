@@ -35,9 +35,13 @@ public class Patrolling {
     private Admin admin;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "police_id")
-    @JsonIgnore
+    @JoinColumn(name = "head_police_id")
+    // @JsonIgnore
     private Police head;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cohead_police_id")
+    // @JsonIgnore
+    private Police cohead;
 
     @OneToMany(mappedBy = "patrolling", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SubPatrolling> subPatrollings = new HashSet<>();

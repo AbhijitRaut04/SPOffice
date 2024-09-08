@@ -50,4 +50,15 @@ public class Subadmin {
     @Column
     private String status = "NOT_APPROVED";
 
+    public String subadminString() {
+        return "Subadmin{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", station='" + station + '\'' +
+                ", admin_id='" + admin.getId() + '\'' +
+                '}';
+    }
+
 }

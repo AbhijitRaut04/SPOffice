@@ -1,6 +1,7 @@
 package com.Backend.Service;
 
 import com.Backend.Dto.PoliceDto;
+import com.Backend.Dto.SubadminDto;
 import com.Backend.Entities.*;
 import com.Backend.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PoliceService {
@@ -17,6 +20,9 @@ public class PoliceService {
 
     @Autowired
     private SubadminRepository subadminRepository;
+
+    @Autowired
+    private SubadminService subadminService;
 
     // @Autowired
     // private RequestRepository requestRepository;
@@ -28,9 +34,12 @@ public class PoliceService {
     // private SectorRepository sectorRepository;
 
     // Get all Police
-    public List<Police> getAllPolices() {
+    public Set<PoliceDto> getAllPolices() {
         try {
-            return policeRepository.findAll();
+            List<Police> polices = policeRepository.findAll();
+            Set<PoliceDto> policesDto = polices.stream().map(police -> new PoliceDto().buildPolice(police))
+                                .collect(Collectors.toSet());
+            return policesDto;
         } catch (Exception e) {
             throw new RuntimeException("Error fetching all polices", e);
         }
@@ -64,14 +73,11 @@ public class PoliceService {
                 police.setEmail(policeDto.getEmail());
                 police.setGender(policeDto.getGender());
                 police.setDesignation(policeDto.getDesignation());
-                System.out.println("______________________________________________");
-            System.out.println(police);
-                if (policeDto.getSubadminId() != null) {
-                    Subadmin subadmin = subadminRepository.findById(policeDto.getSubadminId())
-                            .orElseThrow(() -> new RuntimeException("Subadmin not found"));
-                    police.setSubadmin(subadmin);
+                SubadminDto subadmindto = subadminService.currentSubadmin();
+                Optional<Subadmin> subadmin = subadminRepository.findById(subadmindto.getId());
+                if (subadmin != null) {
+                    police.setSubadmin(subadmin.get());
                 }
-                
                 // if (policeDto.getAreaId() != null) {
                 //     Area area = areaRepository.findById(policeDto.getAreaId())
                 //             .orElseThrow(() -> new RuntimeException("Area not found"));
@@ -84,9 +90,7 @@ public class PoliceService {
                 // }
                 return policeRepository.save(police);
         } catch (Exception e) {
-            System.out.println("______________________________________________");
             System.out.println(e);
-            System.out.println("______________________________________________");
             throw new RuntimeException("Error creating police", e);
         }
     }

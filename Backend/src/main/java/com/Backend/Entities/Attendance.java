@@ -33,7 +33,7 @@ public class Attendance {
     @JsonIgnore
     private Set<Subadmin> subadmins = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "attendance_id")
     private Set<Police> polices = new HashSet<>();
 

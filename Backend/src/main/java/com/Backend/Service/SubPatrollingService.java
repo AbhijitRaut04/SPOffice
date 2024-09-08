@@ -34,9 +34,9 @@ public class SubPatrollingService {
         try {
             SubPatrolling subPatrolling = new SubPatrolling();
 
-            Police head = policeRepository.findById(subPatrollingDTO.getHeadId())
+            Police head = policeRepository.findById(subPatrollingDTO.getHead().getId())
                     .orElseThrow(() -> new RuntimeException("Head not found"));
-            Police cohead = policeRepository.findById(subPatrollingDTO.getCoheadId())
+            Police cohead = policeRepository.findById(subPatrollingDTO.getCohead().getId())
                     .orElseThrow(() -> new RuntimeException("Co-head not found"));
             Patrolling patrolling = patrollingRepository.findById(subPatrollingDTO.getPatrollingId())
                     .orElseThrow(() -> new RuntimeException("Patrolling not found"));
@@ -46,6 +46,7 @@ public class SubPatrollingService {
             subPatrolling.setDescription(subPatrollingDTO.getDescription());
             subPatrolling.setInstructions(subPatrollingDTO.getInstructions());
             subPatrolling.setPatrolling(patrolling);
+            subPatrolling.setSubpatrollingname(subPatrollingDTO.getSubpatrollingname());
             return subPatrollingRepository.save(subPatrolling);
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to create SubPatrolling", e);

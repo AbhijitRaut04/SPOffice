@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Backend.Dto.AdminDto;
@@ -17,7 +16,9 @@ import com.Backend.Dto.PatrollingDto;
 import com.Backend.Dto.PoliceDto;
 import com.Backend.Dto.SubadminDto;
 import com.Backend.Entities.Admin;
+import com.Backend.Entities.Subadmin;
 import com.Backend.Repository.AdminRepository;
+import com.Backend.Utils.PasswordChecker;
 
 @Service
 public class AdminService {
@@ -25,12 +26,11 @@ public class AdminService {
     @Autowired
     private final AdminRepository adminRepository;
 
-    @Autowired
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordChecker passwordChecker;
 
-    public AdminService(AdminRepository adminRepository, PasswordEncoder passwordEncoder) {
+    public AdminService(AdminRepository adminRepository, PasswordChecker passwordChecker) {
         this.adminRepository = adminRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.passwordChecker = new PasswordChecker();
     }
 
     public Optional<Admin> getAdminByUsername(String username) {
@@ -58,13 +58,13 @@ public class AdminService {
 
             Set<PatrollingDto> patrollings = admin.getPatrollings().stream()
                     .map(patrolling -> {
-                        Map<Long, Set<PoliceDto>> attendance = new HashMap<>();
+                        Map<String, Set<PoliceDto>> attendance = new HashMap<>();
                         if (patrolling.getAttendance() != null) {
                             patrolling.getAttendance().getPolices().forEach(police -> {
-                                Long subadminId = police.getSubadmin().getId();
-                                Set<PoliceDto> policeDtos = attendance.getOrDefault(subadminId, new HashSet<>());
+                                Subadmin subadmin = police.getSubadmin();
+                                Set<PoliceDto> policeDtos = attendance.getOrDefault(subadmin, new HashSet<>());
                                 policeDtos.add(new PoliceDto().buildPolice(police));
-                                attendance.put(subadminId, policeDtos);
+                                attendance.put(subadmin.subadminString(), policeDtos);
                             });
                         }
                         return new PatrollingDto().buildPatrolling(patrolling, attendance);
@@ -81,8 +81,7 @@ public class AdminService {
     public Admin createAdmin(Admin admin) {
         try {
 
-            String hashPassword = passwordEncoder.encode(admin.getPassword());
-            admin.setPassword(hashPassword);
+            admin.setPassword(passwordChecker.encodePassword(admin.getPassword()));
 
             return adminRepository.save(admin);
         } catch (DataAccessException e) {

@@ -1,0 +1,15 @@
+.submit-button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+  }
+  
+  mat-selection-list {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  mat-checkbox {
+    margin-right: 10px;
+  }
+  

@@ -7,9 +7,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SubPatrollingDto {
-    private Long headId;
-    private Long coheadId;
+    private Long id;
+    private PoliceDto head;
+    private PoliceDto cohead;
     private String description;
     private String instructions;
     private Long patrollingId;
+    private String subpatrollingname;
 }
