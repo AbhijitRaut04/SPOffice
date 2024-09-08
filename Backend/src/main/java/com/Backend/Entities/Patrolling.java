@@ -47,7 +47,7 @@ public class Patrolling {
     private Set<SubPatrolling> subPatrollings = new HashSet<>();
 
     @OneToOne(mappedBy = "patrolling", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Attendance attendance = new Attendance();
+    private Attendance attendance;
 
 
 }

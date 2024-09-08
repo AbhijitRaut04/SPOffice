@@ -11,11 +11,14 @@ import { Area } from '../../models/area.models';
 export class AreaService {
   private apiUrl = `${environment.baseUrl}/api/areas`;
 
-  admin_id = 1;
-
   constructor(private http: HttpClient) { }
 
   getAreas(): Observable<Area[]>{
-    return this.http.get<Area[]>(`${this.apiUrl}/${this.admin_id}`);
+    return this.http.get<Area[]>(`${this.apiUrl}`);
+  }
+
+  addArea(area: Area) {
+    console.log(area)
+    return this.http.post<Area>(this.apiUrl, area);
   }
 }

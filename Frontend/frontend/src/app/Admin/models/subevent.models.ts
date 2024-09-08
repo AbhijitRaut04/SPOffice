@@ -1,3 +1,4 @@
+import { Area } from "./area.models";
 import { Police } from "./police.models";
 
 export interface Subevent{
@@ -8,4 +9,5 @@ export interface Subevent{
     description:string;
     instructions:string;
     patrollingId:number;
+    areas:Area[];
 }

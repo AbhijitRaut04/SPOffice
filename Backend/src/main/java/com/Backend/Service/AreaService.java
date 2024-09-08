@@ -33,22 +33,34 @@ public class AreaService {
     }
 
     public Area createArea(AreaDto areaDTO) {
-        Area area = new Area();
-        area.setAreaName(areaDTO.getAreaName());
+        try {
 
-        if (areaDTO.getHeadId() != null) {
-            Police head = policeRepository.findById(areaDTO.getHeadId())
-                    .orElseThrow(() -> new RuntimeException("Police not found"));
-            area.setHead(head);
-        }
+            Area area = new Area();
+            area.setAreaName(areaDTO.getAreaName());
 
-        if (areaDTO.getSubPatrollingId() != null) {
+            if (areaDTO.getHeadId() != null) {
+                Police head = policeRepository.findById(areaDTO.getHeadId())
+                        .orElseThrow(() -> new RuntimeException("Police not found"));
+                area.setHead(head);
+            }
+            if (areaDTO.getCoheadId() != null) {
+                Police cohead = policeRepository.findById(areaDTO.getCoheadId())
+                        .orElseThrow(() -> new RuntimeException("Police not found"));
+                area.setCohead(cohead);
+            }
+
+            // if (areaDTO.getSubPatrollingId() != null) {
             SubPatrolling subPatrolling = subPatrollingRepository.findById(areaDTO.getSubPatrollingId())
                     .orElseThrow(() -> new RuntimeException("SubPatrolling not found"));
             area.setSubPatrolling(subPatrolling);
+            // }
+            System.out.println(area.toString());
+            return areaRepository.save(area);
+            // return null;
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to create area", e);
         }
-        return areaRepository.save(area);
-
 
     }
 

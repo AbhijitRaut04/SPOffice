@@ -28,9 +28,9 @@ public class PatrollingDto {
         private String eventname;
         private String description;
         private Set<SubPatrolling> subpatrollings;
-        private Map<Long, Set<PoliceDto>> attendance;
+        private Map<String, Set<PoliceDto>> attendance;
 
-        public PatrollingDto buildPatrolling(Patrolling patrolling, Map<Long, Set<PoliceDto>> attendance) {
+        public PatrollingDto buildPatrolling(Patrolling patrolling, Map<String, Set<PoliceDto>> attendance) {
                 PatrollingDto patrollingDto = PatrollingDto.builder()
                                 .id(patrolling.getId())
                                 .adminId(patrolling.getAdmin().getId())

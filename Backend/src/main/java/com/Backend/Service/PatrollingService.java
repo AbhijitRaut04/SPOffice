@@ -44,24 +44,31 @@ public class PatrollingService {
         return patrollingRepository.findAll();
     }
 
-    public List<Patrolling> getPatrollings() {
+    public Set<PatrollingDto> getPatrollings() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = null;
-
+        
         if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
             username = ((UserDetails) authentication.getPrincipal()).getUsername();
         } else if (authentication != null) {
             username = authentication.getName();
         }
         Optional<Subadmin> subadmin = subadminRepository.getSubdminByUsername(username);
-        if(subadmin != null){
+        if(subadmin.isPresent()){
             Subadmin sub = subadmin.get();
-            return patrollingRepository.findPatrollingsOfAdmin(sub.getAdmin().getId());
+
+            List<Patrolling> patrollings = patrollingRepository.findPatrollingsOfAdmin(sub.getAdmin().getId());
+            return patrollings.stream()
+                .map(patrolling -> getPatrollingById(patrolling.getId()))
+                .collect(Collectors.toSet());
         }
         else{
             Optional<Admin> admin = adminRepository.getAdminByUsername(username);
             Admin ad = admin.get();
-            return patrollingRepository.findPatrollingsOfAdmin(ad.getId());
+            List<Patrolling> patrollings = patrollingRepository.findPatrollingsOfAdmin(ad.getId());
+            return patrollings.stream()
+                .map(patrolling -> getPatrollingById(patrolling.getId()))
+                .collect(Collectors.toSet());
         }
     }
 
@@ -100,9 +107,9 @@ public class PatrollingService {
         }
 
         // Transform the Police entities into PoliceDto and group by Subadmin ID
-        Map<Long, Set<PoliceDto>> attendance = patrolling.getAttendance().getPolices().stream()
+        Map<String, Set<PoliceDto>> attendance = patrolling.getAttendance().getPolices().stream()
                 .collect(Collectors.groupingBy(
-                        police -> police.getSubadmin().getId(),
+                        police -> police.getSubadmin().subadminString(),
                         Collectors.mapping(
                                 police -> new PoliceDto().buildPolice(police),
                                 Collectors.toSet())));

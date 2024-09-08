@@ -1,16 +1,19 @@
 package com.Backend.Entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "areas")
 @Getter
 @Setter
+@ToString
 public class Area {
 
     @Id
@@ -21,8 +24,14 @@ public class Area {
     private String areaName;
 
     @OneToOne(mappedBy = "area")
-    @JsonIgnore
+    @JoinColumn(name = "head_id")
+    // @JsonIgnore
     private Police head;
+
+    @OneToOne(mappedBy = "area")
+    @JoinColumn(name = "cohead_id")
+    // @JsonIgnore
+    private Police cohead;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subPatrolling_id")
@@ -30,6 +39,6 @@ public class Area {
     private SubPatrolling subPatrolling;
 
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Sector> sectors;
+    private Set<Sector> sectors = new HashSet<>();
 
 }

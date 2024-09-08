@@ -9,5 +9,6 @@ public class AreaDto {
     private Long id;
     private String areaName;
     private Long headId;
+    private Long coheadId;
     private Long subPatrollingId;
 }

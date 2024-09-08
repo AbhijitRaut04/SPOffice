@@ -16,6 +16,7 @@ import com.Backend.Dto.PatrollingDto;
 import com.Backend.Dto.PoliceDto;
 import com.Backend.Dto.SubadminDto;
 import com.Backend.Entities.Admin;
+import com.Backend.Entities.Subadmin;
 import com.Backend.Repository.AdminRepository;
 import com.Backend.Utils.PasswordChecker;
 
@@ -57,13 +58,13 @@ public class AdminService {
 
             Set<PatrollingDto> patrollings = admin.getPatrollings().stream()
                     .map(patrolling -> {
-                        Map<Long, Set<PoliceDto>> attendance = new HashMap<>();
+                        Map<String, Set<PoliceDto>> attendance = new HashMap<>();
                         if (patrolling.getAttendance() != null) {
                             patrolling.getAttendance().getPolices().forEach(police -> {
-                                Long subadminId = police.getSubadmin().getId();
-                                Set<PoliceDto> policeDtos = attendance.getOrDefault(subadminId, new HashSet<>());
+                                Subadmin subadmin = police.getSubadmin();
+                                Set<PoliceDto> policeDtos = attendance.getOrDefault(subadmin, new HashSet<>());
                                 policeDtos.add(new PoliceDto().buildPolice(police));
-                                attendance.put(subadminId, policeDtos);
+                                attendance.put(subadmin.subadminString(), policeDtos);
                             });
                         }
                         return new PatrollingDto().buildPatrolling(patrolling, attendance);

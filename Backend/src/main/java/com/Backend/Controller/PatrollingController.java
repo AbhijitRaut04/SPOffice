@@ -78,9 +78,9 @@ public class PatrollingController extends BaseController  {
 
     // Get Patrollings of loggedin user
     @GetMapping
-    public ResponseEntity<List<Patrolling>> getPatrollings() {
+    public ResponseEntity<Set<PatrollingDto>> getPatrollings() {
         try {
-            List<Patrolling> patrollings = patrollingService.getPatrollings();
+            Set<PatrollingDto> patrollings = patrollingService.getPatrollings();
             return ResponseEntity.ok(patrollings);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

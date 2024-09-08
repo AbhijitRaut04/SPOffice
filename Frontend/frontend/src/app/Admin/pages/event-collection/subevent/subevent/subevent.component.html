@@ -17,7 +17,42 @@
         <div class="title">
           <p>{{ subevent.subpatrollingname }}</p>
         </div>
+
+
+
         <div class="heads">
+          <div class="police-wrapper">
+            <h4>Head</h4>
+            <div class="police">
+              {{ subevent.head.fullname + " (" + subevent.head.designation + ")" }}
+            </div>
+            <div class="police-info">
+              <p>{{ subevent.head.fullname }}</p>
+              <p>{{ subevent.head.email }}</p>
+              <p>{{ subevent.head.phone }}</p>
+              <p>{{ subevent.head.policeId }}</p>
+              <p>{{ subevent.head.designation }}</p>
+            </div>
+          </div>
+          <div class="police-wrapper">
+            <h4>Cohead</h4>
+            <div class="police">
+              {{
+                subevent.cohead.fullname + " (" + subevent.cohead.designation + ")"
+              }}
+            </div>
+            <div class="police-info">
+              <p>{{ subevent.cohead.fullname }}</p>
+              <p>{{ subevent.cohead.email }}</p>
+              <p>{{ subevent.cohead.phone }}</p>
+              <p>{{ subevent.cohead.policeId }}</p>
+              <p>{{ subevent.cohead.designation }}</p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- <div class="heads">
           <div class="police-wrapper">
             <h4>Head</h4>
             <div class="police">{{subevent.head.fullname + " (" + subevent.head.designation + ")"}}</div>
@@ -26,7 +61,7 @@
             <h4>Cohead</h4>
             <div class="police">{{subevent.cohead.fullname + " (" + subevent.cohead.designation + ")"}}</div>
           </div>
-        </div>
+        </div> -->
         <div class="description-info">
           <h3>Description</h3>
           <p>{{subevent.description}}</p>
@@ -48,6 +83,15 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
+
+      @for (area of subevent.areas; track $index) {
+        <mat-card appearance="outlined">
+          <mat-card-content (click)="navigateToArea(area)">{{
+            area.areaName
+          }}</mat-card-content>
+        </mat-card>
+        }
+
     </div>
   </div>
 </div>

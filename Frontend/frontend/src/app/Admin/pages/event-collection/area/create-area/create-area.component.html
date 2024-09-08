@@ -1,0 +1,62 @@
+<div class="sub-nav">
+  <app-back-btn></app-back-btn>
+  <div class="sub-nav-title">
+    <h1>Create Area</h1>
+  </div>
+</div>
+<div class="wrapper">
+  <mat-card>
+    <div class="card-content-wrapper">
+      <div class="create-form">
+        <form [formGroup]="areaForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="fill">
+            <mat-label>Area Name</mat-label>
+            <input matInput placeventNameeholder="Enter area name" formControlName="areaName" required />
+          </mat-form-field>
+
+          <div class="heads">
+            <mat-form-field>
+              <mat-label>Head Officer</mat-label>
+              <input 
+              type="text" 
+              placeholder="Enter head name" 
+              aria-label="Number" 
+              matInput 
+              formControlName="head"
+              [matAutocomplete]="head" 
+              required />
+              <mat-autocomplete #head="matAutocomplete" [displayWith]="displayPoliceName">
+                @for (option of filteredOptionsHead | async; track option) {
+                <mat-option [value]="option">{{ option.fullname }}</mat-option>
+                }
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Co-Head officer</mat-label>
+            <input
+              type="text"
+              placeholder="Enter co-head name"
+              aria-label="Number"
+              matInput
+              formControlName="cohead"
+              [matAutocomplete]="cohead"
+            />
+            <mat-autocomplete #cohead="matAutocomplete" [displayWith]="displayPoliceName">
+              @for (option of filteredOptionsCohead | async; track option) {
+              <mat-option [value]="option">{{ option.fullname }}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <button class="submit-button" mat-raised-button type="submit">
+            Create Area
+          </button>
+        </form>
+      </div>
+    </div>
+  </mat-card>
+
+  <app-sidebar [event]="event"></app-sidebar>
+</div>

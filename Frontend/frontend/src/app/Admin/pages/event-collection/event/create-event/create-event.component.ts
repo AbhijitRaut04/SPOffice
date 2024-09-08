@@ -1,16 +1,9 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
-import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
+import { Component, OnInit } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { CreateBtnComponent } from '../../../../components/reusable/create-btn/create-btn.component';
-import { CreateEventFormComponent } from '../../../../components/reusable/create-event-form/create-event-form.component';
-import { CreateSubeventFormComponent } from '../../../../components/reusable/create-subevent-form/create-subevent-form.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-btn.component';
-import { Event } from '../../../../models/event.models';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,15 +12,15 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AsyncPipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { catchError, map, Observable, of, startWith, switchMap } from 'rxjs';
-import { EventService } from '../../../../services/event-service/event.service';
+import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
+import { CreateBtnComponent } from '../../../../components/reusable/create-btn/create-btn.component';
+import { CreateEventFormComponent } from '../../../../components/reusable/create-event-form/create-event-form.component';
+import { CreateSubeventFormComponent } from '../../../../components/reusable/create-subevent-form/create-subevent-form.component';
+import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-btn.component';
 import { Police } from '../../../../models/police.models';
+import { EventService } from '../../../../services/event-service/event.service';
 import { PoliceService } from '../../../../services/police-service/police.service';
 
-interface EventObject {
-  id: string;
-  name: string;
-  // Add other properties as needed
-}
 
 @Component({
   selector: 'app-create-event',

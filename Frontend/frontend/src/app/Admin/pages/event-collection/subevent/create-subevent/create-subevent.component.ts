@@ -4,20 +4,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AsyncPipe } from '@angular/common';
-import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
-import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-btn.component';
-import { CreateSubeventFormComponent } from '../../../../components/reusable/create-subevent-form/create-subevent-form.component';
 import { map, Observable, startWith } from 'rxjs';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SubeventService } from '../../../../services/subevent-service/subevent.service';
-import { Subevent } from '../../../../models/subevent.models';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { Event } from '../../../../models/event.models';
+import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
+import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-btn.component';
+import { CreateSubeventFormComponent } from '../../../../components/reusable/create-subevent-form/create-subevent-form.component';
 import { Police } from '../../../../models/police.models';
+import { SubeventService } from '../../../../services/subevent-service/subevent.service';
+import { Event } from '../../../../models/event.models';
+import { Subevent } from '../../../../models/subevent.models';
 
 @Component({
   selector: 'app-create-subevent',
@@ -85,7 +85,6 @@ export class CreateSubeventComponent {
   }
 
 
-
   ngOnInit() {
     this.event = history.state.event;
     this.getPolices();
@@ -109,7 +108,8 @@ export class CreateSubeventComponent {
       head: this.eventForm.value.head,
       cohead: this.eventForm.value.cohead,
       instructions: this.eventForm.value.instructions,
-      patrollingId:this.event.id
+      patrollingId:this.event.id,
+      areas:null
     };
     
 

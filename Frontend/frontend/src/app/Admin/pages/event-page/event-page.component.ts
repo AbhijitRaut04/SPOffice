@@ -2,13 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { catchError, of, switchMap } from 'rxjs';
-import { CreateBtnComponent } from '../../../components/reusable/create-btn/create-btn.component';
-import { CreateSubeventFormComponent } from '../../../components/reusable/create-subevent-form/create-subevent-form.component';
-import { EventService } from '../../../services/event-service/event.service';
-import { Event } from '../../../models/event.models';
+// import { CreateBtnComponent } from '../../../components/reusable/create-btn/create-btn.component';
+// import { CreateSubeventFormComponent } from '../../../components/reusable/create-subevent-form/create-subevent-form.component';
+// import { EventService } from '../../../services/event-service/event.service';
+// import { Event } from '../../../models/event.models';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { CreateBtnComponent } from '../../components/reusable/create-btn/create-btn.component';
+import { CreateSubeventFormComponent } from '../../components/reusable/create-subevent-form/create-subevent-form.component';
+import { EventService } from '../../services/event-service/event.service';
+import { Event } from '../../models/event.models';
 
 @Component({
   selector: 'app-event-page',

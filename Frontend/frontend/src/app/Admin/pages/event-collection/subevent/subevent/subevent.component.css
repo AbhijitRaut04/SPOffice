@@ -65,6 +65,35 @@
     color: #fff;
     cursor: pointer;
 }
+.police-info{
+    position: absolute;
+    width: 200px;
+    padding: 15px;
+    left: 70px;
+    top: -25px;
+    display: flex;
+    border-radius: 12px;
+    flex-direction: column;
+    background: rgb(255, 255, 255);
+    box-shadow: 2px 2px 5px rgb(110, 110, 110);
+    opacity: 0;
+    height: 0;
+    top: 50px;
+    color: transparent;
+    overflow: hidden;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.police-wrapper:hover .police-info{
+    opacity: 1;
+    height: auto;
+    top: -25px;
+    color: black;
+    padding: 15px;
+}
+
+
 
 .create-card{
     flex: 1;

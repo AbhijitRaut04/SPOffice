@@ -1,7 +1,8 @@
+import { Subadmin } from '../../SubAdmin/models/subadmin.models';
 import { Police } from './police.models';
 import { Subevent } from './subevent.models';
 
-export interface Event {
+export class Event {
   id: number;
   adminId: number;
   head: Police;
@@ -10,10 +11,7 @@ export interface Event {
   date: Date;
   eventname: string;
   description: string;
-  attendance: Map<number, Police>;
+  attendance: Map<string, Police>;
 }
 
-export interface Pair{
-  subadminId: number;
-  polices: Police[];
-}
+

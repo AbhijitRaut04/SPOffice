@@ -1,3 +1,33 @@
 <mat-card class="sidebar">
-    <mat-card-content>Live Updates here</mat-card-content>
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Present Police Officers</mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>Attendance of Subadmins</p>
+      </mat-expansion-panel>
+      @for (pair of attendance; track $index) {
+      <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+        <mat-expansion-panel-header>
+          <mat-panel-title> {{$index+1}} </mat-panel-title>
+          <mat-panel-description>
+            {{pair.subadmin.username }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        @for (police of pair.polices; track $index) {
+          <mat-card appearance="outlined">
+            <mat-card-content>
+              <h5>{{$index+1}}</h5> 
+              <!-- <div class="police"> -->
+                <h4>{{police.fullname }} </h4>
+                <h3>{{police.designation.substring(0,20)+"..."}}</h3>
+              <!-- </div> -->
+            </mat-card-content>
+          </mat-card>
+          
+      }
+      </mat-expansion-panel>
+    }
+    </mat-accordion>
+    
   </mat-card>
