@@ -1,14 +1,36 @@
 div {
-    margin: 20px;
+    margin: 10px;
     padding: 10px;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
   }
   
   p {
     margin: 5px 0;
   }
+
+  .mat-expansion-panel-header-description {
+    flex-grow: 0;
+}
+
+.expandBtn button {
+  background-color: var(--primary-color);
+  color: aliceblue;
+  letter-spacing: 2px;
+  height: 50px;
   
-  hr {
-    margin: 10px 0;
-  }
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  margin-right: 5px;
+}
+
+.editDialog {
+  position: fixed;
+  height: 100px;
+  width: 100px;
+  bottom: 0px;
+  background-color: #fff;
+}
   
