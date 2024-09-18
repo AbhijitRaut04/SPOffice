@@ -23,6 +23,7 @@ import { PageNotFoundComponent } from './Admin/pages/page-not-found/page-not-fou
 import { PoliceSignupComponent } from './SubAdmin/pages/police-signup/police-signup.component';
 import { CreateAreaComponent } from './Admin/pages/event-tab/create/create-area/create-area.component';
 import { AdminSignupComponent } from './Admin/pages/auth/admin-signup/admin-signup.component';
+import { AreaComponent } from './Admin/pages/event-tab/show/area/area.component';
 
 
 export const routes: Routes = [
@@ -90,6 +91,24 @@ export const routes: Routes = [
                                             {
                                                 path:"add-area",
                                                 component:CreateAreaComponent
+                                            },
+                                            {
+                                                path:":name",
+                                                children:[
+                                                    {
+                                                        path:"",
+                                                        component:AreaComponent,
+                                                    },
+                                                    {
+                                                        path:"edit",
+                                                        component:CreateAreaComponent,
+                                                    },
+                                                    {
+                                                        path:"add-location",
+                                                        //add location component here
+                                                        component:CreateAreaComponent
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
