@@ -1,0 +1,77 @@
+<div class="main-wrapper">
+  <div class="btns">
+    <app-back-btn></app-back-btn>
+    <div class="btn-wrap">
+      <button matTooltip="add subevent" mat-fab (click)="navigateToAddArea()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button matTooltip="edit event" mat-fab (click)="navigateToEditArea()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="wrappr">
+    <div class="content">
+      <div class="event-info" appearance="outlined">
+        <div class="title">
+          <p>{{ area.areaName }}</p>
+          <!-- <p>{{ area.date | dateFormat : "shortDate" }}</p> -->
+        </div>
+        <div class="heads">
+          <div class="police-wrapper">
+            <h4>Head</h4>
+            <div class="police">
+              {{ area.head.fullname + " (" + area.head.designation + ")" }}
+            </div>
+            <div class="police-info">
+              <p>{{ area.head.fullname }}</p>
+              <p>{{ area.head.email }}</p>
+              <p>{{ area.head.phone }}</p>
+              <p>{{ area.head.policeId }}</p>
+              <p>{{ area.head.designation }}</p>
+            </div>
+          </div>
+          <!-- <div class="police-wrapper">
+              <h4>Cohead</h4>
+              <div class="police">
+                {{
+                  event.cohead.fullname + " (" + event.cohead.designation + ")"
+                }}
+              </div>
+              <div class="police-info">
+                <p>{{ event.cohead.fullname }}</p>
+                <p>{{ event.cohead.email }}</p>
+                <p>{{ event.cohead.phone }}</p>
+                <p>{{ event.cohead.policeId }}</p>
+                <p>{{ event.cohead.designation }}</p>
+              </div>
+            </div> -->
+        </div>
+
+        <div class="description-info">
+          <h4>Description</h4>
+          <p>{{ area.description }}</p>
+        </div>
+      </div>
+      <!-- <app-search-toolbar></app-search-toolbar> -->
+      <div class="search-toolbar">
+        <div class="search">
+          <input type="text" placeholder="Search Subevent ......" />
+          <mat-icon fontIcon="search"></mat-icon>
+        </div>
+        <!-- <button mat-fab matTooltip="add Subevent" (click)="navigateToAddSubevent()">
+            <mat-icon>add</mat-icon>
+          </button> -->
+      </div>
+
+      <!-- @for (location of event.location; track $index) {
+        <mat-card appearance="outlined">
+          <mat-card-content (click)="navigateToSubevent(subevent)">{{
+            area.location
+          }}</mat-card-content>
+        </mat-card>
+        } -->
+    </div>
+    <!-- <app-sidebar></app-sidebar> -->
+  </div>
+</div>
