@@ -5,4 +5,5 @@ export interface Area {
   areaName: string;
   head: Police;
   subPatrollingId: number;
+  description: string;
 }

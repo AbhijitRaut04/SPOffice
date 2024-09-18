@@ -77,6 +77,7 @@ export class CreateSubeventFormComponent {
       head: this.eventForm.value.headId,
       cohead: this.eventForm.value.headId,
       instructions: "",
+      area: null,
     };
     
 

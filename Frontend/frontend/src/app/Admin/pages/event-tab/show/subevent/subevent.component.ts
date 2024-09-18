@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-btn.component';
 import { SearchToolbarComponent } from '../../../../components/reusable/search-toolbar/search-toolbar.component';
 import { Subevent } from '../../../../models/subevent.models';
+import { Area } from '../../../../models/area.models';
 
 @Component({
   selector: 'app-subevent',
@@ -39,6 +40,36 @@ export class SubeventComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.subevent = history.state.subevent;
     });
+    //testing purpose
+    this.subevent.area = [
+      {
+        id: 1,
+        areaName: "area example",
+        head: {
+          id: 1001,
+          fullname: "Dipanshu Singh",
+          policeId: 2032,
+          phone: "9658452855",
+          email: "depanshu123@gmail.com",
+          gender: "male",
+          designation: "Constable"
+        },
+        subPatrollingId: 1,
+        description: "g  kjndsf"
+      }
+    ]
+  }
+
+  navigateToArea(area: Area) {
+    const currentPath = this.router.url;
+    this.router.navigate(
+      [
+        `${currentPath}/${area.areaName
+          .toLowerCase()
+          .replace(' ', '-')}`,
+      ],
+      { state: { area } }
+    );
   }
 
   navigateToAddArea() {

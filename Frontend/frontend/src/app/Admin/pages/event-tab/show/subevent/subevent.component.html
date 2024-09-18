@@ -48,6 +48,15 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
+
+      @for (area of subevent.area; track $index) {
+        <mat-card appearance="outlined">
+          <mat-card-content (click)="navigateToArea(area)">{{
+            area.areaName
+          }}</mat-card-content>
+        </mat-card>
+      }
+      
     </div>
   </div>
 </div>
