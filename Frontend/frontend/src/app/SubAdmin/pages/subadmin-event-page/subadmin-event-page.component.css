@@ -1,15 +1,48 @@
+.main-wrapper{
+  min-height: 100vh;
+}
+.wrapper{
+  width: 100%;
+  background-color: rgb(65, 182, 255);
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  font-size: 18px;
+}
+
+.description{
+  width: 90%;
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid black;
+  margin: 10px auto;
+}
+
 .submit-button-container {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 20px;
-  }
-  
-  mat-selection-list {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-  
-  mat-checkbox {
-    margin-right: 10px;
-  }
-  
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+mat-selection-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+mat-checkbox {
+  margin-right: 10px;
+}
+
+button{
+  padding: 8px 20px;
+  cursor: pointer;
+  border-radius: 18px;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  letter-spacing: 1px;
+  background-color: rgb(1, 139, 38);
+  float: right;
+  margin-right: 20px;
+}

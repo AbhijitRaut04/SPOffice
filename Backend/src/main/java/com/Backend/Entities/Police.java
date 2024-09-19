@@ -44,8 +44,8 @@ public class Police {
     @JsonIgnore
     private Subadmin subadmin;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    private Area area;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Area> areas;
     
     @OneToOne(cascade = CascadeType.ALL)
     private Sector sector;

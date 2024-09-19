@@ -1,28 +1,34 @@
-<p>{{event.eventname}}</p>
-<p>{{event.description}}</p>
-<p>{{event.date | dateFormat:'longDate'}}</p>
+<div class="main-wrapper">
+    <div class="wrapper">
+        <p>{{event.eventname}}</p>
+        <p>{{event.date | dateFormat:'longDate'}}</p>
+    </div>
+    <div class="description">
+        <p>{{event.description}}</p>
+    </div>
 
-@if (submitted) {
+    @if (submitted) {
 
     <button>View Attendance</button>
-}
-@else {
+    }
+    @else {
     @if (showAttendanceForm) {
-        <form [formGroup]="attendanceForm" (ngSubmit)="submit()">
-            <mat-selection-list formControlName="polices">
+    <form [formGroup]="attendanceForm" (ngSubmit)="submit()">
+        <mat-selection-list formControlName="polices">
 
-                @for (police of subadmin.polices; track $index) {
-                    <mat-list-option  [value]="police.id">
-                        {{ police.fullname }}
-                      </mat-list-option>
-                }
-                <div class="submit-button-container">
-                    <button mat-raised-button color="primary" type="submit">Submit</button>
-                  </div>
-            </mat-selection-list>
-        </form>
+            @for (police of subadmin.polices; track $index) {
+            <mat-list-option [value]="police.id">
+                {{ police.fullname }}
+            </mat-list-option>
+            }
+            <div class="submit-button-container">
+                <button mat-raised-button color="primary" type="submit">Submit</button>
+            </div>
+        </mat-selection-list>
+    </form>
     }
     @else{
-        <button (click)="openAttendanceForm()">Submit Attendance</button>
+    <button (click)="openAttendanceForm()">Submit Attendance</button>
     }
-}
+    }
+</div>

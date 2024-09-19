@@ -23,14 +23,12 @@ public class Area {
     @Column
     private String areaName;
 
-    @OneToOne(mappedBy = "area")
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "head_id")
-    // @JsonIgnore
     private Police head;
 
-    @OneToOne(mappedBy = "area")
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cohead_id")
-    // @JsonIgnore
     private Police cohead;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,4 +1,6 @@
 import { Police } from "./police.models";
+import { Subadmin } from "./subadmin.models";
+
 
 export interface Event {
   id: number;
@@ -6,10 +8,14 @@ export interface Event {
   date: Date;
   eventname:string;
   description:string;
-  attendances:Attendance;
+  attendance:Attendance[];
 }
 
-export interface Attendance{
-  id: number;
-  polices: [Police];
+export class Attendance{
+  subadmin:Subadmin;
+  polices:Police[];
+  constructor(subadmin:Subadmin, polices:Police[]){
+    this.subadmin = subadmin;
+    this.polices = polices;
+  }
 }

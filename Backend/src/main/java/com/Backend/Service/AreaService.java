@@ -49,14 +49,12 @@ public class AreaService {
                 area.setCohead(cohead);
             }
 
-            // if (areaDTO.getSubPatrollingId() != null) {
-            SubPatrolling subPatrolling = subPatrollingRepository.findById(areaDTO.getSubPatrollingId())
-                    .orElseThrow(() -> new RuntimeException("SubPatrolling not found"));
-            area.setSubPatrolling(subPatrolling);
-            // }
-            System.out.println(area.toString());
+            if (areaDTO.getSubPatrollingId() != null) {
+                SubPatrolling subPatrolling = subPatrollingRepository.findById(areaDTO.getSubPatrollingId())
+                        .orElseThrow(() -> new RuntimeException("SubPatrolling not found"));
+                area.setSubPatrolling(subPatrolling);
+            }
             return areaRepository.save(area);
-            // return null;
         } catch (DataAccessException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to create area", e);

@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Event } from '../../models/event.models';
+import { Attendance, Event } from '../../models/event.models';
 import { DateFormatPipe } from '../../../pipes/date-format/date-format.pipe';
 import { SubadminService } from '../../services/subadmin-service/subadmin.service';
-import { CurrentSubadmin } from '../../models/subadmin.models';
+import { CurrentSubadmin, Subadmin } from '../../models/subadmin.models';
 import { Police } from '../../models/police.models';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatListModule} from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
 import { EventService } from '../../services/event-service/event.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-subadmin-event-page',
@@ -19,17 +20,23 @@ import { EventService } from '../../services/event-service/event.service';
 })
 export class SubadminEventPageComponent {
   event: Event;
-  constructor(private eventService: EventService, private subadminService: SubadminService) { }
+  constructor(private eventService: EventService, private subadminService: SubadminService, private _snackBar: MatSnackBar) { }
 
   subadmin: CurrentSubadmin;
   attendanceForm: FormGroup;
 
-  submitted = false;
-  showAttendanceForm:boolean;
+  submitted: boolean = false;
+  showAttendanceForm: boolean;
 
 
   ngOnInit(): void {
+    const eventFromState = history.state.event;
+    if (eventFromState) {
+      this.event = eventFromState;
+    }
+    console.log(this.event)
     this.getCurrentSubadmin();
+    
 
     this.attendanceForm = new FormGroup({
       id: new FormControl(),
@@ -38,21 +45,20 @@ export class SubadminEventPageComponent {
       subadminId: new FormControl()
     })
 
-    // console.log(this.subadmin)
-    const eventFromState = history.state.event;
-    if (eventFromState) {
-      this.event = eventFromState;
-    }
-    // this.filterAttendance(this.subadmin?.polices, this.event.attendances?.polices);
+    
+
     // console.log("Attendance",this.attendance);
   }
 
-  submit(){
+  submit() {
     this.attendanceForm.value.patrollingId = this.event.id;
     this.attendanceForm.value.subadminId = this.subadmin.id;
-    if(this.attendanceForm.valid){
+    if (this.attendanceForm.valid) {
       this.eventService.sendAttendance(this.attendanceForm.value).subscribe(data => {
         console.log(data)
+        this._snackBar.open("Attendance Submitted Successfully", "OK", {
+          duration: 3000
+        });
       })
     }
   }
@@ -64,19 +70,17 @@ export class SubadminEventPageComponent {
   getCurrentSubadmin() {
     this.subadminService.fetchSubadmin().subscribe(data => {
       this.subadmin = data;
+      this.filterAttendance(this.subadmin, this.event.attendance);
     })
   }
 
 
-  filterAttendance(arr1: Police[], arr2: Police[]): void {
-    arr1?.filter(police => {
-      let flag = false;
-      for (let police2 of arr2) {
-        if (police.id === police2.id) {
-          flag = true;
-          break;
-        }
-      };
+  filterAttendance(subadmin: Subadmin, arr: Attendance[]): void {
+    arr.forEach(item => {
+      if(item.subadmin?.id?.toString() === subadmin?.id?.toString()){
+        this.submitted = true;
+      }
     })
   }
+
 }
