@@ -118,6 +118,9 @@ export class CreateAreaComponent implements OnInit {
       headId: this.areaForm.value.head.id,
       coheadId: this.areaForm.value.cohead.id,
       subPatrollingId: this.subevent.id,
+      head:null,
+      cohead:null,
+      sectors:null
     };
 
     this.areaService.addArea(newArea).subscribe({

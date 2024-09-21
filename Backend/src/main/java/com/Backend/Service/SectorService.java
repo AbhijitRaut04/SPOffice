@@ -35,16 +35,16 @@ public class SectorService {
     public Sector createSector(SectorDto sectorDTO) {
 
         Sector sector = new Sector();
-        sector.setName(sectorDTO.getName());
+        sector.setSectorName(sectorDTO.getSectorName());
 
-        if (sectorDTO.getHeadId() != null) {
-            Police head = policeRepository.findById(sectorDTO.getHeadId())
+        if (sectorDTO.getHead().getId() != null) {
+            Police head = policeRepository.findById(sectorDTO.getHead().getId())
                     .orElseThrow(() -> new RuntimeException("Police not found"));
             sector.setHead(head);
         }
 
-        if (sectorDTO.getAreaId() != null) {
-            Area area = areaRepository.findById(sectorDTO.getAreaId())
+        if (sectorDTO.getArea().getId() != null) {
+            Area area = areaRepository.findById(sectorDTO.getArea().getId())
                     .orElseThrow(() -> new RuntimeException("Area not found"));
             sector.setArea(area);
         }
@@ -55,16 +55,16 @@ public class SectorService {
         try {
             Sector sector = sectorRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Sector not found"));
-            sector.setName(sectorDTO.getName());
+            sector.setSectorName(sectorDTO.getSectorName());
 
-            if (sectorDTO.getHeadId() != null) {
-                Police head = policeRepository.findById(sectorDTO.getHeadId())
+            if (sectorDTO.getHead().getId() != null) {
+                Police head = policeRepository.findById(sectorDTO.getHead().getId())
                         .orElseThrow(() -> new RuntimeException("Police not found"));
                 sector.setHead(head);
             }
 
-            if (sectorDTO.getAreaId() != null) {
-                Area area = areaRepository.findById(sectorDTO.getAreaId())
+            if (sectorDTO.getArea().getId() != null) {
+                Area area = areaRepository.findById(sectorDTO.getArea().getId())
                         .orElseThrow(() -> new RuntimeException("Area not found"));
                 sector.setArea(area);
             }

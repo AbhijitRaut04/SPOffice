@@ -85,7 +85,7 @@
       </div>
 
       @for (area of subevent.areas; track $index) {
-        <mat-card appearance="outlined">
+        <mat-card class="area-card" appearance="outlined">
           <mat-card-content (click)="navigateToArea(area)">{{
             area.areaName
           }}</mat-card-content>

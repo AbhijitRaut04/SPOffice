@@ -5,12 +5,14 @@ import lombok.Setter;
 
 import java.util.Set;
 
+import com.Backend.Entities.Area;
+
 @Getter
 @Setter
 public class SectorDto {
     private Long id;
-    private String name;
-    private Long headId;
-    private Long areaId;
+    private String sectorName;
+    private PoliceDto head;
+    private Area area;
     private Set<Long> locationIds;
 }

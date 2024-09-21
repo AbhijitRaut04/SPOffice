@@ -19,11 +19,11 @@ public class Sector {
     private Long id;
 
     @Column
-    private String name;
+    private String sectorName;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "police_id")
-    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "head_id")
+    // @JsonIgnore
     private Police head;
 
     @ManyToOne(fetch = FetchType.LAZY)

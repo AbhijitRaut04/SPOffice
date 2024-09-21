@@ -25,15 +25,12 @@ public class Location {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "police_id")
+    @JoinColumn(name = "head_id")
     @JsonIgnore
     private Police head;
 
-    @Column
-    private List<String> malePolices;
-
-    @Column
-    private List<String> femalePolices;
+    // @Column
+    // private List<Police> polices;
 
     @Column
     private List<String> equipments;

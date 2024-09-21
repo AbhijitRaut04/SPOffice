@@ -1,28 +1,31 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from './Admin/pages/home/home.component';
-import { RequestsComponent } from './Admin/pages/requests/requests.component';
-import { SubadminsComponent } from './Admin/pages/subadmin-tab/subadmins/subadmins.component';
-import { adminGuard } from './Admin/gaurds/admin.guard';
-import { LoginComponent } from './Admin/pages/auth/login/login.component';
-import { SubadminPageComponent } from './Admin/pages/subadmin-tab/subadmin-page/subadmin-page.component';
-import { SubadminHomeComponent } from './SubAdmin/pages/subadmin-home/subadmin-home.component';
-import { SubAdminSignupComponent } from './SubAdmin/pages/sub-admin-signup/sub-admin-signup.component';
-import { AppAdminComponent } from './Admin/app-admin/app-admin.component';
-import { AppSubadminComponent } from './SubAdmin/app-subadmin/app-subadmin.component';
-import { PolicePageComponent } from './SubAdmin/pages/police-page/police-page.component';
-import { EventsPageComponent } from './SubAdmin/pages/events-page/events-page.component';
-import { subadminGuard } from './SubAdmin/gaurds/subadmin.guard';
-import { SubadminLoginComponent } from './SubAdmin/pages/login/subadmin-login.component';
+import { Routes                     } from '@angular/router';
+import { adminGuard                 } from './Admin/gaurds/admin.guard';
+import { subadminGuard              } from './SubAdmin/gaurds/subadmin.guard';
+import { HomeComponent              } from './Admin/pages/home/home.component';
+import { AppAdminComponent          } from './Admin/app-admin/app-admin.component';
+import { LoginComponent             } from './Admin/pages/auth/login/login.component';
+import { RequestsComponent          } from './Admin/pages/requests/requests.component';
+import { EventPageComponent         } from './Admin/pages/event-page/event-page.component';
+import { AppSubadminComponent       } from './SubAdmin/app-subadmin/app-subadmin.component';
+import { SubadminLoginComponent     } from './SubAdmin/pages/login/subadmin-login.component';
+import { PolicePageComponent        } from './SubAdmin/pages/police-page/police-page.component';
+import { EventsPageComponent        } from './SubAdmin/pages/events-page/events-page.component';
+import { PageNotFoundComponent      } from './Admin/pages/page-not-found/page-not-found.component';
+import { AdminSignupComponent       } from './Admin/pages/auth/admin-signup/admin-signup.component';
+import { SubadminHomeComponent      } from './SubAdmin/pages/subadmin-home/subadmin-home.component';
+import { PoliceSignupComponent      } from './SubAdmin/pages/police-signup/police-signup.component';
+import { AreaComponent              } from './Admin/pages/event-collection/area/area/area.component';
+import { SubadminsComponent         } from './Admin/pages/subadmin-tab/subadmins/subadmins.component';
+import { EventComponent             } from './Admin/pages/event-collection/event/event/event.component';
+import { SubAdminSignupComponent    } from './SubAdmin/pages/sub-admin-signup/sub-admin-signup.component';
+import { SectorComponent            } from './Admin/pages/event-collection/sector/sector/sector.component';
+import { SubadminPageComponent      } from './Admin/pages/subadmin-tab/subadmin-page/subadmin-page.component';
 import { SubadminEventPageComponent } from './SubAdmin/pages/subadmin-event-page/subadmin-event-page.component';
-import { PageNotFoundComponent } from './Admin/pages/page-not-found/page-not-found.component';
-import { PoliceSignupComponent } from './SubAdmin/pages/police-signup/police-signup.component';
-import { AdminSignupComponent } from './Admin/pages/auth/admin-signup/admin-signup.component';
-import { EventPageComponent } from './Admin/pages/event-page/event-page.component';
-import { EventComponent } from './Admin/pages/event-collection/event/event/event.component';
-import { CreateEventComponent } from './Admin/pages/event-collection/event/create-event/create-event.component';
-import { CreateSubeventComponent } from './Admin/pages/event-collection/subevent/create-subevent/create-subevent.component';
-import { SubeventComponent } from './Admin/pages/event-collection/subevent/subevent/subevent.component';
-import { CreateAreaComponent } from './Admin/pages/event-collection/area/create-area/create-area.component';
+import { SubeventComponent          } from './Admin/pages/event-collection/subevent/subevent/subevent.component';
+import { CreateAreaComponent        } from './Admin/pages/event-collection/area/create-area/create-area.component';
+import { CreateEventComponent       } from './Admin/pages/event-collection/event/create-event/create-event.component';
+import { CreateSectorComponent      } from './Admin/pages/event-collection/sector/create-sector/create-sector.component';
+import { CreateSubeventComponent    } from './Admin/pages/event-collection/subevent/create-subevent/create-subevent.component';
 
 
 export const routes: Routes = [
@@ -48,7 +51,7 @@ export const routes: Routes = [
                         component:CreateEventComponent
                     },
                     {
-                        path: ":name",
+                        path: ":eventname",
                         children: [
                             {
                                 path:"",
@@ -63,7 +66,7 @@ export const routes: Routes = [
                                     },
                                     // edit event path
                                     {
-                                        path:":name",
+                                        path:":subeventname",
                                         children:[
                                             {
                                                 path:"",
@@ -75,12 +78,43 @@ export const routes: Routes = [
                                                 component:CreateAreaComponent
                                             },
                                             {
-                                                path:":name",
+                                                path:":areaname",
                                                 children:[
-                                                    // {
-                                                    //     path:"",
-                                                    //     component:AreaComponent
-                                                    // }
+                                                    {
+                                                        path:"",
+                                                        component:AreaComponent
+                                                    },
+                                                    // edit area path
+                                                    {
+                                                        path:"add-sector",
+                                                        component:CreateSectorComponent
+                                                    },
+                                                    {
+                                                        path:":sectorname",
+                                                        children:[
+                                                            {
+                                                                path:"",
+                                                                component:SectorComponent
+                                                            },
+                                                            // edit sector
+                                                            // {
+                                                            //     path:"add-location",
+                                                            //     component:CreateLocationComponent
+                                                            // },
+                                                            {
+                                                                path:":locationname",
+                                                                children:[
+                                                                    // {
+                                                                    //     path:"",
+                                                                    //     component:LocationComponent
+                                                                    // },
+                                                                    // edit location
+
+                                                                    // nested routing routing ends
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
                                                 ]
                                             }
                                         ]

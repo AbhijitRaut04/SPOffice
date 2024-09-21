@@ -36,8 +36,7 @@ public class LocationService {
 
         Location location = new Location();
         location.setName(locationDTO.getName());
-        location.setMalePolices(locationDTO.getMalePolices());
-        location.setFemalePolices(locationDTO.getFemalePolices());
+        // location.setPolices(locationDTO.getPolices());
         location.setEquipments(locationDTO.getEquipments());
 
         if (locationDTO.getHeadId() != null) {
@@ -73,8 +72,7 @@ public class LocationService {
             }
 
             existingLocation.setName(locationDTO.getName());
-            existingLocation.setMalePolices(locationDTO.getMalePolices());
-            existingLocation.setFemalePolices(locationDTO.getFemalePolices());
+            // existingLocation.setPolices(locationDTO.getPolices());
             existingLocation.setEquipments(locationDTO.getEquipments());
 
             return locationRepository.save(existingLocation);

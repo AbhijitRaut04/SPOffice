@@ -46,7 +46,15 @@ export class SubeventComponent implements OnInit {
   }
 
   navigateToArea(area:Area){
-    console.log(area);
+    const currentPath = this.router.url;
+    this.router.navigate(
+      [
+        `${currentPath}/${area.areaName
+          .toLowerCase()
+          .replace(' ', '-')}`,
+      ],
+      { state: { area, event:this.event } }
+    );
   }
 
   navigateToAddArea() {

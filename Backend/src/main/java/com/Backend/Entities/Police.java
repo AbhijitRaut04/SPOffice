@@ -45,10 +45,10 @@ public class Police {
     private Subadmin subadmin;
     
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Area> areas;
+    private List<Area> areas = new ArrayList<>();
     
-    @OneToOne(cascade = CascadeType.ALL)
-    private Sector sector;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Sector> sectors = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL)
     private List<Location> locations = new ArrayList<>();
