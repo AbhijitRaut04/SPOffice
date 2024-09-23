@@ -35,7 +35,7 @@ public class LocationService {
     public Location createLocation(LocationDto locationDTO) {
 
         Location location = new Location();
-        location.setName(locationDTO.getName());
+        location.setLocationName(locationDTO.getLocationName());
         // location.setPolices(locationDTO.getPolices());
         location.setEquipments(locationDTO.getEquipments());
 
@@ -71,7 +71,7 @@ public class LocationService {
                 existingLocation.setSector(sector);
             }
 
-            existingLocation.setName(locationDTO.getName());
+            existingLocation.setLocationName(locationDTO.getLocationName());
             // existingLocation.setPolices(locationDTO.getPolices());
             existingLocation.setEquipments(locationDTO.getEquipments());
 

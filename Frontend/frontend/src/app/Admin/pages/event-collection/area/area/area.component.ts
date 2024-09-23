@@ -16,7 +16,6 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CreateBtnComponent,
     MatIconModule,
-    CreateBtnComponent,
     BackBtnComponent,
     MatButtonModule,
     MatCardModule,
@@ -40,16 +39,15 @@ export class AreaComponent implements OnInit {
   }
 
   navigateToSector(sector:Sector){
-    console.log(sector)
-    // const currentPath = this.router.url;
-    // this.router.navigate(
-    //   [
-    //     `${currentPath}/${sector.sectorName
-    //       .toLowerCase()
-    //       .replace(' ', '-')}`,
-    //   ],
-    //   { state: { sector, event:this.event } }
-    // );
+    const currentPath = this.router.url;
+    this.router.navigate(
+      [
+        `${currentPath}/${sector.sectorName
+          .toLowerCase()
+          .replace(' ', '-')}`,
+      ],
+      { state: { sector, event:this.event } }
+    );
   }
 
   navigateToAddSector() {

@@ -46,7 +46,7 @@
 
 .input-block{
     width: 580px;
-    height: 30px;
+    /* height: 30px; */
 }
 
 .btn {
@@ -68,7 +68,7 @@
 .formButtons {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .errormsg {

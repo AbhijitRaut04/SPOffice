@@ -50,7 +50,7 @@ public class Police {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Sector> sectors = new ArrayList<>();
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "polices")
     private List<Location> locations = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL)

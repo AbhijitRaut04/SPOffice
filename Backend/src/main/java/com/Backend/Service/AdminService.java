@@ -95,7 +95,8 @@ public class AdminService {
                     .map(admin -> {
                         admin.setUsername(updatedAdmin.getUsername());
                         admin.setPassword(updatedAdmin.getPassword());
-                        admin.setContact(updatedAdmin.getContact());
+                        admin.setEmail(updatedAdmin.getEmail());
+                        admin.setPhone(updatedAdmin.getPhone());
                         admin.setDistrict(updatedAdmin.getDistrict());
                         return adminRepository.save(admin);
                     })

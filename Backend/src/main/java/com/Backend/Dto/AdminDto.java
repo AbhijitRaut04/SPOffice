@@ -21,7 +21,8 @@ public class AdminDto {
     private Long id;
     private String username;
     private String password;
-    private String contact;
+    private String email;
+    private String phone;
     private String district;
     private Set<SubadminDto> subadmins;
     private Set<PatrollingDto> patrollings;
@@ -30,7 +31,8 @@ public class AdminDto {
         AdminDto adminDto = AdminDto.builder()
                 .id(admin.getId())
                 .username(admin.getUsername())
-                .contact(admin.getContact())
+                .email(admin.getEmail())
+                .phone(admin.getPhone())
                 .district(admin.getDistrict())
                 .subadmins(subadmins)
                 .patrollings(patrollings)

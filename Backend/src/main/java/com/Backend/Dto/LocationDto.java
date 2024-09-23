@@ -11,7 +11,7 @@ import com.Backend.Entities.Police;
 @Setter
 public class LocationDto {
     private Long id;
-    private String name;
+    private String locationName;
     private Long headId;
     private Long sectorId;
     private List<Police> polices;

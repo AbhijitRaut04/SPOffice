@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { NgClass, NgFor, NgIf } from '@angular/common';
+import { AdminService } from '../../../services/admin-service/admin.service';
 
 @Component({
   selector: 'app-admin-signup',
@@ -22,17 +23,16 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 })
 export class AdminSignupComponent implements OnInit {
 
+  constructor(private adminService:AdminService){}
 
   // Details in Form with Validators 
   reactiveForm: FormGroup;
   ngOnInit() {
       this.reactiveForm = new FormGroup({
-        fullname: new FormControl(null, Validators.required),
-        policeID: new FormControl(null, Validators.required),
+        username: new FormControl(null, Validators.required),
         district: new FormControl(null, Validators.required),
         email: new FormControl(null,[Validators.required, Validators.email]),
         phone: new FormControl(null,[Validators.required, Validators.pattern(/^[0-9]{10}$/)]),
-        station: new FormControl(null,[Validators.required, Validators.pattern(/^[0-9]{10}$/)]),
         password: new FormControl(null,[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/)]),
         confirmPassword: new FormControl(null, [Validators.required]),
       });
@@ -77,7 +77,14 @@ export class AdminSignupComponent implements OnInit {
       this.displayError= true;
     }
     else {
-      console.log('form submitted')
+      this.adminService.registerAdmin(this.reactiveForm.value).subscribe({
+        next: (response) => {
+          console.log('Admin registered successfully:', response);
+        },
+        error: (error) => {
+          console.error('Error while register:', error);
+        }
+      });
     }
   }
   

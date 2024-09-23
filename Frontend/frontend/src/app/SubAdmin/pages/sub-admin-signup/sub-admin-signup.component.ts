@@ -99,9 +99,11 @@ export class SubAdminSignupComponent implements OnInit {
       this.openDialog('200ms','200ms');
     }
     else {
-      this.subadminService.registerSubadmin(this.reactiveForm.value).subscribe();
+      this.subadminService.registerSubadmin(this.reactiveForm.value).subscribe(data => {
+        console.log(data)
+      });
       // new AuthService().login("subadmin","subadmin");
-      this.router.navigate(['/subadmin/']);
+      // this.router.navigate(['/subadmin/']);
       this._snackBar.open("Subadmin registered Successfully", "OK");
     }
   }

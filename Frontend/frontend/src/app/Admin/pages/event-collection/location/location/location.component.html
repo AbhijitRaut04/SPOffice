@@ -1,0 +1,30 @@
+
+{{location.locationName}}
+<div class="heads">
+    <div class="police-wrapper">
+        <h4>Head</h4>
+        <div class="police">
+            {{ location.head.fullname + " (" + location.head.designation + ")" }}
+        </div>
+        <div class="police-info">
+            <p>{{ location.head.fullname }}</p>
+            <p>{{ location.head.email }}</p>
+            <p>{{ location.head.phone }}</p>
+            <p>{{ location.head.policeId }}</p>
+            <p>{{ location.head.designation }}</p>
+        </div>
+    </div>
+</div>
+<div>
+    <p>equipments</p>
+    @for (item of location.equipments; track $index) {
+        <div>{{item}}</div>
+    }
+</div>
+
+<div>
+    <p>Polices</p>
+    @for (police of location.polices; track $index) {
+        <div>{{police.fullname}}</div>
+    }
+</div>

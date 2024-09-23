@@ -85,7 +85,7 @@
 
             @for (sector of area.sectors; track $index) {
             <mat-card appearance="outlined">
-                <mat-card-content (click)="navigateToSector(sector)">{{
+                <mat-card-content class="sector-card" (click)="navigateToSector(sector)">{{
                     sector.sectorName
                     }}</mat-card-content>
             </mat-card>

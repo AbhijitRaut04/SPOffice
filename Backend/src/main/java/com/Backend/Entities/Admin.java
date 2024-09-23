@@ -21,7 +21,8 @@ public class Admin {
 
     private String password;
 
-    private String contact;
+    private String email;
+    private String phone;
 
     private String district;
 

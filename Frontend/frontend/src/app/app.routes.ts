@@ -26,6 +26,8 @@ import { CreateAreaComponent        } from './Admin/pages/event-collection/area/
 import { CreateEventComponent       } from './Admin/pages/event-collection/event/create-event/create-event.component';
 import { CreateSectorComponent      } from './Admin/pages/event-collection/sector/create-sector/create-sector.component';
 import { CreateSubeventComponent    } from './Admin/pages/event-collection/subevent/create-subevent/create-subevent.component';
+import { LocationComponent } from './Admin/pages/event-collection/location/location/location.component';
+import { CreateLocationComponent } from './Admin/pages/event-collection/location/create-location/create-location.component';
 
 
 export const routes: Routes = [
@@ -97,17 +99,17 @@ export const routes: Routes = [
                                                                 component:SectorComponent
                                                             },
                                                             // edit sector
-                                                            // {
-                                                            //     path:"add-location",
-                                                            //     component:CreateLocationComponent
-                                                            // },
+                                                            {
+                                                                path:"add-location",
+                                                                component:CreateLocationComponent
+                                                            },
                                                             {
                                                                 path:":locationname",
                                                                 children:[
-                                                                    // {
-                                                                    //     path:"",
-                                                                    //     component:LocationComponent
-                                                                    // },
+                                                                    {
+                                                                        path:"",
+                                                                        component:LocationComponent
+                                                                    },
                                                                     // edit location
 
                                                                     // nested routing routing ends
