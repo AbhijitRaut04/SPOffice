@@ -60,19 +60,15 @@ export class PoliceSignupComponent implements OnInit {
 
   //Designation for Police
   designationOptions: string[] = [
-    "Director General of Police (DGP)",
-    "Additional Director General of Police (ADGP)",
-    "Inspector General of Police (IGP)",
-    "Deputy Inspector General of Police (DIG)",
-    "Superintendent of Police (SP)",
-    "Senior Superintendent of Police (SSP)",
-    "Assistant Superintendent of Police (ASP)",
-    "Deputy Superintendent of Police (DSP)",
-    "Inspector of Police",
-    "Sub-Inspector of Police (SI)",
-    "Assistant Sub-Inspector of Police (ASI)",
-    "Head Constable",
-    "Police Constable"
+    "पोलीस निरीक्षक (पोनि)",
+    "पोलीस उपनिरीक्षक (पोउपनि)",
+    "सहाय्यक पोलीस उपनिरीक्षक (सपोउपनि)",
+    "पोलीस हेड कॉन्स्टेबल (पोहेकॉ)",
+    "पोलीस कॉन्स्टेबल (पोकॉ)",
+    "उप विभागीय पोलीस अधिकारी (उपविपोअ)",
+    "उच्च पोलीस अधिकारी (उपोअ)",
+    "पोना",
+    "मापोना"
   ];
 
 
