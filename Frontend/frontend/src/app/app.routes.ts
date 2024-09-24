@@ -22,13 +22,15 @@ import { SectorComponent            } from './Admin/pages/event-collection/secto
 import { SubadminPageComponent      } from './Admin/pages/subadmin-tab/subadmin-page/subadmin-page.component';
 import { SubadminEventPageComponent } from './SubAdmin/pages/subadmin-event-page/subadmin-event-page.component';
 import { SubeventComponent          } from './Admin/pages/event-collection/subevent/subevent/subevent.component';
+import { LocationComponent          } from './Admin/pages/event-collection/location/location/location.component';
+import { EditEventComponent         } from './Admin/pages/event-collection/event/edit-event/edit-event.component';
 import { CreateAreaComponent        } from './Admin/pages/event-collection/area/create-area/create-area.component';
+import { EditSectorComponent        } from './Admin/pages/event-collection/sector/edit-sector/edit-sector.component';
 import { CreateEventComponent       } from './Admin/pages/event-collection/event/create-event/create-event.component';
 import { CreateSectorComponent      } from './Admin/pages/event-collection/sector/create-sector/create-sector.component';
+import { EditSubeventComponent      } from './Admin/pages/event-collection/subevent/edit-subevent/edit-subevent.component';
 import { CreateSubeventComponent    } from './Admin/pages/event-collection/subevent/create-subevent/create-subevent.component';
-import { LocationComponent } from './Admin/pages/event-collection/location/location/location.component';
-import { CreateLocationComponent } from './Admin/pages/event-collection/location/create-location/create-location.component';
-import { EditEventComponent } from './Admin/pages/event-collection/event/edit-event/edit-event.component';
+import { CreateLocationComponent    } from './Admin/pages/event-collection/location/create-location/create-location.component';
 
 
 export const routes: Routes = [
@@ -78,7 +80,10 @@ export const routes: Routes = [
                                                 path:"",
                                                 component:SubeventComponent,
                                             },
-                                            // edit subevent path
+                                            {
+                                                path: "edit",
+                                                component:EditSubeventComponent
+                                            },
                                             {
                                                 path:"add-area",
                                                 component:CreateAreaComponent
@@ -102,7 +107,10 @@ export const routes: Routes = [
                                                                 path:"",
                                                                 component:SectorComponent
                                                             },
-                                                            // edit sector
+                                                            {
+                                                                path: "edit",
+                                                                component:EditSectorComponent
+                                                            },
                                                             {
                                                                 path:"add-location",
                                                                 component:CreateLocationComponent
