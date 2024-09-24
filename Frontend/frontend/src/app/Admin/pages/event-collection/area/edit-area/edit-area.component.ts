@@ -4,7 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { map, Observable, startWith } from 'rxjs';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,7 +24,7 @@ import { Area } from '../../../../models/area.models';
 import { Event } from '../../../../models/event.models';
 
 @Component({
-  selector: 'app-create-area',
+  selector: 'app-edit-area',
   standalone: true,
   imports: [
     SidebarComponent,
@@ -37,20 +42,18 @@ import { Event } from '../../../../models/event.models';
     ReactiveFormsModule,
     AsyncPipe,
   ],
-  templateUrl: './create-area.component.html',
-  styleUrl: './create-area.component.css',
+  templateUrl: './edit-area.component.html',
+  styleUrl: './edit-area.component.css',
 })
-export class CreateAreaComponent implements OnInit {
-
-
+export class EditAreaComponent implements OnInit {
   filteredOptionsHead: Observable<Police[]>;
   filteredOptionsCohead: Observable<Police[]>;
 
   polices: Police[] = [];
 
   areaForm: FormGroup;
-  subevent:Subevent;
-  event:Event;
+  subevent: Subevent;
+  event: Event;
 
   constructor(private areaService: AreaService) {}
 
@@ -67,7 +70,7 @@ export class CreateAreaComponent implements OnInit {
     this.initializeForm();
     this.subevent = history.state.subevent;
     this.event = history.state.event;
-    console.log(this.event)
+    console.log(this.event);
     this.filteredOptionsHead = this.areaForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
@@ -83,11 +86,10 @@ export class CreateAreaComponent implements OnInit {
     return option ? option.fullname : '';
   }
 
-  
   getPolices() {
-    Object.values(this.event.attendance).forEach(value => {
-      this.polices = [...value, ...this.polices]
-    })
+    Object.values(this.event.attendance).forEach((value) => {
+      this.polices = [...value, ...this.polices];
+    });
     this.filteredOptionsHead = this.areaForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
@@ -113,9 +115,9 @@ export class CreateAreaComponent implements OnInit {
       headId: this.areaForm.value.head.id,
       coheadId: this.areaForm.value.cohead.id,
       subPatrollingId: this.subevent.id,
-      head:null,
-      cohead:null,
-      sectors:null
+      head: null,
+      cohead: null,
+      sectors: null,
     };
 
     this.areaService.addArea(newArea).subscribe({
@@ -130,5 +132,4 @@ export class CreateAreaComponent implements OnInit {
       },
     });
   }
-
 }

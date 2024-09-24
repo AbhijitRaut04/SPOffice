@@ -48,7 +48,7 @@
         @for (location of sector.locations; track $index) {
         <mat-card appearance="outlined">
             <mat-card-content class="location-card" (click)="navigateToLocation(location)">
-                {{ location.locationName }}
+                {{ location.locationName }} "Hello"
                 </mat-card-content>
         </mat-card>
         }
