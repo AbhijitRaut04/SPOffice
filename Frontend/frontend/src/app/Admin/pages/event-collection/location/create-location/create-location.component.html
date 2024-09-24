@@ -1,39 +1,51 @@
 <div class="sub-nav">
-    <app-back-btn></app-back-btn>
-    <div class="sub-nav-title">
-      <h1>Create Location</h1>
-    </div>
+  <app-back-btn></app-back-btn>
+  <div class="sub-nav-title">
+    <h1>Create Location</h1>
   </div>
-  <div class="wrapper">
-    <mat-card>
-      <div class="card-content-wrapper">
-        <div class="create-form">
-          <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="fill">
-              <mat-label>Location Name</mat-label>
-              <input matInput placeventNameeholder="Enter location name" formControlName="locationName" required />
-            </mat-form-field>
-  
-            <div class="heads">
-              <mat-form-field>
-                <mat-label>Head Officer</mat-label>
-                <input 
-                type="text" 
-                placeholder="Enter head name" 
-                aria-label="Number" 
-                matInput 
-                formControlName="head"
-                [matAutocomplete]="head" 
-                required />
-                <mat-autocomplete #head="matAutocomplete" [displayWith]="displayPoliceName">
-                  @for (option of filteredOptionsHead | async; track option) {
-                  <mat-option [value]="option">{{ option.fullname }}</mat-option>
-                  }
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
+</div>
+<div class="wrapper">
+  <mat-card>
+    <div class="card-content-wrapper">
+      <div class="create-form">
+        <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="fill">
+            <mat-label>Location Name</mat-label>
+            <input matInput placeventNameeholder="Enter location name" formControlName="locationName" required />
+          </mat-form-field>
 
-            <div class="equipments">
+          <div class="heads">
+            <mat-form-field>
+              <mat-label>Head Officer</mat-label>
+              <input type="text" placeholder="Enter head name" aria-label="Number" matInput formControlName="head"
+                [matAutocomplete]="head" required />
+              <mat-autocomplete #head="matAutocomplete" [displayWith]="displayPoliceName">
+                @for (option of filteredOptionsHead | async; track option) {
+                <mat-option [value]="option">{{ option.fullname }}</mat-option>
+                }
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+
+          <mat-selection-list formControlName="equipments">
+
+            @for (item of equipments; track $index) {
+            <mat-list-option [value]="item">
+              {{ item }}
+            </mat-list-option>
+            }
+          </mat-selection-list>
+
+          <mat-selection-list formControlName="policeIds">
+            @for (police of polices; track $index) {
+            <mat-list-option [value]="police.id">
+              {{ police.fullname }}
+            </mat-list-option>
+            }
+          </mat-selection-list>
+
+          <!-- <div class="equipments">
                 <mat-form-field>
                   <mat-label>Equipments</mat-label>
                   <input 
@@ -50,16 +62,16 @@
                     }
                   </mat-autocomplete>
                 </mat-form-field>
-              </div>
+              </div> -->
 
-  
-            <button class="submit-button" mat-raised-button type="submit">
-              Create Location
-            </button>
-          </form>
-        </div>
+
+          <button class="submit-button" mat-raised-button type="submit">
+            Create Location
+          </button>
+        </form>
       </div>
-    </mat-card>
-  
-    <app-sidebar [event]="event"></app-sidebar>
-  </div>
+    </div>
+  </mat-card>
+
+  <app-sidebar [event]="event"></app-sidebar>
+</div>

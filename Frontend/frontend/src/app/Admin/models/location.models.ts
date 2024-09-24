@@ -7,5 +7,6 @@ export interface Location{
     equipments:Set<string>;
     headId:number;
     sectorId:number;
-    polices:Police[]
+    polices:Police[],
+    policeIds:Set<number>
 }

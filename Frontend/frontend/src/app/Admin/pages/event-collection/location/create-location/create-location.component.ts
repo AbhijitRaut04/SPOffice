@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-create-location',
@@ -35,6 +36,7 @@ import { MatInputModule } from '@angular/material/input';
     SidebarComponent,
     MatExpansionModule,
     MatButtonModule,
+    MatListModule
   ],
   templateUrl: './create-location.component.html',
   styleUrl: './create-location.component.css'
@@ -44,7 +46,7 @@ export class CreateLocationComponent {
   filteredOptionsHead: Observable<Police[]>;
   filteredOptionsCohead: Observable<Police[]>;
 
-  equipments:string[][] = [["Barricade"], ["Pipes"], ["Car Blocker"]]
+  equipments:string[] = ["Barricade", "Pipes", "Car Blocker"]
 
   polices: Police[] = [];
 
@@ -56,9 +58,10 @@ export class CreateLocationComponent {
 
   initializeForm() {
     this.locationForm = new FormGroup({
-      locationName: new FormControl(),
+      locationName: new FormControl(''),
       head: new FormControl(''),
       equipments: new FormControl(''),
+      policeIds: new FormControl(''),
     });
   }
 
@@ -105,6 +108,7 @@ export class CreateLocationComponent {
       headId: this.locationForm.value.head.id,
       sectorId: this.sector.id,
       equipments: this.locationForm.value.equipments,
+      policeIds:this.locationForm.value.policeIds,
       polices:[]
     };
 

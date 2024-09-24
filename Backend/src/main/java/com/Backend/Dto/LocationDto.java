@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 import com.Backend.Entities.Police;
 
@@ -16,4 +17,5 @@ public class LocationDto {
     private Long sectorId;
     private List<Police> polices;
     private List<String> equipments;
+    private Set<Long> policeIds;
 }

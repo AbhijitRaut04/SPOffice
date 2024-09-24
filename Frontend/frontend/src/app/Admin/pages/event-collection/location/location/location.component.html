@@ -21,6 +21,12 @@
         <div>{{item}}</div>
     }
 </div>
+<div>
+    <p>polices</p>
+    @for (item of location.polices; track $index) {
+        <div>{{item.fullname}}</div>
+    }
+</div>
 
 <div>
     <p>Polices</p>
