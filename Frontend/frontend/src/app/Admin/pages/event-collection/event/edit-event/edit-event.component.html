@@ -1,0 +1,97 @@
+<div class="sub-nav">
+  <app-back-btn></app-back-btn>
+  <div class="sub-nav-title">
+    <h1>Edit Event</h1>
+  </div>
+</div>
+<div class="wrapper">
+  <mat-card>
+    <div class="card-content-wrapper">
+      <div class="create-form">
+        <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="fill">
+            <mat-label>Event Name</mat-label>
+            <input
+              matInput
+              placeventNameeholder="Enter event name"
+              formControlName="eventname"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              placeholder="Enter description"
+              formControlName="description"
+              required
+            ></textarea>
+          </mat-form-field>
+
+          <div class="heads">
+            <mat-form-field>
+              <mat-label>Head Officer</mat-label>
+              <input
+                type="text"
+                placeholder="Enter head"
+                aria-label="head"
+                matInput
+                formControlName="head"
+                [matAutocomplete]="head"
+                required
+              />
+              <mat-autocomplete
+                #head="matAutocomplete"
+                [displayWith]="displayPoliceName"
+              >
+                @for (option of filteredOptionsHead | async; track option) {
+                <mat-option [value]="option">{{ option.fullname }}</mat-option>
+                }
+              </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Cohead Officer</mat-label>
+              <input
+                type="text"
+                placeholder="Enter cohead"
+                aria-label="cohead"
+                matInput
+                formControlName="cohead"
+                [matAutocomplete]="cohead"
+                required
+              />
+              <mat-autocomplete
+                #cohead="matAutocomplete"
+                [displayWith]="displayPoliceName"
+              >
+                @for (option of filteredOptionsCohead | async; track option) {
+                <mat-option [value]="option">{{ option.fullname }}</mat-option>
+                }
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div id="date-input">
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input formControlName="date" matInput [matDatepicker]="picker" />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <button class="submit-button" mat-raised-button type="submit">
+            Create Event
+          </button>
+        </form>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- <app-sidebar></app-sidebar> -->
+</div>

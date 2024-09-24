@@ -28,6 +28,7 @@ import { CreateSectorComponent      } from './Admin/pages/event-collection/secto
 import { CreateSubeventComponent    } from './Admin/pages/event-collection/subevent/create-subevent/create-subevent.component';
 import { LocationComponent } from './Admin/pages/event-collection/location/location/location.component';
 import { CreateLocationComponent } from './Admin/pages/event-collection/location/create-location/create-location.component';
+import { EditEventComponent } from './Admin/pages/event-collection/event/edit-event/edit-event.component';
 
 
 export const routes: Routes = [
@@ -66,7 +67,10 @@ export const routes: Routes = [
                                         path:"add-subevent",
                                         component:CreateSubeventComponent
                                     },
-                                    // edit event path
+                                    {
+                                        path: "edit",
+                                        component:EditEventComponent
+                                    },
                                     {
                                         path:":subeventname",
                                         children:[
