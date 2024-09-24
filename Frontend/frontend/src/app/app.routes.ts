@@ -31,6 +31,8 @@ import { CreateSectorComponent      } from './Admin/pages/event-collection/secto
 import { EditSubeventComponent      } from './Admin/pages/event-collection/subevent/edit-subevent/edit-subevent.component';
 import { CreateSubeventComponent    } from './Admin/pages/event-collection/subevent/create-subevent/create-subevent.component';
 import { CreateLocationComponent    } from './Admin/pages/event-collection/location/create-location/create-location.component';
+import { EditAreaComponent } from './Admin/pages/event-collection/area/edit-area/edit-area.component';
+import { EditLocationComponent } from './Admin/pages/event-collection/location/edit-location/edit-location.component';
 
 
 export const routes: Routes = [
@@ -95,7 +97,10 @@ export const routes: Routes = [
                                                         path:"",
                                                         component:AreaComponent
                                                     },
-                                                    // edit area path
+                                                    {
+                                                        path: "edit",
+                                                        component:EditAreaComponent
+                                                    },
                                                     {
                                                         path:"add-sector",
                                                         component:CreateSectorComponent
@@ -121,6 +126,10 @@ export const routes: Routes = [
                                                                     {
                                                                         path:"",
                                                                         component:LocationComponent
+                                                                    },
+                                                                    {
+                                                                        path: "edit",
+                                                                        component:EditLocationComponent
                                                                     },
                                                                     // edit location
 
