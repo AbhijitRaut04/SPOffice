@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class LocationService {
@@ -45,8 +43,6 @@ public class LocationService {
 
         HashSet<Police> polices2 = new HashSet<>();
             for (Long id : locationDTO.getPoliceIds()) {
-                System.out.println("__________________________________________________ ");
-                System.out.println(id+" ");
                 Police police = policeRepository.findById((long)id)
                         .orElseThrow(() -> new RuntimeException("Police not found"));
                 polices2.add(police);
