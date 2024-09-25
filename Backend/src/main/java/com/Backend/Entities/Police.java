@@ -51,6 +51,7 @@ public class Police {
     private List<Sector> sectors = new ArrayList<>();
     
     @ManyToMany(mappedBy = "polices")
+    @JsonIgnore
     private List<Location> locations = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL)

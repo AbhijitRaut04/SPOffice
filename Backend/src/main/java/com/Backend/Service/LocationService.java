@@ -7,10 +7,12 @@ import com.Backend.Entities.Sector;
 import com.Backend.Repository.LocationRepository;
 import com.Backend.Repository.PoliceRepository;
 import com.Backend.Repository.SectorRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,8 +38,17 @@ public class LocationService {
 
         Location location = new Location();
         location.setLocationName(locationDTO.getLocationName());
-        // location.setPolices(locationDTO.getPolices());
+        
         location.setEquipments(locationDTO.getEquipments());
+
+        HashSet<Police> polices2 = new HashSet<>();
+            for (Long id : locationDTO.getPoliceIds()) {
+                Police police = policeRepository.findById((long)id)
+                        .orElseThrow(() -> new RuntimeException("Police not found"));
+                polices2.add(police);
+            }
+
+        location.setPolices(polices2);
 
         if (locationDTO.getHeadId() != null) {
             Police head = policeRepository.findById(locationDTO.getHeadId())
