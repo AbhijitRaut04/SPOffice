@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -49,24 +50,35 @@ import { Subevent } from '../../../../models/subevent.models';
   templateUrl: './edit-subevent.component.html',
   styleUrl: './edit-subevent.component.css',
 })
-export class EditSubeventComponent {
+export class EditSubeventComponent implements OnInit  {
   polices: Police[] = [];
+  event: Event;
+  subevent: Subevent;
+  subeventForm: FormGroup;
 
   filteredOptionsHead: Observable<Police[]>;
   filteredOptionsCohead: Observable<Police[]>;
-  eventForm: FormGroup;
-  event: Event;
-  constructor(private subEventService: SubeventService) {
-    this.eventForm = new FormGroup({
-      subpatrollingname: new FormControl(''),
-      description: new FormControl(''),
-      instructions: new FormControl(''),
-      head: new FormControl(''),
-      cohead: new FormControl(''),
-      patrollingId: new FormControl(''),
+
+  constructor(private subEventService: SubeventService) {}
+
+  initializeForm() {
+    this.subeventForm = new FormGroup({
+      subpatrollingname: new FormControl(this.subevent.subpatrollingname, Validators.required),
+      description: new FormControl(this.subevent.description, Validators.required),
+      instructions: new FormControl(this.subevent.instructions, Validators.required),
+      head: new FormControl(this.subevent.head, Validators.required),
+      cohead: new FormControl(this.subevent.cohead, Validators.required),
+      patrollingId: new FormControl(this.subevent.patrollingId, Validators.required),
     });
   }
-
+  
+  ngOnInit() {
+    this.event = history.state.event;
+    this.subevent = history.state.subevent;
+    this.initializeForm();
+    this.getPolices();
+  }
+  
   displayPoliceName(option: Police): string {
     return option ? option.fullname : '';
   }
@@ -75,21 +87,16 @@ export class EditSubeventComponent {
     Object.values(this.event.attendance).forEach((value) => {
       this.polices = [...value, ...this.polices];
     });
-    this.filteredOptionsHead = this.eventForm.get('head')!.valueChanges.pipe(
+    this.filteredOptionsHead = this.subeventForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
-    this.filteredOptionsCohead = this.eventForm
+    this.filteredOptionsCohead = this.subeventForm
       .get('cohead')!
       .valueChanges.pipe(
         startWith(''),
         map((value) => this._filter(value || ''))
       );
-  }
-
-  ngOnInit() {
-    this.event = history.state.event;
-    this.getPolices();
   }
 
   private _filter(value: string): Police[] {
@@ -103,11 +110,11 @@ export class EditSubeventComponent {
   onSubmit() {
     const newEvent: Subevent = {
       id: null,
-      subpatrollingname: this.eventForm.value.subpatrollingname,
-      description: this.eventForm.value.description,
-      head: this.eventForm.value.head,
-      cohead: this.eventForm.value.cohead,
-      instructions: this.eventForm.value.instructions,
+      subpatrollingname: this.subeventForm.value.subpatrollingname,
+      description: this.subeventForm.value.description,
+      head: this.subeventForm.value.head,
+      cohead: this.subeventForm.value.cohead,
+      instructions: this.subeventForm.value.instructions,
       patrollingId: this.event.id,
       areas: null,
     };
