@@ -67,12 +67,12 @@ import { Event } from '../../../../models/event.models';
 export class EditEventComponent implements OnInit {
   polices: Police[];
   event: Event;
+  eventForm: FormGroup;
   // admin_id: number = 1;
 
   filteredOptionsHead: Observable<Police[]>;
   filteredOptionsCohead: Observable<Police[]>;
 
-  eventForm: FormGroup;
 
   constructor(
     private eventService: EventService,
@@ -91,9 +91,8 @@ export class EditEventComponent implements OnInit {
 
   ngOnInit() {
     this.event = history.state.event;
-    this.getPolices();
     this.initializeForm();
-    console.log(this.event);
+    this.getPolices();
   }
 
   private _filter(value: string): Police[] {

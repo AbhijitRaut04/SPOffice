@@ -56,10 +56,6 @@ export class EventComponent implements OnInit {
     );
   }
 
-  viewAttendance(){
-    console.log(this.event.attendance)
-  }
-
   navigateToAddSubevent() {
     const currentPath = this.router.url;
     this.router.navigate([`${currentPath}/add-subevent`], {state:{event:this.event}});
@@ -70,5 +66,9 @@ export class EventComponent implements OnInit {
     this.router.navigate([`${currentPath}/edit`], {
       state: { event: this.event },
     });
+  }
+
+  viewAttendance(){
+    console.log(this.event.attendance)
   }
 }

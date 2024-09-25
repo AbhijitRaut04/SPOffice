@@ -64,6 +64,8 @@ export class SubeventComponent implements OnInit {
   
   editSubevent() {
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/edit`]);
+    this.router.navigate([`${currentPath}/edit`], {
+      state: { subevent: this.subevent, event: this.event },
+    });
   }
 }
