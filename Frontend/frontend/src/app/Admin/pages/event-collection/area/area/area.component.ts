@@ -33,7 +33,6 @@ export class AreaComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.area = history.state.area;
-      console.log(this.area)
       this.event = history.state.event;
     });
   }
@@ -55,9 +54,11 @@ export class AreaComponent implements OnInit {
     this.router.navigate([`${currentPath}/add-sector`], {state:{area:this.area, event:this.event}});
   }
 
-  editArea(){
+  navigateToEditArea(){
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/edit`]);
+    this.router.navigate([`${currentPath}/edit`],{
+      state: { event: this.event, area: this.area },
+    });
   }
 
 }

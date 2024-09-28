@@ -9,6 +9,7 @@ import { Event } from '../../../../models/event.models';
 import { Location } from '../../../../models/location.models';
 import { CreateBtnComponent } from '../../../../components/reusable/create-btn/create-btn.component';
 import { MatCardModule } from '@angular/material/card';
+import { Area } from '../../../../models/area.models';
 
 @Component({
   selector: 'app-sector',
@@ -28,13 +29,14 @@ export class SectorComponent implements OnInit {
 
   sector: Sector;
   event:Event;
+  area: Area;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.sector = history.state.sector;
-      console.log(this.sector)
+      this.area = history.state.area;
       this.event = history.state.event;
     });
   }
@@ -47,7 +49,7 @@ export class SectorComponent implements OnInit {
           .toLowerCase()
           .replace(' ', '-')}`,
       ],
-      { state: { location, event:this.event } }
+      { state: { location, event:this.event, sector: this.sector } }
     );
   }
 
@@ -56,8 +58,10 @@ export class SectorComponent implements OnInit {
     this.router.navigate([`${currentPath}/add-location`], {state:{sector:this.sector, event:this.event}});
   }
 
-  editSector() {
+  navigateToEditSector(){
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/edit`]);
+    this.router.navigate([`${currentPath}/edit`],{
+      state: { event: this.event, sector: this.sector, area: this.area },
+    });
   }
 }

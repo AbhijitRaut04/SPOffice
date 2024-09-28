@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '../../../../models/location.models';
 import { Event } from '../../../../models/event.models';
+import { Sector } from '../../../../models/sector.models';
 
 @Component({
   selector: 'app-location',
@@ -14,12 +15,14 @@ export class LocationComponent {
 
   location:Location;
   event:Event;
+  sector: Sector;
 
   constructor (private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.location = history.state.location;
+      this.sector = history.state.sector;
       console.log(this.location)
       this.event = history.state.event;
     });
@@ -29,9 +32,11 @@ export class LocationComponent {
     console.log("Add police")
   }
 
-  editLocation() {
+  navigateToEditLocation(){
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/edit`]);
+    this.router.navigate([`${currentPath}/edit`],{
+      state: { event: this.event, location: this.location, sector: this.sector },
+    });
   }
 
 }

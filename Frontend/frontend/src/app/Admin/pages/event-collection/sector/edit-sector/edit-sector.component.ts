@@ -57,6 +57,7 @@ export class EditSectorComponent {
   sectorForm: FormGroup;
   area: Area;
   event: Event;
+  sector: Sector;
 
   constructor(private sectorService: SectorService) {}
 
@@ -70,6 +71,7 @@ export class EditSectorComponent {
   ngOnInit() {
     this.initializeForm();
     this.area = history.state.area;
+    this.sector = history.state.sector;
     this.event = history.state.event;
     console.log(this.event);
     this.filteredOptionsHead = this.sectorForm.get('head')!.valueChanges.pipe(
