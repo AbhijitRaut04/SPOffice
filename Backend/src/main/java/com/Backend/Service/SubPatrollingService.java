@@ -23,7 +23,6 @@ public class SubPatrollingService {
     @Autowired
     private PatrollingRepository patrollingRepository;
 
-
     // Get SubPatrolling by ID
     public Optional<SubPatrolling> getSubPatrollingById(Long id) {
         return subPatrollingRepository.findById(id);
@@ -54,24 +53,25 @@ public class SubPatrollingService {
     }
 
     // Update SubPatrolling
-    public SubPatrolling updateSubPatrolling(Long id, SubPatrolling updatedSubPatrolling) {
+    public SubPatrolling updateSubPatrolling(Long id, SubPatrollingDto updatedSubPatrolling) {
         try {
             return subPatrollingRepository.findById(id)
                     .map(subPatrolling -> {
                         // Update fields
-                        subPatrolling.setHead(updatedSubPatrolling.getHead());
-                        subPatrolling.setCohead(updatedSubPatrolling.getCohead());
+                        Police head = policeRepository.findById(updatedSubPatrolling.getHead().getId())
+                                .orElseThrow(() -> new RuntimeException("Head not found"));
+                        Police cohead = policeRepository.findById(updatedSubPatrolling.getCohead().getId())
+                                .orElseThrow(() -> new RuntimeException("Co-head not found"));
+                        Patrolling patrolling = patrollingRepository.findById(updatedSubPatrolling.getPatrollingId())
+                                .orElseThrow(() -> new RuntimeException("Patrolling not found"));
+                        subPatrolling.setHead(head);
+                        subPatrolling.setCohead(cohead);
                         subPatrolling.setDescription(updatedSubPatrolling.getDescription());
                         subPatrolling.setInstructions(updatedSubPatrolling.getInstructions());
-                        subPatrolling.setPatrolling(updatedSubPatrolling.getPatrolling());
-                        subPatrolling.setAreas(updatedSubPatrolling.getAreas());
-
+                        subPatrolling.setPatrolling(patrolling);
                         return subPatrollingRepository.save(subPatrolling);
                     })
-                    .orElseGet(() -> {
-                        updatedSubPatrolling.setId(id);
-                        return subPatrollingRepository.save(updatedSubPatrolling);
-                    });
+                    .orElseThrow(() -> new RuntimeException("Unable to update Subpatrolling"));
         } catch (DataAccessException e) {
             throw new RuntimeException("Failed to update SubPatrolling", e);
         }

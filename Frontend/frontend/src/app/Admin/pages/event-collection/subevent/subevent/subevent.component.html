@@ -3,19 +3,12 @@
     <app-back-btn></app-back-btn>
     <div class="btn-wrap">
 
-      <button
-        matTooltip="edit subevent"
-        mat-fab
-        (click)="navigateToEditSubevent()"
-      >
-
-      <button matTooltip="preview pdf" mat-fab (click)="navigateToPreviewPdf()">
-        <mat-icon>remove</mat-icon>
-      </button>
-      <button matTooltip="edit subevent" mat-fab (click)="editSubevent()">
-
+      <button matTooltip="उपबंदोबस्त संपादित करा" mat-fab (click)="navigateToEditSubevent()">
         <mat-icon>edit</mat-icon>
       </button>
+        <button matTooltip="preview pdf" mat-fab (click)="navigateToPreviewPdf()">
+          <mat-icon>remove</mat-icon>
+        </button>
     </div>
   </div>
 
@@ -28,10 +21,10 @@
 
         <div class="heads">
           <div class="police-wrapper">
-            <h4>Head</h4>
+            <h4>मुख्याधिकारी</h4>
             <div class="police">
               {{
-                subevent.head.fullname + " (" + subevent.head.designation + ")"
+              subevent.head.fullname + " (" + subevent.head.designation + ")"
               }}
             </div>
             <div class="police-info">
@@ -43,13 +36,13 @@
             </div>
           </div>
           <div class="police-wrapper">
-            <h4>Cohead</h4>
+            <h4>सहप्रमुख अधिकारी</h4>
             <div class="police">
               {{
-                subevent.cohead.fullname +
-                  " (" +
-                  subevent.cohead.designation +
-                  ")"
+              subevent.cohead.fullname +
+              " (" +
+              subevent.cohead.designation +
+              ")"
               }}
             </div>
             <div class="police-info">
@@ -73,11 +66,11 @@
           </div>
         </div> -->
         <div class="description-info">
-          <h3>Description</h3>
+          <h3>उपबंदोबस्त महिती</h3>
           <p>{{ subevent.description }}</p>
         </div>
         <div class="instruction-info">
-          <h3>Instructions</h3>
+          <h3>सूचना</h3>
           <p>{{ subevent.instructions }}</p>
         </div>
         <!-- <mat-card-footer>footer</mat-card-footer> -->
@@ -86,10 +79,10 @@
       <!-- <app-search-toolbar></app-search-toolbar> -->
       <div class="search-toolbar">
         <div class="search">
-          <input type="text" placeholder="Search Area ......" />
+          <input type="text" placeholder="शोधा......" />
           <mat-icon fontIcon="search"></mat-icon>
         </div>
-        <button mat-fab matTooltip="add Area" (click)="navigateToAddArea()">
+        <button mat-fab matTooltip="नवीन क्षेत्र" (click)="navigateToAddArea()">
           <mat-icon>add</mat-icon>
         </button>
       </div>
@@ -98,7 +91,7 @@
       <mat-card class="area-card" appearance="outlined">
         <mat-card-content (click)="navigateToArea(area)">{{
           area.areaName
-        }}</mat-card-content>
+          }}</mat-card-content>
       </mat-card>
       }
     </div>

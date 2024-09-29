@@ -2,7 +2,7 @@
     <div class="btns">
         <app-back-btn></app-back-btn>
         <div class="btn-wrap">
-            <button matTooltip="edit area" mat-fab (click)="navigateToEditArea()">
+            <button matTooltip="क्षेत्र संपादित करा" mat-fab (click)="navigateToEditArea()">
                 <mat-icon>edit</mat-icon>
             </button>
         </div>
@@ -15,7 +15,7 @@
                 </div>
                 <div class="heads">
                     <div class="police-wrapper">
-                        <h4>Head</h4>
+                        <h4>मुख्याधिकारी</h4>
                         <div class="police">
                             {{ area.head.fullname + " (" + area.head.designation + ")" }}
                         </div>
@@ -29,7 +29,7 @@
                     </div>
                     @if (area.cohead !== null) {
                     <div class="police-wrapper">
-                        <h4>Cohead</h4>
+                        <h4>सहप्रमुख अधिकारी</h4>
                         <div class="police">
                             {{
                             area.cohead.fullname + " (" + area.cohead.designation + ")"
@@ -49,10 +49,10 @@
 
             <div class="search-toolbar">
                 <div class="search">
-                    <input type="text" placeholder="Search Sector ......">
+                    <input type="text" placeholder="शोधा....">
                     <mat-icon fontIcon="search"></mat-icon>
                 </div>
-                <button mat-fab matTooltip="add Sector" (click)="navigateToAddSector()">
+                <button mat-fab matTooltip="नवीन सेक्टर" (click)="navigateToAddSector()">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>

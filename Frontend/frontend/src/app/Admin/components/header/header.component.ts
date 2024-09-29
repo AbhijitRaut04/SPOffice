@@ -17,11 +17,11 @@ export class HeaderComponent implements OnInit {
   showDialog: boolean = true;
 
   navElements = [
-    { img: 'https://cdn-icons-png.flaticon.com/128/1946/1946488.png', title: 'Home', active: true, path: '/' },
-    { img: 'https://cdn-icons-png.flaticon.com/128/3503/3503827.png', title: 'Events', active: false, path: '/events' },
-    { img: 'https://cdn-icons-png.flaticon.com/128/1077/1077063.png', title: 'SubAdmins', active: false, path: '/subadmins' },
-    { img: 'https://cdn-icons-png.flaticon.com/128/833/833593.png', title: 'Requests', active: false, path: '/requests' },
-    { img: 'https://cdn-icons-png.flaticon.com/128/1286/1286853.png', title: 'Login', active: false, path: '/login' }
+    { img: 'https://cdn-icons-png.flaticon.com/128/1946/1946488.png', title: 'मुखपुष्ट', active: true, path: '/' },
+    { img: 'https://cdn-icons-png.flaticon.com/128/3503/3503827.png', title: 'बंदोबस्त योजना', active: false, path: '/events' },
+    { img: 'https://cdn-icons-png.flaticon.com/128/1077/1077063.png', title: 'पोलीस स्टेशन', active: false, path: '/subadmins' },
+    { img: 'https://cdn-icons-png.flaticon.com/128/833/833593.png', title: 'विनंत्या', active: false, path: '/requests' },
+    { img: 'https://cdn-icons-png.flaticon.com/128/1286/1286853.png', title: 'लॉगिन करा', active: false, path: '/login' }
   ];
 
   constructor(
@@ -64,7 +64,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private updateNavElements() {
-    this.navElements[4].title = this.authService.isLoggedIn() ? 'Logout' : 'Login';
+    this.navElements[4].title = this.authService.isLoggedIn() ? 'लॉगआउट करा' : 'लॉगिन करा';
   }
 
 

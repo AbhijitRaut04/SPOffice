@@ -2,10 +2,10 @@
   <div class="btns">
     <app-back-btn></app-back-btn>
     <div class="btn-wrap">
-      <button matTooltip="view Attendance" mat-fab (click)="viewAttendance()">
+      <!-- <button matTooltip="view Attendance" mat-fab (click)="viewAttendance()">
         <mat-icon>person</mat-icon>
-      </button>
-      <button matTooltip="edit event" mat-fab (click)="navigateToEditEvent()">
+      </button> -->
+      <button matTooltip="संपादित करा" mat-fab (click)="navigateToEditEvent()">
         <mat-icon>edit</mat-icon>
       </button>
     </div>
@@ -19,7 +19,7 @@
         </div>
         <div class="heads">
           <div class="police-wrapper">
-            <h4>Head</h4>
+            <h4>मुख्याधिकारी</h4>
             <div class="police">
               {{ event.head.fullname + " (" + event.head.designation + ")" }}
             </div>
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="police-wrapper">
-            <h4>Cohead</h4>
+            <h4>सहप्रमुख अधिकारी</h4>
             <div class="police">
               {{
                 event.cohead.fullname + " (" + event.cohead.designation + ")"
@@ -49,19 +49,19 @@
         </div>
 
         <div class="description-info">
-          <h4>Description</h4>
+          <h4>बंदोबस्त महिती</h4>
           <p>{{ event.description }}</p>
         </div>
       </div>
       <!-- <app-search-toolbar></app-search-toolbar> -->
       <div class="search-toolbar">
         <div class="search">
-          <input type="text" placeholder="Search Subevent ......" />
+          <input type="text" placeholder="शोधा ...." />
           <mat-icon fontIcon="search"></mat-icon>
         </div>
         <button
           mat-fab
-          matTooltip="add Subevent"
+          matTooltip="उपबंदोबस्त तयार करा"
           (click)="navigateToAddSubevent()"
         >
           <mat-icon>add</mat-icon>
@@ -72,7 +72,7 @@
       <mat-card appearance="outlined">
         <mat-card-content>
           <p (click)="navigateToSubevent(subevent)">{{ subevent.subpatrollingname }}</p>
-          <p (click)="navigateToPreviewPdf(subevent)">pdf</p>
+          <p (click)="navigateToPreviewPdf(subevent)">pdf डाउनलोड करा</p>
         </mat-card-content>
       </mat-card>
       }

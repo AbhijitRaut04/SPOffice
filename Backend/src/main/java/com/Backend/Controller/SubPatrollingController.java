@@ -52,7 +52,7 @@ public class SubPatrollingController extends BaseController  {
 
     // Update SubPatrolling
     @PutMapping("/{id}")
-    public ResponseEntity<SubPatrolling> updateSubPatrolling(@PathVariable Long id, @RequestBody SubPatrolling subPatrollingDetails) {
+    public ResponseEntity<SubPatrolling> updateSubPatrolling(@PathVariable Long id, @RequestBody SubPatrollingDto subPatrollingDetails) {
         try {
             SubPatrolling updatedSubPatrolling = subPatrollingService.updateSubPatrolling(id, subPatrollingDetails);
             return new ResponseEntity<>(updatedSubPatrolling, HttpStatus.OK);

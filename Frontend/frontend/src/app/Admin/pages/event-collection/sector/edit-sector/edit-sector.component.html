@@ -1,7 +1,7 @@
 <div class="sub-nav">
   <app-back-btn></app-back-btn>
   <div class="sub-nav-title">
-    <h1>Create Sector</h1>
+    <h1>नवीन सेक्टर</h1>
   </div>
 </div>
 <div class="wrapper">
@@ -10,10 +10,10 @@
       <div class="create-form">
         <form [formGroup]="sectorForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="fill">
-            <mat-label>Sector Name</mat-label>
+            <mat-label>सेक्टरचे नाव</mat-label>
             <input
               matInput
-              placeventNameeholder="Enter sector name"
+              placeventNameeholder="सेक्टरचे नाव "
               formControlName="sectorName"
               required
             />
@@ -21,10 +21,10 @@
 
           <div class="heads">
             <mat-form-field>
-              <mat-label>Head Officer</mat-label>
+              <mat-label>मुख्याधिकारी</mat-label>
               <input
                 type="text"
-                placeholder="Enter head name"
+                placeholder="मुख्य अधिकारी नाव प्रविष्ट करा"
                 aria-label="Number"
                 matInput
                 formControlName="head"
@@ -43,7 +43,7 @@
           </div>
 
           <button class="submit-button" mat-raised-button type="submit">
-            Create Sector
+            सेक्टर संपादित करा
           </button>
         </form>
       </div>

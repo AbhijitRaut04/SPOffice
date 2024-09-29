@@ -1,7 +1,7 @@
 <div class="sub-nav">
   <app-back-btn></app-back-btn>
   <div class="sub-nav-title">
-    <h1>Create Area</h1>
+    <h1>नवीन क्षेत्र</h1>
   </div>
 </div>
 <div class="wrapper">
@@ -10,14 +10,14 @@
       <div class="create-form">
         <form [formGroup]="areaForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="fill">
-            <mat-label>Area Name</mat-label>
-            <input matInput placeventNameeholder="Enter area name" formControlName="areaName" required />
+            <mat-label>क्षेत्राचे नाव</mat-label>
+            <input matInput placeventNameeholder="क्षेत्राचे नाव प्रविष्ट करा" formControlName="areaName" required />
           </mat-form-field>
 
           <div class="heads">
             <mat-form-field>
-              <mat-label>Head Officer</mat-label>
-              <input type="text" placeholder="Enter head name" aria-label="Number" matInput formControlName="head"
+              <mat-label>मुख्याधिकारी</mat-label>
+              <input type="text" placeholder="मुख्य अधिकारी नाव प्रविष्ट करा" aria-label="Number" matInput formControlName="head"
                 [matAutocomplete]="head" required />
               <mat-autocomplete #head="matAutocomplete" [displayWith]="displayPoliceName">
                 @for (option of filteredOptionsHead | async; track option) {
@@ -28,8 +28,8 @@
           </div>
 
           <mat-form-field appearance="fill">
-            <mat-label>Co-Head officer</mat-label>
-            <input type="text" placeholder="Enter co-head name" aria-label="Number" matInput formControlName="cohead"
+            <mat-label>सहप्रमुख अधिकारी</mat-label>
+            <input type="text" placeholder="सहप्रमुख अधिकारी नाव प्रविष्ट करा" aria-label="Number" matInput formControlName="cohead"
               [matAutocomplete]="cohead" />
             <mat-autocomplete #cohead="matAutocomplete" [displayWith]="displayPoliceName">
               @for (option of filteredOptionsCohead | async; track option) {
@@ -39,7 +39,7 @@
           </mat-form-field>
 
           <button class="submit-button" mat-raised-button type="submit">
-            Create Area
+            नवीन क्षेत्र तयार करा
           </button>
         </form>
       </div>

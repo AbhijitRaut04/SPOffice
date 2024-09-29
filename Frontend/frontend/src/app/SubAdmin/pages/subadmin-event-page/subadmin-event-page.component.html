@@ -10,7 +10,8 @@
   @if (submitted) {
 
   <button>View Attendance</button>
-  } @else { @if (showAttendanceForm) {
+  } @else {
+  @if (showAttendanceForm) {
   <form [formGroup]="attendanceForm" (ngSubmit)="submit()">
     <mat-selection-list formControlName="polices">
       @for (police of subadmin.polices; track $index) {
@@ -23,7 +24,8 @@
       </div>
     </mat-selection-list>
   </form>
-  } @else{
+  } 
+  @else{
   <button (click)="openAttendanceForm()">Submit Attendance</button>
   } }
 </div>

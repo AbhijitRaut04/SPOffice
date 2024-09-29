@@ -112,6 +112,7 @@
 }
 
 mat-card {
+
   cursor: pointer;
   transition: all 0.2s ease;
   &:hover {
@@ -119,11 +120,11 @@ mat-card {
   }
 }
 
-mat-card p:nth-child(2){
-    position: absolute;
-    right: 20px;
-    top: 15px;
+mat-card-content {
+  display: flex;
+  justify-content: space-between;
 }
+
 
 .search-toolbar {
   width: 100%;

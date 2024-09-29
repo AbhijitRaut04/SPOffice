@@ -1,7 +1,7 @@
 <div class="sub-nav">
   <app-back-btn></app-back-btn>
   <div class="sub-nav-title">
-    <h1>Create Subevent</h1>
+    <h1>नवीन उपबंदोबस्त</h1>
   </div>
 </div>
 <div class="wrapper">
@@ -11,26 +11,26 @@
       <div class="create-form">
         <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="fill">
-            <mat-label>Subevent Name</mat-label>
+            <mat-label>उपबंदोबस्ताचे नाव</mat-label>
             <input
               matInput
-              placeholder="Enter Subevent name"
+              placeholder="उपबंदोबस्ताचे नाव प्रविष्ठ करा"
               formControlName="subpatrollingname"
               required
             />
           </mat-form-field>
 
           <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
+            <mat-label>उपबंदोबस्त महिती</mat-label>
             <textarea
               matInput
-              placeholder="Enter description"
+              placeholder="उपबंदोबस्त महिती प्रविष्ठ करा"
               formControlName="description"
               required
             ></textarea>
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Instructions</mat-label>
+            <mat-label>सूचना</mat-label>
             <textarea
               matInput
               placeholder="Enter instructions"
@@ -41,10 +41,10 @@
 
           <div class="heads">
             <mat-form-field>
-              <mat-label>Head Officer</mat-label>
+              <mat-label>मुख्याधिकारी</mat-label>
               <input
                 type="text"
-                placeholder="Enter head name"
+                placeholder="मुख्य अधिकारी नाव प्रविष्ट करा"
                 aria-label="Number"
                 matInput
                 formControlName="head"
@@ -62,10 +62,10 @@
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-              <mat-label>Co-Head officer</mat-label>
+              <mat-label>सहप्रमुख अधिकारी</mat-label>
               <input
                 type="text"
-                placeholder="Enter co-head name"
+                placeholder="सहप्रमुख अधिकारी नाव प्रविष्ट करा"
                 aria-label="Number"
                 matInput
                 formControlName="cohead"
@@ -83,7 +83,7 @@
           </div>
 
           <button class="submit-button" mat-raised-button type="submit">
-            Create Event
+            उपबंदोबस्त तयार करा
           </button>
         </form>
       </div>

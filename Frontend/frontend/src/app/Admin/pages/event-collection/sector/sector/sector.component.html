@@ -2,7 +2,7 @@
   <div class="btns">
     <app-back-btn></app-back-btn>
     <div class="btn-wrap">
-      <button matTooltip="edit sector" mat-fab (click)="navigateToEditSector()">
+      <button matTooltip="सेक्टर संपादित करा" mat-fab (click)="navigateToEditSector()">
         <mat-icon>edit</mat-icon>
       </button>
     </div>
@@ -16,8 +16,10 @@
       </div>
 
       <div class="heads">
+        @if (sector.head) {
+
         <div class="police-wrapper">
-          <h4>Head</h4>
+          <h4>मुख्याधिकारी</h4>
           <div class="police">
             {{ sector.head.fullname + " (" + sector.head.designation + ")" }}
           </div>
@@ -29,31 +31,25 @@
             <p>{{ sector.head.designation }}</p>
           </div>
         </div>
+        }
       </div>
     </mat-card>
 
     <!-- <app-search-toolbar></app-search-toolbar> -->
     <div class="search-toolbar">
       <div class="search">
-        <input type="text" placeholder="Search Sector ......" />
+        <input type="text" placeholder="सेक्टर शोधा ......" />
         <mat-icon fontIcon="search"></mat-icon>
       </div>
-      <button
-        mat-fab
-        matTooltip="add Location"
-        (click)="navigateToAddLocation()"
-      >
+      <button mat-fab matTooltip="नवीन ठिकाण" (click)="navigateToAddLocation()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
 
     @for (location of sector.locations; track $index) {
     <mat-card appearance="outlined">
-      <mat-card-content
-        class="location-card"
-        (click)="navigateToLocation(location)"
-      >
-        {{ location.locationName }} "Hello"
+      <mat-card-content class="location-card" (click)="navigateToLocation(location)">
+        {{ location.locationName }}
       </mat-card-content>
     </mat-card>
     }
