@@ -1,17 +1,17 @@
 <div class="subadmin-container">
-    <!-- Display subadmin details -->
-    <h2>{{ subadmin.username }}</h2>
-    <p>Contact: {{ subadmin.contact }}</p>
-    <p>Station: {{ subadmin.station }}</p>
-    <div class="police-list">
-        <h3>Associated Police Officers</h3>
+  <!-- Display subadmin details -->
+  <h2>{{ subadmin.username }}</h2>
+  <p>Contact: {{ subadmin.contact }}</p>
+  <p>Station: {{ subadmin.station }}</p>
+  <div class="police-list">
+    <h3>Associated Police Officers</h3>
 
-        @for (police of subadmin.polices; track $index) {
-        <div class="police-detail">
-            <p>Full Name: {{ police.fullname }}</p>
-            <p>Designation: {{ police.designation }}</p>
-            <p>Police ID: {{ police.policeId }}</p>
-            <!-- 
+    @for (police of subadmin.polices; track $index) {
+    <div class="police-detail">
+      <p>Full Name: {{ police.fullname }}</p>
+      <p>Designation: {{ police.designation }}</p>
+      <p>Police ID: {{ police.policeId }}</p>
+      <!-- 
                 fullname: string,
                 policeId: number,
                 phone: string,
@@ -19,7 +19,7 @@
                 gender: string;
                 designation: string;
             -->
-        </div>
-        }
     </div>
+    }
+  </div>
 </div>

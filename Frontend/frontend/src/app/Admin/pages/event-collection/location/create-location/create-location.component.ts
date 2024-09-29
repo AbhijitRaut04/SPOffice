@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-btn.component';
 import { MatCardModule } from '@angular/material/card';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Sector } from '../../../../models/sector.models';
 import { Event } from '../../../../models/event.models';
 import { map, Observable, startWith } from 'rxjs';
@@ -36,25 +41,24 @@ import { MatListModule } from '@angular/material/list';
     SidebarComponent,
     MatExpansionModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
   ],
   templateUrl: './create-location.component.html',
-  styleUrl: './create-location.component.css'
+  styleUrl: './create-location.component.css',
 })
 export class CreateLocationComponent {
-
   filteredOptionsHead: Observable<Police[]>;
   filteredOptionsCohead: Observable<Police[]>;
 
-  equipments:string[] = ["Barricade", "Pipes", "Car Blocker"]
+  equipments: string[] = ['Barricade', 'Pipes', 'Car Blocker'];
 
   polices: Police[] = [];
 
-  locationForm:FormGroup;
-  sector:Sector;
-  event:Event;
+  locationForm: FormGroup;
+  sector: Sector;
+  event: Event;
 
-  constructor(private locationService:LocationService) {}
+  constructor(private locationService: LocationService) {}
 
   initializeForm() {
     this.locationForm = new FormGroup({
@@ -69,7 +73,7 @@ export class CreateLocationComponent {
     this.event = history.state.event;
     this.sector = history.state.sector;
     this.initializeForm();
-    console.log(this.event)
+    console.log(this.event);
     this.filteredOptionsHead = this.locationForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
@@ -82,9 +86,9 @@ export class CreateLocationComponent {
   }
 
   getPolices() {
-    Object.values(this.event.attendance).forEach(value => {
-      this.polices = [...value, ...this.polices]
-    })
+    Object.values(this.event.attendance).forEach((value) => {
+      this.polices = [...value, ...this.polices];
+    });
     this.filteredOptionsHead = this.locationForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
@@ -99,7 +103,6 @@ export class CreateLocationComponent {
     );
   }
 
-
   onSubmit() {
     const newLocation: Location = {
       id: null,
@@ -108,8 +111,8 @@ export class CreateLocationComponent {
       headId: this.locationForm.value.head.id,
       sectorId: this.sector.id,
       equipments: this.locationForm.value.equipments,
-      policeIds:this.locationForm.value.policeIds,
-      polices:[]
+      policeIds: this.locationForm.value.policeIds,
+      polices: [],
     };
 
     this.locationService.addLocation(newLocation).subscribe({
@@ -124,5 +127,4 @@ export class CreateLocationComponent {
       },
     });
   }
-
 }

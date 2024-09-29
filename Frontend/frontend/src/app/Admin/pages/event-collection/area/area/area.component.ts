@@ -23,45 +23,42 @@ import { Subevent } from '../../../../models/subevent.models';
     MatTooltipModule,
   ],
   templateUrl: './area.component.html',
-  styleUrl: './area.component.css'
+  styleUrl: './area.component.css',
 })
 export class AreaComponent implements OnInit {
+  area: Area;
+  event: Event;
+  subevent: Subevent;
 
-  area:Area;
-  event:Event;
-  subevent:Subevent;
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.area = history.state.area;
       this.event = history.state.event;
       this.subevent = history.state.subevent;
     });
   }
 
-  navigateToSector(sector:Sector){
+  navigateToSector(sector: Sector) {
     const currentPath = this.router.url;
     this.router.navigate(
-      [
-        `${currentPath}/${sector.sectorName
-          .toLowerCase()
-          .replace(' ', '-')}`,
-      ],
-      { state: { sector, event:this.event, area: this.area } }
+      [`${currentPath}/${sector.sectorName.toLowerCase().replace(' ', '-')}`],
+      { state: { sector, event: this.event, area: this.area } }
     );
   }
 
   navigateToAddSector() {
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/add-sector`], {state:{area:this.area, event:this.event}});
-  }
-
-  navigateToEditArea(){
-    const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/edit`],{
-      state: { event: this.event, subevent: this.subevent, area: this.area },
+    this.router.navigate([`${currentPath}/add-sector`], {
+      state: { area: this.area, event: this.event },
     });
   }
 
+  navigateToEditArea() {
+    const currentPath = this.router.url;
+    this.router.navigate([`${currentPath}/edit`], {
+      state: { event: this.event, subevent: this.subevent, area: this.area },
+    });
+  }
 }

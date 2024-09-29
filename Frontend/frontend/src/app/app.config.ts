@@ -9,8 +9,12 @@ import { authInterceptor } from './Admin/interceptors/adminAuth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideRouter(routes), provideAnimationsAsync(), 
-    provideHttpClient(), 
-    provideHttpClient(withInterceptors([authInterceptor, subadminAuthInterceptor]))]
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideAnimationsAsync(),
+    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([authInterceptor, subadminAuthInterceptor])
+    ),
+  ],
 };

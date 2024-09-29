@@ -19,7 +19,7 @@
               required
             />
           </mat-form-field>
-  
+
           <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
             <textarea
@@ -38,7 +38,7 @@
               required
             ></textarea>
           </mat-form-field>
-  
+
           <div class="heads">
             <mat-form-field>
               <mat-label>Head Officer</mat-label>
@@ -51,13 +51,16 @@
                 [matAutocomplete]="head"
                 required
               />
-              <mat-autocomplete #head="matAutocomplete" [displayWith]="displayPoliceName">
+              <mat-autocomplete
+                #head="matAutocomplete"
+                [displayWith]="displayPoliceName"
+              >
                 @for (option of filteredOptionsHead | async; track option) {
                 <mat-option [value]="option">{{ option.fullname }}</mat-option>
                 }
               </mat-autocomplete>
             </mat-form-field>
-  
+
             <mat-form-field appearance="fill">
               <mat-label>Co-Head officer</mat-label>
               <input
@@ -68,14 +71,17 @@
                 formControlName="cohead"
                 [matAutocomplete]="cohead"
               />
-              <mat-autocomplete #cohead="matAutocomplete" [displayWith]="displayPoliceName">
+              <mat-autocomplete
+                #cohead="matAutocomplete"
+                [displayWith]="displayPoliceName"
+              >
                 @for (option of filteredOptionsCohead | async; track option) {
                 <mat-option [value]="option">{{ option.fullname }}</mat-option>
                 }
               </mat-autocomplete>
             </mat-form-field>
           </div>
-  
+
           <button class="submit-button" mat-raised-button type="submit">
             Create Event
           </button>

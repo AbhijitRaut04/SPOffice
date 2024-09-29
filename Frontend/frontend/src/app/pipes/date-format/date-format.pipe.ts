@@ -2,10 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'dateFormat',
-  standalone:true
+  standalone: true,
 })
 export class DateFormatPipe implements PipeTransform {
-
   transform(value: string | Date, format: string = 'shortDate'): string {
     if (!value) {
       return '';
@@ -22,18 +21,21 @@ export class DateFormatPipe implements PipeTransform {
           weekday: 'long',
           year: 'numeric',
           month: 'long',
-          day: 'numeric'
+          day: 'numeric',
         }); // Format as Friday, August 30, 2024
       case 'fullDate':
-        return date.toLocaleDateString(undefined, {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        }) + ' ' + date.toLocaleTimeString(); // Add time
+        return (
+          date.toLocaleDateString(undefined, {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          }) +
+          ' ' +
+          date.toLocaleTimeString()
+        ); // Add time
       default:
         return date.toString();
     }
   }
-
 }

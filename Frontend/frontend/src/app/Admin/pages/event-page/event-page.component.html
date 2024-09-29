@@ -2,24 +2,24 @@
   <app-create-btn></app-create-btn>
 </div> -->
 @if (isLoading) {
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 }
 <div class="wrapper">
   <div class="nav">
     <div class="search">
-      <input type="text" placeholder="Search event ......">
+      <input type="text" placeholder="Search event ......" />
       <mat-icon fontIcon="search"></mat-icon>
     </div>
-    <button mat-button class="create-event" (click)="addEvent()">New Event</button>
-    
+    <button mat-button class="create-event" (click)="addEvent()">
+      New Event
+    </button>
   </div>
 
-  
   <div class="event-list">
     @for (event of events; track $index) {
-      <mat-card appearance="outlined" (click)="navigateToEvent(event)" >
-        <mat-card-content>{{ event.eventname }}</mat-card-content>
-      </mat-card>
+    <mat-card appearance="outlined" (click)="navigateToEvent(event)">
+      <mat-card-content>{{ event.eventname }}</mat-card-content>
+    </mat-card>
     }
     <!-- @empty{
       <div class="no-events">No events</div>

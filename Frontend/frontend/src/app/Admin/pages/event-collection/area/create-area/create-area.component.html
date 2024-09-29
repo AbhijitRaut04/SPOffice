@@ -17,14 +17,8 @@
           <div class="heads">
             <mat-form-field>
               <mat-label>Head Officer</mat-label>
-              <input 
-              type="text" 
-              placeholder="Enter head name" 
-              aria-label="Number" 
-              matInput 
-              formControlName="head"
-              [matAutocomplete]="head" 
-              required />
+              <input type="text" placeholder="Enter head name" aria-label="Number" matInput formControlName="head"
+                [matAutocomplete]="head" required />
               <mat-autocomplete #head="matAutocomplete" [displayWith]="displayPoliceName">
                 @for (option of filteredOptionsHead | async; track option) {
                 <mat-option [value]="option">{{ option.fullname }}</mat-option>
@@ -35,14 +29,8 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Co-Head officer</mat-label>
-            <input
-              type="text"
-              placeholder="Enter co-head name"
-              aria-label="Number"
-              matInput
-              formControlName="cohead"
-              [matAutocomplete]="cohead"
-            />
+            <input type="text" placeholder="Enter co-head name" aria-label="Number" matInput formControlName="cohead"
+              [matAutocomplete]="cohead" />
             <mat-autocomplete #cohead="matAutocomplete" [displayWith]="displayPoliceName">
               @for (option of filteredOptionsCohead | async; track option) {
               <mat-option [value]="option">{{ option.fullname }}</mat-option>

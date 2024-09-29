@@ -2,7 +2,11 @@
   <div class="btns">
     <app-back-btn></app-back-btn>
     <div class="btn-wrap">
-      <button matTooltip="edit subevent" mat-fab (click)="navigateToEditSubevent()">
+      <button
+        matTooltip="edit subevent"
+        mat-fab
+        (click)="navigateToEditSubevent()"
+      >
         <mat-icon>edit</mat-icon>
       </button>
     </div>
@@ -15,13 +19,13 @@
           <p>{{ subevent.subpatrollingname }}</p>
         </div>
 
-
-
         <div class="heads">
           <div class="police-wrapper">
             <h4>Head</h4>
             <div class="police">
-              {{ subevent.head.fullname + " (" + subevent.head.designation + ")" }}
+              {{
+                subevent.head.fullname + " (" + subevent.head.designation + ")"
+              }}
             </div>
             <div class="police-info">
               <p>{{ subevent.head.fullname }}</p>
@@ -35,7 +39,10 @@
             <h4>Cohead</h4>
             <div class="police">
               {{
-                subevent.cohead.fullname + " (" + subevent.cohead.designation + ")"
+                subevent.cohead.fullname +
+                  " (" +
+                  subevent.cohead.designation +
+                  ")"
               }}
             </div>
             <div class="police-info">
@@ -47,7 +54,6 @@
             </div>
           </div>
         </div>
-
 
         <!-- <div class="heads">
           <div class="police-wrapper">
@@ -61,11 +67,11 @@
         </div> -->
         <div class="description-info">
           <h3>Description</h3>
-          <p>{{subevent.description}}</p>
+          <p>{{ subevent.description }}</p>
         </div>
         <div class="instruction-info">
           <h3>Instructions</h3>
-          <p>{{subevent.instructions}}</p>
+          <p>{{ subevent.instructions }}</p>
         </div>
         <!-- <mat-card-footer>footer</mat-card-footer> -->
       </mat-card>
@@ -73,7 +79,7 @@
       <!-- <app-search-toolbar></app-search-toolbar> -->
       <div class="search-toolbar">
         <div class="search">
-          <input type="text" placeholder="Search Area ......">
+          <input type="text" placeholder="Search Area ......" />
           <mat-icon fontIcon="search"></mat-icon>
         </div>
         <button mat-fab matTooltip="add Area" (click)="navigateToAddArea()">
@@ -82,13 +88,12 @@
       </div>
 
       @for (area of subevent.areas; track $index) {
-        <mat-card class="area-card" appearance="outlined">
-          <mat-card-content (click)="navigateToArea(area)">{{
-            area.areaName
-          }}</mat-card-content>
-        </mat-card>
-        }
-
+      <mat-card class="area-card" appearance="outlined">
+        <mat-card-content (click)="navigateToArea(area)">{{
+          area.areaName
+        }}</mat-card-content>
+      </mat-card>
+      }
     </div>
   </div>
 </div>

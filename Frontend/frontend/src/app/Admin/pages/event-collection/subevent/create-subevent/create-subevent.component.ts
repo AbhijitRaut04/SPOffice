@@ -5,7 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AsyncPipe } from '@angular/common';
 import { map, Observable, startWith } from 'rxjs';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -42,20 +47,16 @@ import { Subevent } from '../../../../models/subevent.models';
     MatButtonModule,
   ],
   templateUrl: './create-subevent.component.html',
-  styleUrl: './create-subevent.component.css'
+  styleUrl: './create-subevent.component.css',
 })
 export class CreateSubeventComponent {
-
-
   polices: Police[] = [];
-
 
   filteredOptionsHead: Observable<Police[]>;
   filteredOptionsCohead: Observable<Police[]>;
   eventForm: FormGroup;
-  event:Event;
+  event: Event;
   constructor(private subEventService: SubeventService) {
-    
     this.eventForm = new FormGroup({
       subpatrollingname: new FormControl(''),
       description: new FormControl(''),
@@ -71,19 +72,20 @@ export class CreateSubeventComponent {
   }
 
   getPolices() {
-    Object.values(this.event.attendance).forEach(value => {
-      this.polices = [...value, ...this.polices]
-    })
+    Object.values(this.event.attendance).forEach((value) => {
+      this.polices = [...value, ...this.polices];
+    });
     this.filteredOptionsHead = this.eventForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
-    this.filteredOptionsCohead = this.eventForm.get('cohead')!.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value || ''))
-    );
+    this.filteredOptionsCohead = this.eventForm
+      .get('cohead')!
+      .valueChanges.pipe(
+        startWith(''),
+        map((value) => this._filter(value || ''))
+      );
   }
-
 
   ngOnInit() {
     this.event = history.state.event;
@@ -99,8 +101,6 @@ export class CreateSubeventComponent {
   }
 
   onSubmit() {
-    
-
     const newEvent: Subevent = {
       id: null,
       subpatrollingname: this.eventForm.value.subpatrollingname,
@@ -108,10 +108,9 @@ export class CreateSubeventComponent {
       head: this.eventForm.value.head,
       cohead: this.eventForm.value.cohead,
       instructions: this.eventForm.value.instructions,
-      patrollingId:this.event.id,
-      areas:null
+      patrollingId: this.event.id,
+      areas: null,
     };
-    
 
     this.subEventService.addSubevents(newEvent).subscribe({
       next: (response) => {
@@ -122,11 +121,9 @@ export class CreateSubeventComponent {
       },
       complete: () => {
         console.log('Subevent creation process completed.');
-      }
+      },
     });
   }
-  
+
   readonly panelOpenState = signal(false);
-
-
 }

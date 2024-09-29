@@ -7,27 +7,30 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SubadminService {
-
   private apiUrl = `${environment.baseUrl}/api/subadmins`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   fetchSubadmin(): Observable<CurrentSubadmin> {
-    return this.http.get<CurrentSubadmin>(`${this.apiUrl}/current-subadmin`).pipe(
-      catchError(error => {
-        return throwError(error);
-      })
-    );
+    return this.http
+      .get<CurrentSubadmin>(`${this.apiUrl}/current-subadmin`)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
   }
 
   registerSubadmin(subadmin: Subadmin): Observable<Subadmin> {
-    return this.http.post<Subadmin>(`${this.apiUrl}?admin_id=${subadmin.admin_id}`, subadmin).pipe(
-      catchError(error => {
-        return throwError(error);
-      })
-    );
+    return this.http
+      .post<Subadmin>(`${this.apiUrl}?admin_id=${subadmin.admin_id}`, subadmin)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
   }
 }

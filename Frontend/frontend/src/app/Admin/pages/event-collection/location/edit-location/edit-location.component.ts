@@ -110,7 +110,7 @@ export class EditLocationComponent {
       sectorId: this.sector.id,
       equipments: this.locationForm.value.equipments,
       polices: [],
-      policeIds: null
+      policeIds: null,
     };
 
     this.locationService.addLocation(newLocation).subscribe({

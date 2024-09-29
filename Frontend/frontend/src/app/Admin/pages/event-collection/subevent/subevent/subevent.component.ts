@@ -30,38 +30,36 @@ import { Area } from '../../../../models/area.models';
     SearchToolbarComponent,
   ],
   templateUrl: './subevent.component.html',
-  styleUrl: './subevent.component.css'
+  styleUrl: './subevent.component.css',
 })
 export class SubeventComponent implements OnInit {
-  subevent:Subevent;
-  event:Event;
+  subevent: Subevent;
+  event: Event;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.event = history.state.event;
       this.subevent = history.state.subevent;
     });
   }
 
-  navigateToArea(area:Area){
+  navigateToArea(area: Area) {
     const currentPath = this.router.url;
     this.router.navigate(
-      [
-        `${currentPath}/${area.areaName
-          .toLowerCase()
-          .replace(' ', '-')}`,
-      ],
-      { state: { area, event:this.event, subevent: this.subevent } }
+      [`${currentPath}/${area.areaName.toLowerCase().replace(' ', '-')}`],
+      { state: { area, event: this.event, subevent: this.subevent } }
     );
   }
 
   navigateToAddArea() {
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/add-area`], {state:{subevent:this.subevent, event:this.event}});
+    this.router.navigate([`${currentPath}/add-area`], {
+      state: { subevent: this.subevent, event: this.event },
+    });
   }
-  
+
   navigateToEditSubevent() {
     const currentPath = this.router.url;
     this.router.navigate([`${currentPath}/edit`], {

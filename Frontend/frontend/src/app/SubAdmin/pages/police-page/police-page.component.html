@@ -4,26 +4,40 @@
   </button>
 </div> -->
 
-<button mat-button routerLink="/subadmin/police/register-police">Add Police</button>
-
+<button mat-button routerLink="/subadmin/police/register-police">
+  Add Police
+</button>
 
 <div class="wrapper">
-
-
-
   @for (police of subadmin?.polices; track $index) {
 
-  <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)" [expanded]="expandAll">
+  <mat-expansion-panel
+    (opened)="panelOpenState.set(true)"
+    (closed)="panelOpenState.set(false)"
+    [expanded]="expandAll"
+  >
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <p><strong> Name : </strong>{{ police.designation }} {{ police.fullname }} </p>
+        <p>
+          <strong> Name : </strong>{{ police.designation }}
+          {{ police.fullname }}
+        </p>
       </mat-panel-title>
       <mat-panel-description>
-        <button (click)="deleteById(police.policeId)"><mat-icon aria-hidden="false" aria-label="Example home icon"
-            fontIcon="delete"></mat-icon> </button>
+        <button (click)="deleteById(police.policeId)">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="delete"
+          ></mat-icon>
+        </button>
 
-        <button (click)="editById(police.policeId)"><mat-icon aria-hidden="false" aria-label="Example home icon"
-            fontIcon="edit"></mat-icon>
+        <button (click)="editById(police.policeId)">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="edit"
+          ></mat-icon>
         </button>
       </mat-panel-description>
     </mat-expansion-panel-header>
@@ -34,8 +48,6 @@
     <p><strong>Designation:</strong> {{ police.designation }}</p>
   </mat-expansion-panel>
   }
-
-
 </div>
 
 <!-- <div class="editDialog" *ngIf="openEditDialog === true">

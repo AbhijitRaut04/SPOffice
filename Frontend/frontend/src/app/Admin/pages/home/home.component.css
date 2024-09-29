@@ -39,12 +39,12 @@
 .image img {
   width: 100%;
   height: 100%;
-  transition: scale .2s linear;
+  transition: scale 0.2s linear;
 }
 
-.image img:hover{
-    scale: 1.02;
-    z-index: -1;
+.image img:hover {
+  scale: 1.02;
+  z-index: -1;
 }
 
 .description {

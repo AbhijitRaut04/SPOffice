@@ -9,18 +9,17 @@ import { Sector } from '../../../../models/sector.models';
   standalone: true,
   imports: [],
   templateUrl: './location.component.html',
-  styleUrl: './location.component.css'
+  styleUrl: './location.component.css',
 })
 export class LocationComponent {
-
-  location:Location;
-  event:Event;
+  location: Location;
+  event: Event;
   sector: Sector;
 
-  constructor (private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.event = history.state.event;
       this.sector = history.state.sector;
       this.location = history.state.location;
@@ -28,14 +27,17 @@ export class LocationComponent {
   }
 
   addPolice() {
-    console.log("Add police")
+    console.log('Add police');
   }
 
-  navigateToEditLocation(){
+  navigateToEditLocation() {
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/edit`],{
-      state: { event: this.event, location: this.location, sector: this.sector },
+    this.router.navigate([`${currentPath}/edit`], {
+      state: {
+        event: this.event,
+        location: this.location,
+        sector: this.sector,
+      },
     });
   }
-
 }

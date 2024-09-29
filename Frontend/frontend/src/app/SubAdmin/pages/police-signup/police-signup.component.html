@@ -10,7 +10,6 @@
     <!-- main Form body  -->
 
     <form class="form" [formGroup]="reactiveForm" (ngSubmit)="submit()">
-      
       <!-- Name Field  -->
       <p>
         <mat-form-field class="input-block" appearance="outline">
@@ -18,14 +17,14 @@
           <input class="input" matInput formControlName="fullname" />
         </mat-form-field>
       </p>
-      
+
       <!-- Gender Field  -->
       <p>
         <mat-form-field class="input-block" appearance="outline">
           <mat-label class="label">Gender</mat-label>
           <mat-select formControlName="gender">
-              <mat-option value="Male">Male</mat-option>
-              <mat-option value="Female">Female</mat-option>
+            <mat-option value="Male">Male</mat-option>
+            <mat-option value="Female">Female</mat-option>
           </mat-select>
         </mat-form-field>
       </p>
@@ -89,7 +88,7 @@
           </mat-select>
         </mat-form-field>
       </p>
-<!-- 
+      <!-- 
       
       <p>
         <mat-form-field class="input-block" appearance="outline">
@@ -106,6 +105,5 @@
         <button type="submit" class="submit-btn">Submit</button>
       </div>
     </form>
-
   </div>
 </div>

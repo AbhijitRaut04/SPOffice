@@ -2,9 +2,6 @@
     <div class="btns">
         <app-back-btn></app-back-btn>
         <div class="btn-wrap">
-            <!-- <button matTooltip="add sector" mat-fab (click)="navigateToEditEvent()">
-          <mat-icon>add</mat-icon>
-        </button> -->
             <button matTooltip="edit area" mat-fab (click)="navigateToEditArea()">
                 <mat-icon>edit</mat-icon>
             </button>
@@ -16,9 +13,6 @@
                 <div class="title">
                     <p>{{ area.areaName }}</p>
                 </div>
-
-
-
                 <div class="heads">
                     <div class="police-wrapper">
                         <h4>Head</h4>
@@ -49,30 +43,8 @@
                         </div>
                     </div>
                 </div>
-
-
-                <!-- <div class="heads">
-              <div class="police-wrapper">
-                <h4>Head</h4>
-                <div class="police">{{area.head.fullname + " (" + area.head.designation + ")"}}</div>
-              </div>
-              <div class="police-wrapper">
-                <h4>Cohead</h4>
-                <div class="police">{{area.cohead.fullname + " (" + area.cohead.designation + ")"}}</div>
-              </div>
-            </div> -->
-                <!-- <div class="description-info">
-                    <h3>Description</h3>
-                    <p>{{area.description}}</p>
-                </div>
-                <div class="instruction-info">
-                    <h3>Instructions</h3>
-                    <p>{{area.instructions}}</p>
-                </div> -->
-                <!-- <mat-card-footer>footer</mat-card-footer> -->
             </mat-card>
 
-            <!-- <app-search-toolbar></app-search-toolbar> -->
             <div class="search-toolbar">
                 <div class="search">
                     <input type="text" placeholder="Search Sector ......">

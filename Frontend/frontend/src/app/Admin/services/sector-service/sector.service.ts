@@ -4,15 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { Sector } from '../../models/sector.models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SectorService {
   private apiUrl = `${environment.baseUrl}/api/sectors`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   addSector(sector: Sector) {
-    console.log(sector)
+    console.log(sector);
     return this.http.post<Sector>(this.apiUrl, sector);
   }
 }

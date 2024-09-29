@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './subadmin-home.component.html',
-  styleUrl: './subadmin-home.component.css'
+  styleUrl: './subadmin-home.component.css',
 })
-export class SubadminHomeComponent {
-
-}
+export class SubadminHomeComponent {}
