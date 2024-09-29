@@ -118,6 +118,13 @@ mat-card{
         padding-left: 10px;
     }
 }
+
+mat-card p:nth-child(2){
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
 .search-toolbar {
     width: 100%;
     display: flex;

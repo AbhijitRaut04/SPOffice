@@ -33,6 +33,7 @@ import { CreateSubeventComponent    } from './Admin/pages/event-collection/subev
 import { CreateLocationComponent    } from './Admin/pages/event-collection/location/create-location/create-location.component';
 import { EditAreaComponent } from './Admin/pages/event-collection/area/edit-area/edit-area.component';
 import { EditLocationComponent } from './Admin/pages/event-collection/location/edit-location/edit-location.component';
+import { SubeventPreviewComponent } from './Admin/pages/event-collection/subevent/subevent-preview/subevent-preview.component';
 
 
 export const routes: Routes = [
@@ -85,6 +86,10 @@ export const routes: Routes = [
                                             {
                                                 path: "edit",
                                                 component:EditSubeventComponent
+                                            },
+                                            {
+                                                path: "preview",
+                                                component:SubeventPreviewComponent
                                             },
                                             {
                                                 path:"add-area",

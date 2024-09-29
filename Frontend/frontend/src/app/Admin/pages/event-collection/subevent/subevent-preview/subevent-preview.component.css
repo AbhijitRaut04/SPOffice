@@ -1,0 +1,50 @@
+
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+table {
+  width: 100%;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+@media print {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: left;
+  }
+
+  /* Ensure rows do not break between pages */
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* Add page breaks between tables if needed */
+  .table-container {
+    page-break-after: always;
+  }
+}
+
+
+
+
+th {
+  padding: 10px;
+}
+
+td {
+  padding: 10px 20px;
+}

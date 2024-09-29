@@ -62,6 +62,10 @@ export class SubeventComponent implements OnInit {
     this.router.navigate([`${currentPath}/add-area`], {state:{subevent:this.subevent, event:this.event}});
   }
   
+  navigateToPreviewPdf() {
+    const currentPath = this.router.url;
+    this.router.navigate([`${currentPath}/preview`], {state:{event:this.event, subevent:this.subevent}});
+  }
   editSubevent() {
     const currentPath = this.router.url;
     this.router.navigate([`${currentPath}/edit`]);
