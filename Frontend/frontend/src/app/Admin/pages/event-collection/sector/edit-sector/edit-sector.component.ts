@@ -63,16 +63,16 @@ export class EditSectorComponent {
 
   initializeForm() {
     this.sectorForm = new FormGroup({
-      sectorName: new FormControl(),
-      head: new FormControl(''),
+      sectorName: new FormControl(this.sector.sectorName),
+      head: new FormControl(this.sector.head),
     });
   }
 
   ngOnInit() {
-    this.initializeForm();
     this.event = history.state.event;
     this.area = history.state.area;
     this.sector = history.state.sector;
+    this.initializeForm();
     console.log(this.event);
     this.filteredOptionsHead = this.sectorForm.get('head')!.valueChanges.pipe(
       startWith(''),
@@ -105,22 +105,22 @@ export class EditSectorComponent {
 
   onSubmit() {
     const newSector: Sector = {
-      id: null,
+      id: this.sector.id,
       sectorName: this.sectorForm.value.sectorName,
       head: this.sectorForm.value.head,
       locations: null,
       area: this.area,
     };
 
-    this.sectorService.addSector(newSector).subscribe({
+    this.sectorService.editSector(newSector).subscribe({
       next: (response) => {
-        console.log('Sector created successfully:', response);
+        console.log('Sector edited successfully:', response);
       },
       error: (error) => {
-        console.error('Error creating sector:', error);
+        console.error('Error editing sector:', error);
       },
       complete: () => {
-        console.log('Sector creation process completed.');
+        console.log('Sector editing process completed.');
       },
     });
   }

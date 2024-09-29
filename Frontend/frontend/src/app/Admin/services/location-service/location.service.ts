@@ -15,4 +15,9 @@ export class LocationService {
     console.log(location);
     return this.http.post<Location>(this.apiUrl, location);
   }
+
+  editLocation(location: Location) {
+    console.log(location);
+    return this.http.put<Location>(`${this.apiUrl}/${location.id}`, location);
+  }
 }

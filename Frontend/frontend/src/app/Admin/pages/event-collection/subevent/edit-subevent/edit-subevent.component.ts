@@ -121,7 +121,7 @@ export class EditSubeventComponent implements OnInit {
 
   onSubmit() {
     const newEvent: Subevent = {
-      id: null,
+      id: this.subevent.id,
       subpatrollingname: this.subeventForm.value.subpatrollingname,
       description: this.subeventForm.value.description,
       head: this.subeventForm.value.head,
@@ -131,7 +131,7 @@ export class EditSubeventComponent implements OnInit {
       areas: null,
     };
 
-    this.subEventService.addSubevents(newEvent).subscribe({
+    this.subEventService.updateSubevent(newEvent).subscribe({
       next: (response) => {
         console.log('Subevent created successfully:', response);
       },

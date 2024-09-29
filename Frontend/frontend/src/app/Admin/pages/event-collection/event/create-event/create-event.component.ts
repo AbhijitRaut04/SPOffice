@@ -140,17 +140,6 @@ export class CreateEventComponent implements OnInit {
 
   onSubmit() {
     if (this.eventForm.invalid) return;
-    // const newEvent: Event = {
-    //   id: null,
-    //   adminId: null,
-    //   eventname: this.eventForm.value.eventname,
-    //   description: this.eventForm.value.description,
-    //   head: this.eventForm.value.head,
-    //   cohead: this.eventForm.value.cohead,
-    //   date: this.eventForm.value.date,
-    //   subpatrollings: null,
-    // };
-
     this.eventService.addEvent(this.eventForm.value).subscribe({
       next: (response) => {
         console.log('Event created successfully:', response);

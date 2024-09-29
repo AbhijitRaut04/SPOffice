@@ -23,6 +23,11 @@ export class EventService {
     return this.http.post<Event>(this.apiUrl, event);
   }
 
+  updateEvent(event: Event) {
+    console.log(event);
+    return this.http.put<Event>(`${this.apiUrl}/${event.id}`, event);
+  }
+
   deleteEvent(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
