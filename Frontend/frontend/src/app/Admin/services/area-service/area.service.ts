@@ -20,4 +20,9 @@ export class AreaService {
     console.log(area);
     return this.http.post<Area>(this.apiUrl, area);
   }
+
+  editArea(area: Area) {
+    console.log(area);
+    return this.http.put<Area>(`${this.apiUrl}/${area.id}`, area);
+  }
 }

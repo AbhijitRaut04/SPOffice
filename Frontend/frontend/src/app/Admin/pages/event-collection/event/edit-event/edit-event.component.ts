@@ -85,6 +85,7 @@ export class EditEventComponent implements OnInit {
       head: new FormControl(this.event.head, Validators.required),
       cohead: new FormControl(this.event.cohead, Validators.required),
       date: new FormControl(this.event.date, Validators.required),
+      id: new FormControl(this.event.id, Validators.required),
     });
   }
 
@@ -139,18 +140,8 @@ export class EditEventComponent implements OnInit {
 
   onSubmit() {
     if (this.eventForm.invalid) return;
-    // const newEvent: Event = {
-    //   id: null,
-    //   adminId: null,
-    //   eventname: this.eventForm.value.eventname,
-    //   description: this.eventForm.value.description,
-    //   head: this.eventForm.value.head,
-    //   cohead: this.eventForm.value.cohead,
-    //   date: this.eventForm.value.date,
-    //   subpatrollings: null,
-    // };
 
-    this.eventService.addEvent(this.eventForm.value).subscribe({
+    this.eventService.updateEvent(this.eventForm.value).subscribe({
       next: (response) => {
         console.log('Event created successfully:', response);
       },
