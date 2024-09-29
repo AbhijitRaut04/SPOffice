@@ -70,9 +70,10 @@
 
       @for (subevent of event.subpatrollings; track $index) {
       <mat-card appearance="outlined">
-        <mat-card-content (click)="navigateToSubevent(subevent)">{{
-          subevent.subpatrollingname
-        }}</mat-card-content>
+        <mat-card-content>
+          <p (click)="navigateToSubevent(subevent)">{{ subevent.subpatrollingname }}</p>
+          <p (click)="navigateToPreviewPdf(subevent)">pdf</p>
+        </mat-card-content>
       </mat-card>
       }
     </div>

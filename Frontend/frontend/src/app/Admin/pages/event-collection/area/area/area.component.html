@@ -27,6 +27,7 @@
                             <p>{{ area.head.designation }}</p>
                         </div>
                     </div>
+                    @if (area.cohead !== null) {
                     <div class="police-wrapper">
                         <h4>Cohead</h4>
                         <div class="police">
@@ -42,6 +43,7 @@
                             <p>{{ area.cohead.designation }}</p>
                         </div>
                     </div>
+                }
                 </div>
             </mat-card>
 

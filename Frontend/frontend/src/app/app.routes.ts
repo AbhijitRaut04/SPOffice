@@ -33,216 +33,221 @@ import { CreateSubeventComponent } from './Admin/pages/event-collection/subevent
 import { CreateLocationComponent } from './Admin/pages/event-collection/location/create-location/create-location.component';
 import { EditAreaComponent } from './Admin/pages/event-collection/area/edit-area/edit-area.component';
 import { EditLocationComponent } from './Admin/pages/event-collection/location/edit-location/edit-location.component';
+import { SubeventPreviewComponent } from './Admin/pages/event-collection/subevent/subevent-preview/subevent-preview.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: AppAdminComponent,
-    children: [
-      {
-        path: '',
-        component: HomeComponent,
-      },
-      {
-        path: 'events',
-        canActivate: [adminGuard],
+    {
+        path: "",
+        component: AppAdminComponent,
         children: [
-          // events
-          {
-            path: '',
-            component: EventPageComponent,
-          },
-          {
-            path: 'create-event',
-            component: CreateEventComponent,
-          },
-          {
-            path: ':eventname',
-            children: [
-              {
-                path: '',
+            {
+                path:"",
+                component:HomeComponent
+            },
+            {
+                path: "events",
+                canActivate: [adminGuard],
                 children: [
-                  {
-                    path: '',
-                    component: EventComponent,
-                  },
-                  {
-                    path: 'add-subevent',
-                    component: CreateSubeventComponent,
-                  },
-                  {
-                    path: 'edit',
-                    component: EditEventComponent,
-                  },
-                  {
-                    path: ':subeventname',
-                    children: [
-                      {
-                        path: '',
-                        component: SubeventComponent,
-                      },
-                      {
-                        path: 'edit',
-                        component: EditSubeventComponent,
-                      },
-                      {
-                        path: 'add-area',
-                        component: CreateAreaComponent,
-                      },
-                      {
-                        path: ':areaname',
+                    // events
+                    {
+                        path: "",
+                        component: EventPageComponent,
+                    },
+                    {
+                        path: "create-event",
+                        component:CreateEventComponent
+                    },
+                    {
+                        path: ":eventname",
                         children: [
-                          {
-                            path: '',
-                            component: AreaComponent,
-                          },
-                          {
-                            path: 'edit',
-                            component: EditAreaComponent,
-                          },
-                          {
-                            path: 'add-sector',
-                            component: CreateSectorComponent,
-                          },
-                          {
-                            path: ':sectorname',
-                            children: [
-                              {
-                                path: '',
-                                component: SectorComponent,
-                              },
-                              {
-                                path: 'edit',
-                                component: EditSectorComponent,
-                              },
-                              {
-                                path: 'add-location',
-                                component: CreateLocationComponent,
-                              },
-                              {
-                                path: ':locationname',
+                            {
+                                path:"",
                                 children: [
-                                  {
-                                    path: '',
-                                    component: LocationComponent,
-                                  },
-                                  {
-                                    path: 'edit',
-                                    component: EditLocationComponent,
-                                  },
-                                  // edit location
+                                    {
+                                        path:"",
+                                        component:EventComponent,
+                                    },
+                                    {
+                                        path:"add-subevent",
+                                        component:CreateSubeventComponent
+                                    },
+                                    {
+                                        path: "edit",
+                                        component:EditEventComponent
+                                    },
+                                    {
+                                        path:":subeventname",
+                                        children:[
+                                            {
+                                                path:"",
+                                                component:SubeventComponent,
+                                            },
+                                            {
+                                                path: "edit",
+                                                component:EditSubeventComponent
+                                            },
+                                            {
+                                                path: "preview",
+                                                component:SubeventPreviewComponent
+                                            },
+                                            {
+                                                path:"add-area",
+                                                component:CreateAreaComponent
+                                            },
+                                            {
+                                                path:":areaname",
+                                                children:[
+                                                    {
+                                                        path:"",
+                                                        component:AreaComponent
+                                                    },
+                                                    {
+                                                        path: "edit",
+                                                        component:EditAreaComponent
+                                                    },
+                                                    {
+                                                        path:"add-sector",
+                                                        component:CreateSectorComponent
+                                                    },
+                                                    {
+                                                        path:":sectorname",
+                                                        children:[
+                                                            {
+                                                                path:"",
+                                                                component:SectorComponent
+                                                            },
+                                                            {
+                                                                path: "edit",
+                                                                component:EditSectorComponent
+                                                            },
+                                                            {
+                                                                path:"add-location",
+                                                                component:CreateLocationComponent
+                                                            },
+                                                            {
+                                                                path:":locationname",
+                                                                children:[
+                                                                    {
+                                                                        path:"",
+                                                                        component:LocationComponent
+                                                                    },
+                                                                    {
+                                                                        path: "edit",
+                                                                        component:EditLocationComponent
+                                                                    },
+                                                                    // edit location
 
-                                  // nested routing routing ends
-                                ],
-                              },
-                            ],
-                          },
-                        ],
-                      },
-                    ],
-                  },
+                                                                    // nested routing routing ends
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            // {
+                            //     path:"edit",
+                            //     component:CreateEventComponent,
+                            // },
+                            // {
+                            //     path:"",
+                            //     children: [
+                            //         {
+                            //             path:"edit",
+                            //             component:CreateEventComponent,
+                            //         },
+                            //         {
+                            //             path:":name",
+                            //             component:SubeventComponent,
+                            //         }
+                            //     ]
+                            // }
+                        ]
+                    },
+                ]
+            },
+            {
+                path: "requests",
+                component: RequestsComponent,
+                canActivate: [adminGuard]
+            },
+            {
+                path: "subadmins",
+                canActivate: [adminGuard],
+                children: [
+                    {
+                        path: "",
+                        component: SubadminsComponent,
+                    },
+                    {
+                        path: ":subadmin",
+                        component: SubadminPageComponent,
+                    }
+                ]
+            },
+            {
+                path: "login",
+                component: LoginComponent
+            },
+            {
+                path: "signup",
+                component: AdminSignupComponent
+            },
+        ]
+    },
+
+    {
+        path: "subadmin",
+        component:AppSubadminComponent,
+        children: [
+            {
+                path: "",
+                canActivate:[subadminGuard],
+                component: SubadminHomeComponent
+            },
+            {
+                path: "events",
+                canActivate:[subadminGuard],
+                children:[
+                    {
+                        path:"",
+                        component: EventsPageComponent
+                    },
+                    {
+                        path:":event-name",
+                        component: SubadminEventPageComponent
+                    },
                 ],
-              },
-              // {
-              //     path:"edit",
-              //     component:CreateEventComponent,
-              // },
-              // {
-              //     path:"",
-              //     children: [
-              //         {
-              //             path:"edit",
-              //             component:CreateEventComponent,
-              //         },
-              //         {
-              //             path:":name",
-              //             component:SubeventComponent,
-              //         }
-              //     ]
-              // }
-            ],
-          },
-        ],
-      },
-      {
-        path: 'requests',
-        component: RequestsComponent,
-        canActivate: [adminGuard],
-      },
-      {
-        path: 'subadmins',
-        canActivate: [adminGuard],
-        children: [
-          {
-            path: '',
-            component: SubadminsComponent,
-          },
-          {
-            path: ':subadmin',
-            component: SubadminPageComponent,
-          },
-        ],
-      },
-      {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: 'signup',
-        component: AdminSignupComponent,
-      },
-    ],
-  },
-
-  {
-    path: 'subadmin',
-    component: AppSubadminComponent,
-    children: [
-      {
-        path: '',
-        canActivate: [subadminGuard],
-        component: SubadminHomeComponent,
-      },
-      {
-        path: 'events',
-        canActivate: [subadminGuard],
-        children: [
-          {
-            path: '',
-            component: EventsPageComponent,
-          },
-          {
-            path: ':event-name',
-            component: SubadminEventPageComponent,
-          },
-        ],
-      },
-      {
-        path: 'police',
-        canActivate: [subadminGuard],
-        children: [
-          {
-            path: '',
-            component: PolicePageComponent,
-          },
-          {
-            path: 'register-police',
-            component: PoliceSignupComponent,
-          },
-        ],
-      },
-      {
-        path: 'signup',
-        component: SubAdminSignupComponent,
-      },
-      {
-        path: 'login',
-        component: SubadminLoginComponent,
-      },
-    ],
-  },
-  {
-    path: '**',
-    component: PageNotFoundComponent,
-  },
+            },
+            {
+                path: "police",
+                canActivate:[subadminGuard],
+                children:[
+                    {
+                        path:"",
+                        component: PolicePageComponent
+                    },
+                    {
+                        path:"register-police",
+                        component:PoliceSignupComponent
+                    }
+                ],
+            },
+            {
+                path: "signup",
+                component: SubAdminSignupComponent
+            },
+            {
+                path: "login",
+                component: SubadminLoginComponent
+            }
+        ]
+    },
+    {
+        path: "**",
+        component: PageNotFoundComponent
+    }
 ];

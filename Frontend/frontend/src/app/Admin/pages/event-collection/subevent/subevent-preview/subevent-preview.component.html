@@ -1,0 +1,209 @@
+
+
+<button (click)="print()">Print</button>
+
+
+<div class="header">
+
+    <div>
+        <!-- <h2>{{subevent.subpatrollingname}}  </h2> -->
+        <p> {{subevent.subpatrollingname}}  चे प्रभारी अधिकारी {{subevent.head.fullname}} {{subevent.head.designation}} हे राहतील</p>
+        <p>आणि सहाय्यक अधिकारी  {{subevent.cohead.fullname}}  {{subevent.cohead.designation}} हे राहतील</p>
+    </div>
+
+</div>
+
+
+
+
+<table class="table-container">
+    <thead>
+        <tr>
+            <th>Area</th>
+            <th>Sector</th>
+            <th>Index</th>
+            <th>Location</th>
+            <th>Head at Location</th>
+            <th>Polices</th>
+            <th>Equipments</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Loop through Areas -->
+        @for (area of subevent.areas; track areaIndex; let areaIndex = $index) {
+            <!-- Loop through Sectors within each Area -->
+            @for (sector of area.sectors; track sectorIndex; let sectorIndex = $index, fs = $first) {
+                <!-- Loop through Locations within each Sector -->
+                @for (location of sector.locations; track locationIndex; let locationIndex = $index, fl = $first ) {
+                    <tr>
+                        <!-- Render Area Name only for the first Sector and first Location of the Area -->
+                        @if (fs && fl) {
+                                <td [attr.rowspan]="getRowSpan(area)">
+                                    <p>{{ area.areaName }}</p>
+                                    <p>{{ area.head.fullname }}</p>
+                                    <p>{{area.head.designation}}</p>
+                                </td>
+                        }
+                        
+                        <!-- Render Sector Name only for the first Location of the Sector -->
+                        @if (fl) {
+                            <td [attr.rowspan]="sector.locations.length">
+                                <p>{{ sector.sectorName }}</p>
+                                <p>{{ sector.head.fullname }}</p>
+                                <p>{{ sector.head.designation }}</p>
+                                    
+                            </td>
+                        }
+
+                        <!-- Render the Location and other details -->
+                        <td>{{ locationIndex + 1 }}</td>
+                        <td>{{ location.locationName }}</td>
+                        <td>
+                            <p>{{ location.head.fullname }}</p>
+                            <p>{{ location.head.designation }}</p>
+                            <p>{{ location.head.phone }}</p>
+
+                        </td>
+                        <td>
+                            <ol>
+                                @for (police of location.polices; track $index) {
+                                    <li>
+                                        <p>{{ police.fullname }} / {{ police.policeId }}</p>
+                                        <p>{{ police.designation }}</p>
+                                        <p>{{ police.phone }}</p>
+                                    </li>
+                                }
+                            </ol>
+                        </td>
+                        <td>
+                            <ol>
+                                @for (equipment of location.equipments; track $index) {
+                                    <li>{{ equipment }}</li>
+                                }
+                            </ol>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+    <tbody>
+        <!-- Loop through Areas -->
+        @for (area of subevent.areas; track areaIndex; let areaIndex = $index) {
+            <!-- Loop through Sectors within each Area -->
+            @for (sector of area.sectors; track sectorIndex; let sectorIndex = $index, fs = $first) {
+                <!-- Loop through Locations within each Sector -->
+                @for (location of sector.locations; track locationIndex; let locationIndex = $index, fl = $first ) {
+                    <tr>
+                        <!-- Render Area Name only for the first Sector and first Location of the Area -->
+                        @if (fs && fl) {
+                                <td [attr.rowspan]="getRowSpan(area)">
+                                    <p>{{ area.areaName }}</p>
+                                    <p>{{ area.head.fullname }}</p>
+                                    <p>{{area.head.designation}}</p>
+                                </td>
+                        }
+                        
+                        <!-- Render Sector Name only for the first Location of the Sector -->
+                        @if (fl) {
+                            <td [attr.rowspan]="sector.locations.length">
+                                <p>{{ sector.sectorName }}</p>
+                                <p>{{ sector.head.fullname }}</p>
+                                <p>{{ sector.head.designation }}</p>
+                                    
+                            </td>
+                        }
+
+                        <!-- Render the Location and other details -->
+                        <td>{{ locationIndex + 1 }}</td>
+                        <td>{{ location.locationName }}</td>
+                        <td>
+                            <p>{{ location.head.fullname }}</p>
+                            <p>{{ location.head.designation }}</p>
+                            <p>{{ location.head.phone }}</p>
+
+                        </td>
+                        <td>
+                            <ol>
+                                @for (police of location.polices; track $index) {
+                                    <li>
+                                        <p>{{ police.fullname }} / {{ police.policeId }}</p>
+                                        <p>{{ police.designation }}</p>
+                                        <p>{{ police.phone }}</p>
+                                    </li>
+                                }
+                            </ol>
+                        </td>
+                        <td>
+                            <ol>
+                                @for (equipment of location.equipments; track $index) {
+                                    <li>{{ equipment }}</li>
+                                }
+                            </ol>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+    <tbody>
+        <!-- Loop through Areas -->
+        @for (area of subevent.areas; track areaIndex; let areaIndex = $index) {
+            <!-- Loop through Sectors within each Area -->
+            @for (sector of area.sectors; track sectorIndex; let sectorIndex = $index, fs = $first) {
+                <!-- Loop through Locations within each Sector -->
+                @for (location of sector.locations; track locationIndex; let locationIndex = $index, fl = $first ) {
+                    <tr>
+                        <!-- Render Area Name only for the first Sector and first Location of the Area -->
+                        @if (fs && fl) {
+                                <td [attr.rowspan]="getRowSpan(area)">
+                                    <p>{{ area.areaName }}</p>
+                                    <p>{{ area.head.fullname }}</p>
+                                    <p>{{area.head.designation}}</p>
+                                </td>
+                        }
+                        
+                        <!-- Render Sector Name only for the first Location of the Sector -->
+                        @if (fl) {
+                            <td [attr.rowspan]="sector.locations.length">
+                                <p>{{ sector.sectorName }}</p>
+                                <p>{{ sector.head.fullname }}</p>
+                                <p>{{ sector.head.designation }}</p>
+                                    
+                            </td>
+                        }
+
+                        <!-- Render the Location and other details -->
+                        <td>{{ locationIndex + 1 }}</td>
+                        <td>{{ location.locationName }}</td>
+                        <td>
+                            <p>{{ location.head.fullname }}</p>
+                            <p>{{ location.head.designation }}</p>
+                            <p>{{ location.head.phone }}</p>
+
+                        </td>
+                        <td>
+                            <ol>
+                                @for (police of location.polices; track $index) {
+                                    <li>
+                                        <p>{{ police.fullname }} / {{ police.policeId }}</p>
+                                        <p>{{ police.designation }}</p>
+                                        <p>{{ police.phone }}</p>
+                                    </li>
+                                }
+                            </ol>
+                        </td>
+                        <td>
+                            <ol>
+                                @for (equipment of location.equipments; track $index) {
+                                    <li>{{ equipment }}</li>
+                                }
+                            </ol>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+
+</table>

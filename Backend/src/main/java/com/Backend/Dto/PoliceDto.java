@@ -23,7 +23,7 @@ public class PoliceDto {
     private String email;
     private String gender;
     private String designation;
-    private Long subadminId;
+    private SubadminDto subadmin;
     // private Long areaId;
     // private Long sectorId;
 
@@ -36,7 +36,7 @@ public class PoliceDto {
         .email(police.getEmail())
         .gender(police.getGender())
         .designation(police.getDesignation())
-        .subadminId(police.getSubadmin().getId())
+        .subadmin(new SubadminDto().buildSubadmin(police.getSubadmin(), null))
         .build();
         return policeDto;
     }

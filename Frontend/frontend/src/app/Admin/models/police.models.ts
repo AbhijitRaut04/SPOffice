@@ -1,3 +1,5 @@
+import { Subadmin } from "./subadmin.model";
+
 export interface Police {
     id: number,
     fullname: string,
@@ -6,4 +8,5 @@ export interface Police {
     email: string;
     gender: string;
     designation: string;
+    subadmin:Subadmin;
 }

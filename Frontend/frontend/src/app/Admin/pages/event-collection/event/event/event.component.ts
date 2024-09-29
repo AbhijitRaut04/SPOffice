@@ -56,7 +56,15 @@ export class EventComponent implements OnInit {
     );
   }
 
-  navigateToAddSubevent() {
+ navigateToPreviewPdf(subevent:Subevent) {
+    const currentPath = this.router.url;
+    this.router.navigate([`${currentPath}/${subevent.subpatrollingname
+      .toLowerCase()
+      .replace(' ', '-')}/preview`], {state:{event:this.event, subevent}});
+  }
+
+
+ navigateToAddSubevent() {
     const currentPath = this.router.url;
     this.router.navigate([`${currentPath}/add-subevent`], {
       state: { event: this.event },
