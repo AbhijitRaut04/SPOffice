@@ -50,7 +50,7 @@ import { Subevent } from '../../../../models/subevent.models';
   templateUrl: './edit-subevent.component.html',
   styleUrl: './edit-subevent.component.css',
 })
-export class EditSubeventComponent implements OnInit  {
+export class EditSubeventComponent implements OnInit {
   polices: Police[] = [];
   event: Event;
   subevent: Subevent;
@@ -63,22 +63,34 @@ export class EditSubeventComponent implements OnInit  {
 
   initializeForm() {
     this.subeventForm = new FormGroup({
-      subpatrollingname: new FormControl(this.subevent.subpatrollingname, Validators.required),
-      description: new FormControl(this.subevent.description, Validators.required),
-      instructions: new FormControl(this.subevent.instructions, Validators.required),
+      subpatrollingname: new FormControl(
+        this.subevent.subpatrollingname,
+        Validators.required
+      ),
+      description: new FormControl(
+        this.subevent.description,
+        Validators.required
+      ),
+      instructions: new FormControl(
+        this.subevent.instructions,
+        Validators.required
+      ),
       head: new FormControl(this.subevent.head, Validators.required),
       cohead: new FormControl(this.subevent.cohead, Validators.required),
-      patrollingId: new FormControl(this.subevent.patrollingId, Validators.required),
+      patrollingId: new FormControl(
+        this.subevent.patrollingId,
+        Validators.required
+      ),
     });
   }
-  
+
   ngOnInit() {
     this.event = history.state.event;
     this.subevent = history.state.subevent;
     this.initializeForm();
     this.getPolices();
   }
-  
+
   displayPoliceName(option: Police): string {
     return option ? option.fullname : '';
   }

@@ -54,23 +54,25 @@ export class EditAreaComponent implements OnInit {
   areaForm: FormGroup;
   subevent: Subevent;
   event: Event;
+  area: Area;
 
   constructor(private areaService: AreaService) {}
 
   initializeForm() {
     this.areaForm = new FormGroup({
-      areaName: new FormControl(),
-      head: new FormControl(''),
-      cohead: new FormControl(''),
-      subPatrollingId: new FormControl(''),
+      areaName: new FormControl(this.area.areaName),
+      head: new FormControl(this.area.head),
+      cohead: new FormControl(this.area.cohead),
+      subPatrollingId: new FormControl(this.area.subPatrollingId),
     });
   }
 
   ngOnInit() {
-    this.initializeForm();
-    this.subevent = history.state.subevent;
     this.event = history.state.event;
-    console.log(this.event);
+    this.subevent = history.state.subevent;
+    this.area = history.state.area;
+    this.initializeForm();
+
     this.filteredOptionsHead = this.areaForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))

@@ -9,6 +9,7 @@ import { Event } from '../../../../models/event.models';
 import { Location } from '../../../../models/location.models';
 import { CreateBtnComponent } from '../../../../components/reusable/create-btn/create-btn.component';
 import { MatCardModule } from '@angular/material/card';
+import { Area } from '../../../../models/area.models';
 
 @Component({
   selector: 'app-sector',
@@ -19,27 +20,27 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatTooltipModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
   ],
   templateUrl: './sector.component.html',
-  styleUrl: './sector.component.css'
+  styleUrl: './sector.component.css',
 })
 export class SectorComponent implements OnInit {
-
   sector: Sector;
-  event:Event;
+  event: Event;
+  area: Area;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
-  
+  constructor(private route: ActivatedRoute, private router: Router) {}
+
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.sector = history.state.sector;
-      console.log(this.sector)
+    this.route.queryParams.subscribe((params) => {
       this.event = history.state.event;
+      this.area = history.state.area;
+      this.sector = history.state.sector;
     });
   }
 
-  navigateToLocation(location:Location){
+  navigateToLocation(location: Location) {
     const currentPath = this.router.url;
     this.router.navigate(
       [
@@ -47,17 +48,21 @@ export class SectorComponent implements OnInit {
           .toLowerCase()
           .replace(' ', '-')}`,
       ],
-      { state: { location, event:this.event } }
+      { state: { location, event: this.event, sector: this.sector } }
     );
   }
 
   navigateToAddLocation() {
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/add-location`], {state:{sector:this.sector, event:this.event}});
+    this.router.navigate([`${currentPath}/add-location`], {
+      state: { sector: this.sector, event: this.event },
+    });
   }
 
-  editSector() {
+  navigateToEditSector() {
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/edit`]);
+    this.router.navigate([`${currentPath}/edit`], {
+      state: { event: this.event, sector: this.sector, area: this.area },
+    });
   }
 }

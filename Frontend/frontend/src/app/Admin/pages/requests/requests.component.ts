@@ -15,17 +15,16 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./requests.component.css'],
 })
 export class RequestsComponent implements OnInit {
-
   allRequests: Request[] = [];
   requests: Request[] = [];
 
   items = [
-    { title: "All", active: true, index: 0 },
-    { title: "Approved", active: false, index: 1 },
-    { title: "Pending", active: false, index: 2 }
+    { title: 'All', active: true, index: 0 },
+    { title: 'Approved', active: false, index: 1 },
+    { title: 'Pending', active: false, index: 2 },
   ];
 
-  constructor(private subadminService: SubadminService) { }
+  constructor(private subadminService: SubadminService) {}
 
   ngOnInit(): void {
     this.getRequests();
@@ -42,9 +41,13 @@ export class RequestsComponent implements OnInit {
     if (this.items[0].active) {
       this.requests = [...this.allRequests];
     } else if (this.items[1].active) {
-      this.requests = this.allRequests.filter(item => item.status === "APPROVED");
+      this.requests = this.allRequests.filter(
+        (item) => item.status === 'APPROVED'
+      );
     } else if (this.items[2].active) {
-      this.requests = this.allRequests.filter(item => item.status !== "APPROVED");
+      this.requests = this.allRequests.filter(
+        (item) => item.status !== 'APPROVED'
+      );
     }
   }
 
@@ -52,38 +55,44 @@ export class RequestsComponent implements OnInit {
     this.subadminService.getRequests().subscribe(
       (data: Request[]) => {
         this.allRequests = data;
-        this.applyFilter(); 
+        this.applyFilter();
         console.log(this.requests);
       },
-      error => {
-        console.error("Error fetching requests:", error);
+      (error) => {
+        console.error('Error fetching requests:', error);
       }
     );
   }
 
   reject(request: Request) {
-    this.subadminService.rejectRequest(request).pipe(
-      switchMap(() => this.subadminService.getRequests()),
-      catchError(error => {
-        console.error("Error rejecting request:", error);
-        return of([]);
-      })
-    ).subscribe((data: Request[]) => {
-      this.allRequests = data;
-      this.applyFilter();
-    });
+    this.subadminService
+      .rejectRequest(request)
+      .pipe(
+        switchMap(() => this.subadminService.getRequests()),
+        catchError((error) => {
+          console.error('Error rejecting request:', error);
+          return of([]);
+        })
+      )
+      .subscribe((data: Request[]) => {
+        this.allRequests = data;
+        this.applyFilter();
+      });
   }
 
   approve(request: Request) {
-    this.subadminService.approveRequest(request).pipe(
-      switchMap(() => this.subadminService.getRequests()),
-      catchError(error => {
-        console.error("Error approving request:", error);
-        return of([]);
-      })
-    ).subscribe((data: Request[]) => {
-      this.allRequests = data;
-      this.applyFilter();
-    });
+    this.subadminService
+      .approveRequest(request)
+      .pipe(
+        switchMap(() => this.subadminService.getRequests()),
+        catchError((error) => {
+          console.error('Error approving request:', error);
+          return of([]);
+        })
+      )
+      .subscribe((data: Request[]) => {
+        this.allRequests = data;
+        this.applyFilter();
+      });
   }
 }

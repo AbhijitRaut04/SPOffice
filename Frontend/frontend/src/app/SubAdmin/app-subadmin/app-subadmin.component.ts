@@ -8,8 +8,6 @@ import { FooterComponent } from '../components/footer/footer.component';
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app-subadmin.component.html',
-  styleUrl: './app-subadmin.component.css'
+  styleUrl: './app-subadmin.component.css',
 })
-export class AppSubadminComponent {
-
-}
+export class AppSubadminComponent {}

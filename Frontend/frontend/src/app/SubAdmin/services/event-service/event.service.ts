@@ -5,19 +5,18 @@ import { Event } from '../../models/event.models';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventService {
   private apiUrl = `${environment.baseUrl}/api/patrollings`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<Event[]>{
+  getEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.apiUrl}`);
   }
 
-  sendAttendance(attendance:any):Observable<Event>{
+  sendAttendance(attendance: any): Observable<Event> {
     return this.http.put<Event>(`${this.apiUrl}/send-attendance`, attendance);
   }
-
 }

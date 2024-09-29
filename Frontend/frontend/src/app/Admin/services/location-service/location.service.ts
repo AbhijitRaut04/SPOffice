@@ -4,15 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { Location } from '../../models/location.models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocationService {
   private apiUrl = `${environment.baseUrl}/api/locations`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   addLocation(location: Location) {
-    console.log(location)
+    console.log(location);
     return this.http.post<Location>(this.apiUrl, location);
   }
 }

@@ -73,7 +73,6 @@ export class EditEventComponent implements OnInit {
   filteredOptionsHead: Observable<Police[]>;
   filteredOptionsCohead: Observable<Police[]>;
 
-
   constructor(
     private eventService: EventService,
     private policeService: PoliceService

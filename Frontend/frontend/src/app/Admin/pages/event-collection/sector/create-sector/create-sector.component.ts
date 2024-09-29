@@ -4,7 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-btn.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -41,33 +46,31 @@ import { Area } from '../../../../models/area.models';
     MatButtonModule,
   ],
   templateUrl: './create-sector.component.html',
-  styleUrl: './create-sector.component.css'
+  styleUrl: './create-sector.component.css',
 })
 export class CreateSectorComponent {
-
   filteredOptionsHead: Observable<Police[]>;
   filteredOptionsCohead: Observable<Police[]>;
 
   polices: Police[] = [];
 
-  sectorForm:FormGroup;
-  area:Area;
-  event:Event;
+  sectorForm: FormGroup;
+  area: Area;
+  event: Event;
 
   constructor(private sectorService: SectorService) {}
 
   initializeForm() {
     this.sectorForm = new FormGroup({
       sectorName: new FormControl(),
-      head: new FormControl('')
+      head: new FormControl(''),
     });
   }
 
   ngOnInit() {
-    this.initializeForm();
     this.area = history.state.area;
     this.event = history.state.event;
-    console.log(this.event)
+    this.initializeForm();
     this.filteredOptionsHead = this.sectorForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
@@ -80,9 +83,9 @@ export class CreateSectorComponent {
   }
 
   getPolices() {
-    Object.values(this.event.attendance).forEach(value => {
-      this.polices = [...value, ...this.polices]
-    })
+    Object.values(this.event.attendance).forEach((value) => {
+      this.polices = [...value, ...this.polices];
+    });
     this.filteredOptionsHead = this.sectorForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
@@ -101,9 +104,9 @@ export class CreateSectorComponent {
     const newSector: Sector = {
       id: null,
       sectorName: this.sectorForm.value.sectorName,
-      head:this.sectorForm.value.head,
-      locations:null,
-      area:this.area
+      head: this.sectorForm.value.head,
+      locations: null,
+      area: this.area,
     };
 
     this.sectorService.addSector(newSector).subscribe({
@@ -118,5 +121,4 @@ export class CreateSectorComponent {
       },
     });
   }
-
 }

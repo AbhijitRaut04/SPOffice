@@ -53,24 +53,25 @@ export class EditLocationComponent {
   polices: Police[] = [];
 
   locationForm: FormGroup;
-  sector: Sector;
+  location: Location;
   event: Event;
+  sector: Sector;
 
   constructor(private locationService: LocationService) {}
 
   initializeForm() {
     this.locationForm = new FormGroup({
-      locationName: new FormControl(),
-      head: new FormControl(''),
-      equipments: new FormControl(''),
+      locationName: new FormControl(this.location.locationName),
+      head: new FormControl(this.location.head),
+      equipments: new FormControl(this.location.equipments),
     });
   }
 
   ngOnInit() {
-    this.initializeForm();
-    this.sector = history.state.sector;
     this.event = history.state.event;
-    console.log(this.event);
+    this.sector = history.state.sector;
+    this.location = history.state.location;
+    this.initializeForm();
     this.filteredOptionsHead = this.locationForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
@@ -109,7 +110,7 @@ export class EditLocationComponent {
       sectorId: this.sector.id,
       equipments: this.locationForm.value.equipments,
       polices: [],
-      policeIds: null
+      policeIds: null,
     };
 
     this.locationService.addLocation(newLocation).subscribe({

@@ -8,17 +8,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
 })
 export class HeaderComponent {
+  constructor(
+    private router: Router,
+    public authService: AuthService,
+    private _snackBar: MatSnackBar
+  ) {}
 
-  constructor(private router: Router, public authService:AuthService,private _snackBar: MatSnackBar){}
-
-  handleLogout(){
+  handleLogout() {
     this.authService.logout();
     this.router.navigate(['/subadmin/login']);
-    this._snackBar.open("Logged Out", "OK", {
-      duration: 3000
+    this._snackBar.open('Logged Out', 'OK', {
+      duration: 3000,
     });
   }
 }

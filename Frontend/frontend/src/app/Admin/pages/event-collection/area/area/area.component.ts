@@ -9,6 +9,7 @@ import { Event } from '../../../../models/event.models';
 import { Sector } from '../../../../models/sector.models';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
+import { Subevent } from '../../../../models/subevent.models';
 
 @Component({
   selector: 'app-area',
@@ -22,42 +23,42 @@ import { MatButtonModule } from '@angular/material/button';
     MatTooltipModule,
   ],
   templateUrl: './area.component.html',
-  styleUrl: './area.component.css'
+  styleUrl: './area.component.css',
 })
 export class AreaComponent implements OnInit {
+  area: Area;
+  event: Event;
+  subevent: Subevent;
 
-  area:Area;
-  event:Event;
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.area = history.state.area;
-      console.log(this.area)
       this.event = history.state.event;
+      this.subevent = history.state.subevent;
     });
   }
 
-  navigateToSector(sector:Sector){
+  navigateToSector(sector: Sector) {
     const currentPath = this.router.url;
     this.router.navigate(
-      [
-        `${currentPath}/${sector.sectorName
-          .toLowerCase()
-          .replace(' ', '-')}`,
-      ],
-      { state: { sector, event:this.event } }
+      [`${currentPath}/${sector.sectorName.toLowerCase().replace(' ', '-')}`],
+      { state: { sector, event: this.event, area: this.area } }
     );
   }
 
   navigateToAddSector() {
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/add-sector`], {state:{area:this.area, event:this.event}});
+    this.router.navigate([`${currentPath}/add-sector`], {
+      state: { area: this.area, event: this.event },
+    });
   }
 
-  editArea(){
+  navigateToEditArea() {
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/edit`]);
+    this.router.navigate([`${currentPath}/edit`], {
+      state: { event: this.event, subevent: this.subevent, area: this.area },
+    });
   }
-
 }

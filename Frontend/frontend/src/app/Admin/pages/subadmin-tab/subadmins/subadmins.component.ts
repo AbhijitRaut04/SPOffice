@@ -7,13 +7,15 @@ import { Router } from '@angular/router';
   selector: 'app-subadmins',
   standalone: true,
   templateUrl: './subadmins.component.html',
-  styleUrls: ['./subadmins.component.css']
+  styleUrls: ['./subadmins.component.css'],
 })
 export class SubadminsComponent implements OnInit {
-
   subadmins: Subadmin[] = [];
 
-  constructor(private subadminService: SubadminService, private router: Router) {}
+  constructor(
+    private subadminService: SubadminService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getSubadmins();
@@ -25,13 +27,16 @@ export class SubadminsComponent implements OnInit {
         this.subadmins = data;
         console.log(this.subadmins);
       },
-      error => {
-        console.error("Error fetching subadmins:", error);
+      (error) => {
+        console.error('Error fetching subadmins:', error);
       }
     );
   }
 
   viewSubadmin(subadmin: Subadmin) {
-    this.router.navigate(['/subadmins', subadmin.username.toLowerCase().replace(/\s+/g, '-')], { state: { subadmin } });
+    this.router.navigate(
+      ['/subadmins', subadmin.username.toLowerCase().replace(/\s+/g, '-')],
+      { state: { subadmin } }
+    );
   }
 }

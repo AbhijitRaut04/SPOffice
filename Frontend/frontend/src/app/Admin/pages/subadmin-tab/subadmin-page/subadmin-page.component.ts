@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-subadmin-page',
   standalone: true,
   templateUrl: './subadmin-page.component.html',
-  styleUrls: ['./subadmin-page.component.css']
+  styleUrls: ['./subadmin-page.component.css'],
 })
 export class SubadminPageComponent implements OnInit {
   subadmin: Subadmin;
@@ -14,11 +14,11 @@ export class SubadminPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-   this.route.queryParams.subscribe(params => {
-    const subadminFromState = history.state.subadmin;
-    if (subadminFromState) {
-      this.subadmin = subadminFromState;
-    }
-  });
+    this.route.queryParams.subscribe((params) => {
+      const subadminFromState = history.state.subadmin;
+      if (subadminFromState) {
+        this.subadmin = subadminFromState;
+      }
+    });
   }
 }

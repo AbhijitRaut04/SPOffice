@@ -7,7 +7,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AsyncPipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -20,7 +26,6 @@ import { BackBtnComponent } from '../../../../components/reusable/back-btn/back-
 import { Police } from '../../../../models/police.models';
 import { EventService } from '../../../../services/event-service/event.service';
 import { PoliceService } from '../../../../services/police-service/police.service';
-
 
 @Component({
   selector: 'app-create-event',
@@ -70,7 +75,10 @@ export class CreateEventComponent implements OnInit {
 
   eventForm: FormGroup;
 
-  constructor(private eventService: EventService, private policeService: PoliceService) { }
+  constructor(
+    private eventService: EventService,
+    private policeService: PoliceService
+  ) {}
 
   initializeForm() {
     this.eventForm = new FormGroup({
@@ -102,29 +110,36 @@ export class CreateEventComponent implements OnInit {
   }
 
   getPolices() {
-    this.policeService.getAllPolices().pipe(
-      switchMap(() => this.policeService.getAllPolices()),
-      catchError(error => {
-        console.error("Error fetching polices:", error);
-        return of([]);
-      })
-    ).subscribe((data: Police[]) => {
-      this.polices = data;
-      console.log(this.polices)
+    this.policeService
+      .getAllPolices()
+      .pipe(
+        switchMap(() => this.policeService.getAllPolices()),
+        catchError((error) => {
+          console.error('Error fetching polices:', error);
+          return of([]);
+        })
+      )
+      .subscribe((data: Police[]) => {
+        this.polices = data;
+        console.log(this.polices);
 
-      this.filteredOptionsHead = this.eventForm.get('head')!.valueChanges.pipe(
-        startWith(''),
-        map((value) => this._filter(value || ''))
-      );
-      this.filteredOptionsCohead = this.eventForm.get('cohead')!.valueChanges.pipe(
-        startWith(''),
-        map((value) => this._filter(value || ''))
-      );
-    });
+        this.filteredOptionsHead = this.eventForm
+          .get('head')!
+          .valueChanges.pipe(
+            startWith(''),
+            map((value) => this._filter(value || ''))
+          );
+        this.filteredOptionsCohead = this.eventForm
+          .get('cohead')!
+          .valueChanges.pipe(
+            startWith(''),
+            map((value) => this._filter(value || ''))
+          );
+      });
   }
 
   onSubmit() {
-    if(this.eventForm.invalid) return;
+    if (this.eventForm.invalid) return;
     // const newEvent: Event = {
     //   id: null,
     //   adminId: null,
@@ -136,19 +151,16 @@ export class CreateEventComponent implements OnInit {
     //   subpatrollings: null,
     // };
 
-    this.eventService.addEvent(this.eventForm.value)
-      .subscribe({
-        next: (response) => {
-          console.log('Event created successfully:', response);
-        },
-        error: (error) => {
-          console.error('Error creating event:', error);
-        },
-        complete: () => {
-          console.log('Event creation process completed.');
-        },
-      });
+    this.eventService.addEvent(this.eventForm.value).subscribe({
+      next: (response) => {
+        console.log('Event created successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error creating event:', error);
+      },
+      complete: () => {
+        console.log('Event creation process completed.');
+      },
+    });
   }
-
 }
-

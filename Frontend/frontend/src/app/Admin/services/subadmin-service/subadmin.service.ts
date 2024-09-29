@@ -5,31 +5,34 @@ import { Observable } from 'rxjs';
 import { Subadmin, Request } from '../../models/subadmin.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SubadminService {
   private apiUrl = `${environment.baseUrl}/api/subadmins`;
 
-
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.getValidSubadmins();
   }
-
 
   getRequests(): Observable<Request[]> {
     return this.http.get<Request[]>(`${this.apiUrl}/requests`);
   }
 
   rejectRequest(request: Request): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/requests/reject/${request.id}`, {});
+    return this.http.put<void>(
+      `${this.apiUrl}/requests/reject/${request.id}`,
+      {}
+    );
   }
 
   approveRequest(request: Request): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/requests/approve/${request.id}`, {});
+    return this.http.put<void>(
+      `${this.apiUrl}/requests/approve/${request.id}`,
+      {}
+    );
   }
 
-  getValidSubadmins(): any{
+  getValidSubadmins(): any {
     return this.http.get<Subadmin[]>(`${this.apiUrl}/approved`);
   }
-
 }

@@ -1,66 +1,66 @@
-.create-event-btn{
-    padding: 1rem 0;
-    padding-left: auto;
-    display: flex;
-    justify-content: flex-end;
+.create-event-btn {
+  padding: 1rem 0;
+  padding-left: auto;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.wrapper{
-    width: 100%;
-    padding: 20px;
+.wrapper {
+  width: 100%;
+  padding: 20px;
 }
 
-.nav{
-    width: 100%;
-    display: flex;
-    height: 40px;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
+.nav {
+  width: 100%;
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
-.search{
-    height: 100%;
-    width: 60%;
-    display: flex;
-    align-items: center;
-    border: 2px solid rgb(104, 104, 255);
-    padding: 0 10px;
-    border-radius: 6px;
+.search {
+  height: 100%;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  border: 2px solid rgb(104, 104, 255);
+  padding: 0 10px;
+  border-radius: 6px;
 }
-.search input{
-    height: 80%;
-    width: 100%;
-    outline: none;
-    padding: 0 10px;
-    border: 0;
-    font-size: 16px;
+.search input {
+  height: 80%;
+  width: 100%;
+  outline: none;
+  padding: 0 10px;
+  border: 0;
+  font-size: 16px;
 }
-mat-icon{
-    cursor: pointer;
+mat-icon {
+  cursor: pointer;
 }
-.create-event{
-    background-color: rgb(0, 118, 18);
-    color: #ffffff !important;
-}
-
-.event-list{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.create-event {
+  background-color: rgb(0, 118, 18);
+  color: #ffffff !important;
 }
 
-mat-card{
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-mat-card:hover{
-    padding-left: 10px;
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.no-events{
-    display: flex;
-    justify-content: center;
-    padding-top: 3rem;
-    gap: 15px;
-    height: 100vh;
+mat-card {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+mat-card:hover {
+  padding-left: 10px;
+}
+
+.no-events {
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
+  gap: 15px;
+  height: 100vh;
 }

@@ -52,7 +52,7 @@ export class EventComponent implements OnInit {
           .toLowerCase()
           .replace(' ', '-')}`,
       ],
-      { state: { subevent, event:this.event } }
+      { state: { subevent, event: this.event } }
     );
   }
 
@@ -66,7 +66,9 @@ export class EventComponent implements OnInit {
 
  navigateToAddSubevent() {
     const currentPath = this.router.url;
-    this.router.navigate([`${currentPath}/add-subevent`], {state:{event:this.event}});
+    this.router.navigate([`${currentPath}/add-subevent`], {
+      state: { event: this.event },
+    });
   }
 
   navigateToEditEvent() {
@@ -76,7 +78,7 @@ export class EventComponent implements OnInit {
     });
   }
 
-  viewAttendance(){
-    console.log(this.event.attendance)
+  viewAttendance() {
+    console.log(this.event.attendance);
   }
 }

@@ -4,16 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { Admin } from '../../models/admin.models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminService {
   private apiUrl = `${environment.baseUrl}/api/admins`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  registerAdmin(admin:Admin){
-    console.log('form submitted', admin)
+  registerAdmin(admin: Admin) {
+    console.log('form submitted', admin);
     return this.http.post<Admin>(this.apiUrl, admin);
   }
-
 }

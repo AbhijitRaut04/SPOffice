@@ -5,18 +5,17 @@ import { Police } from '../../models/police.models';
 import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PoliceService {
-
   private apiUrl = `${environment.baseUrl}/api/polices`;
   private subadminId = 1;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   registerPolice(police: Police): Observable<Police> {
     return this.http.post<Police>(`${this.apiUrl}`, police).pipe(
-      catchError(error => {
+      catchError((error) => {
         return throwError(error);
       })
     );

@@ -1,31 +1,45 @@
 <div class="wrapper">
-    <mat-chip-set>
-        @for(item of items; track item.index){
-        <mat-chip [ngClass]="{'active':item.active }" (click)="setActive(item.index)">{{item.title}}</mat-chip>
+  <mat-chip-set>
+    @for(item of items; track item.index){
+    <mat-chip
+      [ngClass]="{ active: item.active }"
+      (click)="setActive(item.index)"
+      >{{ item.title }}</mat-chip
+    >
+    }
+  </mat-chip-set>
+
+  <div class="request-container">
+    @if (requests.length === 0) {
+    <h6>Nothing here</h6>
+    } @for(request of requests; let i = $index; track request.id){
+    <div class="subadmin-detail">
+      <h3>{{ i + 1 }}</h3>
+      <div>
+        <h4>{{ request.username }} - {{ request.station }}</h4>
+      </div>
+      <div class="status-wrapper">
+        @if(request.status === "APPROVED"){
+        <button
+          mat-stroked-button
+          id="status"
+          [style.backgroundColor]="'red'"
+          (click)="reject(request)"
+        >
+          Reject
+        </button>
+        } @else {
+        <button
+          mat-stroked-button
+          id="status"
+          [style.backgroundColor]="'green'"
+          (click)="approve(request)"
+        >
+          Approve
+        </button>
         }
-    </mat-chip-set>
-    
-    <div class="request-container">
-        @if (requests.length === 0) {
-            <h6>Nothing here</h6>
-        }
-        @for(request of requests; let i = $index; track request.id){
-        <div class="subadmin-detail">
-            <h3>{{ i+1 }}</h3>
-            <div>
-                <h4>{{ request.username }} - {{ request.station }}</h4>
-            </div>
-            <div class="status-wrapper">
-                @if(request.status === "APPROVED"){
-                <button mat-stroked-button id="status" [style.backgroundColor]="'red'"
-                    (click)="reject(request)">Reject</button>
-                }
-                @else {
-                <button mat-stroked-button id="status" [style.backgroundColor]="'green'"
-                    (click)="approve(request)">Approve</button>
-                }
-            </div>
-        </div>
-        }
+      </div>
     </div>
+    }
+  </div>
 </div>

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -18,15 +23,28 @@ import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatIconModule, FormsModule, ReactiveFormsModule, NgFor, NgIf, NgClass, RouterLink],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgFor,
+    NgIf,
+    NgClass,
+    RouterLink,
+  ],
   templateUrl: './subadmin-login.component.html',
   styleUrl: './subadmin-login.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-
 })
 export class SubadminLoginComponent implements OnInit {
-
-  constructor(private router: Router, public authService: AuthService, private _snackBar: MatSnackBar) { }
+  constructor(
+    private router: Router,
+    public authService: AuthService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   reactiveForm: FormGroup;
   ngOnInit() {
@@ -36,7 +54,6 @@ export class SubadminLoginComponent implements OnInit {
       password: new FormControl(null, Validators.required),
     });
   }
-
 
   hide1 = signal(true);
   clickEvent1(event: MouseEvent) {
@@ -48,12 +65,11 @@ export class SubadminLoginComponent implements OnInit {
     if (this.reactiveForm.valid) {
       this.authService.login(this.reactiveForm.value);
       this.router.navigate(['/subadmin']);
-      this._snackBar.open("Subadmin Logged In", "OK", {
-        duration: 3000
+      this._snackBar.open('Subadmin Logged In', 'OK', {
+        duration: 3000,
       });
-    }
-    else {
-      this._snackBar.open("Please enter valid credentials", "OK");
+    } else {
+      this._snackBar.open('Please enter valid credentials', 'OK');
     }
   }
 }

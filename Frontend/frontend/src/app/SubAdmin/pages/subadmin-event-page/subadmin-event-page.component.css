@@ -1,7 +1,7 @@
-.main-wrapper{
+.main-wrapper {
   min-height: 100vh;
 }
-.wrapper{
+.wrapper {
   width: 100%;
   background-color: rgb(65, 182, 255);
   display: flex;
@@ -10,7 +10,7 @@
   font-size: 18px;
 }
 
-.description{
+.description {
   width: 90%;
   padding: 15px;
   border-radius: 8px;
@@ -33,7 +33,7 @@ mat-checkbox {
   margin-right: 10px;
 }
 
-button{
+button {
   padding: 8px 20px;
   cursor: pointer;
   border-radius: 18px;
