@@ -112,7 +112,7 @@ export class EditAreaComponent implements OnInit {
 
   onSubmit() {
     const newArea: Area = {
-      id: null,
+      id: this.area.id,
       areaName: this.areaForm.value.areaName,
       headId: this.areaForm.value.head.id,
       coheadId: this.areaForm.value.cohead.id,
@@ -122,15 +122,15 @@ export class EditAreaComponent implements OnInit {
       sectors: null,
     };
 
-    this.areaService.addArea(newArea).subscribe({
+    this.areaService.editArea(newArea).subscribe({
       next: (response) => {
-        console.log('Area created successfully:', response);
+        console.log('Area updation successfully:', response);
       },
       error: (error) => {
-        console.error('Error creating area:', error);
+        console.error('Error updateing area:', error);
       },
       complete: () => {
-        console.log('Area creation process completed.');
+        console.log('Area updation process completed.');
       },
     });
   }

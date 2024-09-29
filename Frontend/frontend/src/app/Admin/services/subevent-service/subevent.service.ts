@@ -22,6 +22,11 @@ export class SubeventService {
     return this.http.post<Subevent>(this.apiUrl, subevent);
   }
 
+  updateSubevent(subevent: Subevent) {
+    console.log(subevent);
+    return this.http.put<Event>(`${this.apiUrl}/${subevent.id}`, subevent);
+  }
+
   deleteSubevents(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }

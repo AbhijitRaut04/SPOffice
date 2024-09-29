@@ -15,4 +15,9 @@ export class SectorService {
     console.log(sector);
     return this.http.post<Sector>(this.apiUrl, sector);
   }
+
+  editSector(sector: Sector) {
+    console.log(sector);
+    return this.http.put<Sector>(`${this.apiUrl}/${sector.id}`, sector);
+  }
 }

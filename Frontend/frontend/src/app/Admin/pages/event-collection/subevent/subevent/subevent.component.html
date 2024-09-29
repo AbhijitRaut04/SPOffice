@@ -2,19 +2,16 @@
   <div class="btns">
     <app-back-btn></app-back-btn>
     <div class="btn-wrap">
-
       <button
         matTooltip="edit subevent"
         mat-fab
         (click)="navigateToEditSubevent()"
       >
+        <mat-icon>edit</mat-icon>
+      </button>
 
       <button matTooltip="preview pdf" mat-fab (click)="navigateToPreviewPdf()">
         <mat-icon>remove</mat-icon>
-      </button>
-      <button matTooltip="edit subevent" mat-fab (click)="editSubevent()">
-
-        <mat-icon>edit</mat-icon>
       </button>
     </div>
   </div>
