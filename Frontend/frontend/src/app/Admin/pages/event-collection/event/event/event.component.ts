@@ -56,18 +56,15 @@ export class EventComponent implements OnInit {
     );
   }
 
-  navigateToPreviewPdf(subevent:Subevent) {
+ navigateToPreviewPdf(subevent:Subevent) {
     const currentPath = this.router.url;
     this.router.navigate([`${currentPath}/${subevent.subpatrollingname
       .toLowerCase()
       .replace(' ', '-')}/preview`], {state:{event:this.event, subevent}});
   }
 
-  viewAttendance(){
-    console.log(this.event.attendance)
-  }
 
-  navigateToAddSubevent() {
+ navigateToAddSubevent() {
     const currentPath = this.router.url;
     this.router.navigate([`${currentPath}/add-subevent`], {state:{event:this.event}});
   }
@@ -77,5 +74,9 @@ export class EventComponent implements OnInit {
     this.router.navigate([`${currentPath}/edit`], {
       state: { event: this.event },
     });
+  }
+
+  viewAttendance(){
+    console.log(this.event.attendance)
   }
 }
