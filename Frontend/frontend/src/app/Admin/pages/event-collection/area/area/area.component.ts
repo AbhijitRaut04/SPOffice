@@ -9,6 +9,7 @@ import { Event } from '../../../../models/event.models';
 import { Sector } from '../../../../models/sector.models';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
+import { Subevent } from '../../../../models/subevent.models';
 
 @Component({
   selector: 'app-area',
@@ -28,12 +29,14 @@ export class AreaComponent implements OnInit {
 
   area:Area;
   event:Event;
+  subevent:Subevent;
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.area = history.state.area;
       this.event = history.state.event;
+      this.subevent = history.state.subevent;
     });
   }
 
@@ -45,7 +48,7 @@ export class AreaComponent implements OnInit {
           .toLowerCase()
           .replace(' ', '-')}`,
       ],
-      { state: { sector, event:this.event } }
+      { state: { sector, event:this.event, area: this.area } }
     );
   }
 
@@ -57,7 +60,7 @@ export class AreaComponent implements OnInit {
   navigateToEditArea(){
     const currentPath = this.router.url;
     this.router.navigate([`${currentPath}/edit`],{
-      state: { event: this.event, area: this.area },
+      state: { event: this.event, subevent: this.subevent, area: this.area },
     });
   }
 

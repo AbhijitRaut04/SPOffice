@@ -40,8 +40,8 @@ export class SubeventComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.subevent = history.state.subevent;
       this.event = history.state.event;
+      this.subevent = history.state.subevent;
     });
   }
 
@@ -53,7 +53,7 @@ export class SubeventComponent implements OnInit {
           .toLowerCase()
           .replace(' ', '-')}`,
       ],
-      { state: { area, event:this.event } }
+      { state: { area, event:this.event, subevent: this.subevent } }
     );
   }
 
@@ -62,7 +62,7 @@ export class SubeventComponent implements OnInit {
     this.router.navigate([`${currentPath}/add-area`], {state:{subevent:this.subevent, event:this.event}});
   }
   
-  editSubevent() {
+  navigateToEditSubevent() {
     const currentPath = this.router.url;
     this.router.navigate([`${currentPath}/edit`], {
       state: { subevent: this.subevent, event: this.event },

@@ -64,10 +64,9 @@ export class CreateSectorComponent {
   }
 
   ngOnInit() {
-    this.initializeForm();
     this.area = history.state.area;
     this.event = history.state.event;
-    console.log(this.event)
+    this.initializeForm();
     this.filteredOptionsHead = this.sectorForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))

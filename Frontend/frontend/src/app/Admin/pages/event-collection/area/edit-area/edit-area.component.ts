@@ -68,8 +68,8 @@ export class EditAreaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subevent = history.state.subevent;
     this.event = history.state.event;
+    this.subevent = history.state.subevent;
     this.area = history.state.area;
     this.initializeForm();
 

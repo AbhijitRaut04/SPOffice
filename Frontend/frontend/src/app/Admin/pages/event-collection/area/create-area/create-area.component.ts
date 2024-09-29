@@ -65,8 +65,8 @@ export class CreateAreaComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForm();
-    this.subevent = history.state.subevent;
     this.event = history.state.event;
+    this.subevent = history.state.subevent;
     console.log(this.event)
     this.filteredOptionsHead = this.areaForm.get('head')!.valueChanges.pipe(
       startWith(''),

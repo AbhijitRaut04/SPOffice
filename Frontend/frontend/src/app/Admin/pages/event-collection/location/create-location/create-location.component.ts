@@ -66,8 +66,8 @@ export class CreateLocationComponent {
   }
 
   ngOnInit() {
-    this.sector = history.state.sector;
     this.event = history.state.event;
+    this.sector = history.state.sector;
     this.initializeForm();
     console.log(this.event)
     this.filteredOptionsHead = this.locationForm.get('head')!.valueChanges.pipe(

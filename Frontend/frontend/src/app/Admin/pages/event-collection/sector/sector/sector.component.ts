@@ -35,9 +35,9 @@ export class SectorComponent implements OnInit {
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.sector = history.state.sector;
-      this.area = history.state.area;
       this.event = history.state.event;
+      this.area = history.state.area;
+      this.sector = history.state.sector;
     });
   }
 

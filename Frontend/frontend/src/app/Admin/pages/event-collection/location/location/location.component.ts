@@ -21,10 +21,9 @@ export class LocationComponent {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.location = history.state.location;
-      this.sector = history.state.sector;
-      console.log(this.location)
       this.event = history.state.event;
+      this.sector = history.state.sector;
+      this.location = history.state.location;
     });
   }
 

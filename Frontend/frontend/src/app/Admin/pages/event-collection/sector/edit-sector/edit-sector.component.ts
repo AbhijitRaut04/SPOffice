@@ -70,9 +70,9 @@ export class EditSectorComponent {
 
   ngOnInit() {
     this.initializeForm();
+    this.event = history.state.event;
     this.area = history.state.area;
     this.sector = history.state.sector;
-    this.event = history.state.event;
     console.log(this.event);
     this.filteredOptionsHead = this.sectorForm.get('head')!.valueChanges.pipe(
       startWith(''),

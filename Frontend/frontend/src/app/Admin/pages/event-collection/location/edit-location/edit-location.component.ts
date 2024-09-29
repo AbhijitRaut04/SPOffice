@@ -68,10 +68,10 @@ export class EditLocationComponent {
   }
 
   ngOnInit() {
-    this.initializeForm();
     this.event = history.state.event;
     this.sector = history.state.sector;
     this.location = history.state.location;
+    this.initializeForm();
     this.filteredOptionsHead = this.locationForm.get('head')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
